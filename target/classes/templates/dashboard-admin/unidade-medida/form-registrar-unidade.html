@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html class="loading" lang="pt-br" data-textdirection="ltr"
+ xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+  <!-- INÍCIO: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
+    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
+    <meta name="author" content="ThemeSelect">
+    <title>Form unidade De Medida | Mamute - Admin</title>
+    <link rel="apple-touch-icon" href="../../../../app-assets/images/favicon/apple-touch-icon-152x152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../app-assets/images/favicon/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- BEGIN: VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/vendors/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/vendors/flag-icon/css/flag-icon.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/vendors/materialize-stepper/materialize-stepper.min.css">
+    <!-- END: VENDOR CSS-->
+    <!-- BEGIN: Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/css/themes/vertical-modern-menu-template/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/css/themes/vertical-modern-menu-template/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/css/pages/form-wizard.min.css">
+    <!-- END: Page Level CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/css/custom/custom.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- END: Custom CSS-->
+  </head>
+ <!-- FIM: Head-->
+  <div th:replace="~{dashboard-admin/fragmentos/topo-pagina :: topo}"></div>
+   <div th:replace="~{dashboard-admin/fragmentos/menu-principal :: menu-painel}"></div>
+    <!-- FIM: SideNav Fim menu lateral-->
+
+    <!-- BEGIN: Page Main-->
+    <div id="main">
+      <div class="row">
+        <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+        <div class="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
+          <!-- Search for small screen-->
+          <div class="container">
+            <div class="row">
+              <div class="col s10 m6 l6">
+                <h5 class="breadcrumbs-title mt-0 mb-0" th:text="${id == null ? 'Formulário de Cadastro' : 'Formulário de Edição'}"><span>Formulário de Cadastro</span></h5>
+                <ol class="breadcrumbs mb-0">
+                  <li class="breadcrumb-item"><a href="#">Home</a> </li>
+                  <li class="breadcrumb-item"><a href="#">Unidade de medida</a></li>
+                  <li class="breadcrumb-item active" th:text="${id == null ? 'Cadastro' : 'Edição'}">Cadastro</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col s12">
+          <div class="container">
+            <div class="section section-form-wizard">
+  			 <div class="card gradient-45deg-light-blue-cyan gradient-shadow">
+			    <div class="card-content white-text">
+			     <p class="caption mb-0">
+			     	<span class="card-title">
+			     	<i class="material-icons">content_paste</i>
+			     	<span th:text="${id == null ? 'Cadastre Aqui o Nome das Unidades de medidas Para Produto.' : 'Editando o Nome das unidades de medidas do Produto.'}">
+			     	Cadastre Aqui o Nome de Cada Unidade de Medida Para Produto.</span></span>
+			        <p></p>
+			      </div>            
+			   </div>
+  <!-- Horizontal Stepper -->
+  <div class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content pb-0">
+          <div class="card-header mb-2">
+            <h4 class="card-title">Etapas</h4>            
+          </div>      
+          <form action="/dashboard-admin/unidade-medida/salvar" th:object="${unidadeDeMedida}" method="post" name="unidadeDeMedida">       
+          <ul class="stepper horizontal" id="horizStepper">       
+            <li class="step active">
+              <div class="step-title waves-effect">Passo Único</div>
+              <div class="step-content">
+                <div class="row">                 
+                <div class="alert" th:if="${#fields.hasErrors()}">
+              	 <div  th:each="erro : ${#fields.errors()}">
+              	 	<i class="material-icons prefix red-text pt-1">thumb_down</i>
+              	 	<span class="red-text text-darken-2" th:text="${erro}"></span>
+              	</div>
+              	 <div class="progress">
+     			 	<div class="indeterminate"></div>
+  				 </div>
+              </div>
+                <br>	                      	
+                  <div class="input-field col m6 s12">
+                    <label>Nome da Unidade de Medida: <span class="red-text">*</span></label>
+                    <input type="text" th:field="*{nome}" name="nome" min="2" max="30" required="required">
+                  	<p th:if="${#fields.hasErrors('nome')}" th:errorclass="error" th:errors="*{nome}" />
+                  	<p>campo obrigatório</p>
+                  </div>
+                  <div class="input-field col m6 s12">
+                    <label>Descrição da Unidade de Medida: <span class="red-text">*</span></label>
+                    <input type="text" th:field="*{descricao}" name="nome" min="4" max="255" required="required">
+                  	<p th:if="${#fields.hasErrors('descricao')}" th:errorclass="error" th:errors="*{descricao}" />
+                  	<p>campo obrigatório</p>
+                  </div>
+                </div> 
+                <div>                   
+                    <input type="hidden" id="id" th:field="*{id}" name="id">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                  </div>                   
+                <div class="row">  
+                	<button class="red btn mr-1 btn-reset" type="reset">
+                        <i class="material-icons right">clear</i>Limpar</button>              
+                      <button class="waves-effect waves-dark btn btn-primary" type="submit"><i class="material-icons right">cloud</i>Enviar</button>  
+                </div>          
+              </div>         
+             </li>            
+            </ul> 
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+ <div class="content-overlay"></div>
+  </div>
+   </div>
+    </div>
+     </div>
+	  <div class="alert alert-success" th:if="${not #strings.isEmpty(menssagem)}">
+		<script>					    
+			M.toast({html: '<i class="material-icons">[(${icone})]</i> &emsp; [(${menssagem})]', classes: 'rounded'});
+		</script>	
+	  </div>
+
+<!-- END: Página principal-->
+	<div th:replace="~{dashboard-admin/fragmentos/personaliza-tema :: temas}"></div>
+	<div th:replace="~{dashboard-admin/fragmentos/rodape :: footer}"></div>
+    <!-- END: Footer-->
+    <!-- BEGIN VENDOR JS-->
+    <script src="../../../../../app-assets/js/vendors.min.js"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="../../../../../../app-assets/vendors/materialize-stepper/materialize-stepper.min.js"></script>
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN THEME  JS-->
+    <script src="../../../../../../app-assets/js/plugins.min.js"></script>
+    <script src="../../../../../../app-assets/js/search.min.js"></script>
+    <script src="../../../../../../app-assets/js/custom/custom-script.min.js"></script>
+    <script src="../../../../../../app-assets/js/scripts/customizer.min.js"></script>
+    <!-- END THEME  JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="../../../../../../app-assets/js/scripts/form-wizard.min.js"></script>
+    <!-- END PAGE LEVEL JS-->
+  </body>
+</html>

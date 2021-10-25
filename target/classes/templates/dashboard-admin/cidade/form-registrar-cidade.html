@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html class="loading" lang="pt-br" data-textdirection="ltr" 
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="/layout/LayoutPadrao">
+
+  <!-- INÍCIO: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
+    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
+    <meta name="author" content="ThemeSelect">
+    <title>Form Cidade | Mamute Admin</title>
+    <link rel="apple-touch-icon" href="../../../../app-assets/images/favicon/apple-touch-icon-152x152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../app-assets/images/favicon/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- BEGIN: VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/vendors/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/vendors/flag-icon/css/flag-icon.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/vendors/materialize-stepper/materialize-stepper.min.css">
+    <!-- END: VENDOR CSS-->
+    <!-- BEGIN: Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/css/themes/vertical-modern-menu-template/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/css/themes/vertical-modern-menu-template/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/css/pages/form-wizard.min.css">
+    <!-- END: Page Level CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/css/custom/custom.css">
+    <!-- END: Custom CSS-->
+  </head>
+ <!-- FIM: Head-->
+  <div th:replace="~{dashboard-admin/fragmentos/topo-pagina :: topo}"></div>
+   <div th:replace="~{dashboard-admin/fragmentos/menu-principal :: menu-painel}"></div>
+    <!-- FIM: SideNav Fim menu lateral-->
+
+    <!-- BEGIN: Page Main-->
+    <div id="main">
+      <div class="row">
+        <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+        <div class="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
+          <!-- Search for small screen-->
+          <div class="container">
+            <div class="row">
+              <div class="col s10 m6 l6">
+                <h5 class="breadcrumbs-title mt-0 mb-0"><span>Formulário de Cadastro</span></h5>
+                <ol class="breadcrumbs mb-0">
+                  <li class="breadcrumb-item"><a href="dashboard-modern.html">Home</a>
+                  </li>
+                  <li class="breadcrumb-item"><a href="#">Cidade</a>
+                  </li>
+                  <li class="breadcrumb-item active">Cadastro
+                  </li>
+                </ol>
+              </div>
+              <div class="col s12 m6 l12">
+			    <div class="card gradient-45deg-light-blue-cyan gradient-shadow">
+			       <div class="card-content white-text">
+			          <p class="caption mb-0">
+			          <span class="card-title">
+			          <i class="material-icons">content_paste</i> Cadastro do Cidades</span>
+			          <p>Cadastre aqui o nome para especificar os cidades para um estado.</p>
+			       </div>            
+			     </div>
+			   </div> 
+  <!-- Horizontal Stepper -->
+  <div class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content pb-0">
+          <div class="card-header mb-2">
+            <h4 class="card-title">Etapas</h4>
+          </div>      
+          <form action="/dashboard-admin/cidade" th:object="${cidade}" method="post">          
+          <ul class="stepper horizontal" id="horizStepper">          
+            <li class="step active">
+              <div class="step-title waves-effect">Passo Único</div>
+              <div class="step-content">
+                <div class="row">   
+                 <div class="alert" th:if="${#fields.hasErrors()}">
+              	  <div  th:each="erro : ${#fields.errors()}">
+              	 	<i class="material-icons prefix red-text pt-1">thumb_down</i>
+              	 	<span class="red-text text-darken-2" th:text="${erro}"></span>
+              		</div>
+              		 <div class="progress">
+     			 		<div class="indeterminate"></div>
+  				 	</div>
+              	 </div>                          
+                  <div class="input-field col m6 s12">
+                    <label for="nome">Nome da cidade: <span class="red-text">*</span></label>
+                    <input type="text" id="nome" th:field="${cidade.nome}" name="nome" minlength="2" maxlength="30" required pattern="[a-zA-Záãâéêíîóôõú\s]+$" title="O campo nome não pode conter números" />
+                  	<p>campo obrigatório (somente letras).</p>  
+                  </div>
+                  <div class="col s12 m6 l3">		           
+		            <div class="input-field">
+		              <select th:field="*{estado}" class="form-control" required title="Informe o estado.">
+		              	<option value="">Selecione o Estado</option>
+		              	<option th:each="estado: ${estados}" th:value="${estado.id}" th:text="${estado.nome}"></option>		               
+		              </select>
+		              <p>campo obrigatório.</p>  
+		            </div>
+		          </div>
+                </div> 
+                <div>                   
+                    <input type="hidden" id="id" th:field="${cidade.id}" name="id"  >
+                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                  </div> 
+                <div class="row">  
+                	<button class="red btn mr-1 btn-reset" type="reset">
+                        <i class="material-icons right">clear</i>Limpar</button>           
+                      <button class="waves-effect waves-dark btn btn-primary" type="submit">
+                      <i class="material-icons right">cloud</i>Enviar</button>  
+                </div>          
+              </div>         
+            </li>            
+             </ul>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- FIM: Introução -->
+    </div>
+    <div class="content-overlay"></div>
+   </div>   
+   <div class="alert alert-success" th:if="${not #strings.isEmpty(menssagem)}">
+		<script>					    
+			M.toast({html: '<i class="material-icons">[(${icone})]</i> &emsp; [(${menssagem})]', classes: 'rounded'});
+		</script>	
+	</div>
+   </div>
+   </div>
+    <!-- END: Página principal-->
+	<div th:replace="~{dashboard-admin/fragmentos/personaliza-tema :: temas}"></div>
+	<div th:replace="~{dashboard-admin/fragmentos/rodape :: footer}"></div>
+    <!-- END: Footer-->
+    <!-- BEGIN VENDOR JS-->
+    <script src="../../../../../app-assets/js/vendors.min.js"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="../../../../../../app-assets/vendors/materialize-stepper/materialize-stepper.min.js"></script>
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN THEME  JS-->
+    <script src="../../../../../../app-assets/js/plugins.min.js"></script>
+    <script src="../../../../../../app-assets/js/search.min.js"></script>
+    <script src="../../../../../../app-assets/js/custom/custom-script.min.js"></script>
+    <script src="../../../../../../app-assets/js/scripts/customizer.min.js"></script>
+    <!-- END THEME  JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="../../../../../../app-assets/js/scripts/form-wizard.min.js"></script>
+    <!-- END PAGE LEVEL JS-->
+  </body>
+</html>

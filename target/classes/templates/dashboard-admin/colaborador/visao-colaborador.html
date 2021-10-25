@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+
+<html class="loading" lang="pt-br" data-textdirection="ltr" 
+	xmlns:th="http://www.thymeleaf.org"
+ 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
+    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
+    <meta name="author" content="ThemeSelect">
+    <title>Dashboard Perfil Colaborador | Mamute - admin</title>
+    <link rel="apple-touch-icon" href="../../../../app-assets/images/favicon/apple-touch-icon-152x152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../app-assets/images/favicon/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- BEGIN: VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/data-tables/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css">
+    <!-- END: VENDOR CSS-->
+    <!-- BEGIN: Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/themes/vertical-modern-menu-template/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/themes/vertical-modern-menu-template/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/pages/page-users.min.css">
+    <!-- END: Page Level CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/custom/custom.css">
+    <!-- END: Custom CSS-->
+  </head>
+  <!-- END: Head-->
+  </head>
+  <!-- FIM: Head-->
+   <div th:replace="~{dashboard-admin/fragmentos/topo-pagina :: topo}"></div>
+   <div th:replace="~{dashboard-admin/fragmentos/menu-principal :: menu-painel}"></div>
+    <!-- END: SideNav Fim menu lateral-->
+
+    <!-- INÍCIO: Página principal-->
+	<!-- BEGIN: Page Main-->
+    <div id="main">
+      <div class="row">
+        <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+        <div class="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
+          <!-- Search for small screen-->
+          <div class="container">
+            <div class="row">
+              <div class="col s10 m6 l6">
+                <h5 class="breadcrumbs-title mt-0 mb-0"><span>Cadastro de Colaborador</span></h5>
+                <ol class="breadcrumbs mb-0">
+                  <li class="breadcrumb-item"><a href="/dashboard-admin">Home</a>
+                  </li>
+                  <li class="breadcrumb-item"><a href="#">Colaborador</a>
+                  </li>
+                  <li class="breadcrumb-item active">Visualizar
+                  </li>
+                </ol>
+              </div>              
+            </div>
+          </div>
+        </div>
+        <div class="col s12">
+      <div class="container">
+   <!-- users view start -->
+<div class="section users-view">
+  <!-- users view media object start -->
+  <div class="card-panel" th:object="${colaborador}">
+    <div class="row">
+      <div class="col s12 m5">
+        <div class="display-flex media">
+          <a href="#" class="avatar">
+            <img th:src="@{/dashboard-admin/colaborador/mostarImagem/{imagem}(imagem=${colaborador.imagem})}"
+             alt="foto colaborador" class="z-depth-4 circle" height="100" width="100">
+          </a>
+        </div>
+      </div>
+      <div class="col s12 m6 quick-action-btns display-flex justify-content-end align-items-center pt-2">
+        <a class="btn-small btn-light-indigo"><i class="material-icons">beenhere</i></a>
+        <a th:href="@{/dashboard-admin/permissao/registrar/{id}(id=${colaborador.id})}" class="btn-small btn-light-indigo">Conceder Permissões</a>
+        <a th:href="@{/dashboard-admin/colaborador/{id}(id=${colaborador.id})}" class="btn-small indigo">Editar</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="card">
+    <div class="card-content">
+      <div class="row indigo lighten-5 border-radius-4 mb-2">
+        <div class="col s12 m4 users-view-timeline">
+          <span class="indigo-text m-0">Modalidade de Trabalho : </span> <span th:text="${colaborador.modalidadeDeTrabalho}"></span>
+        </div>
+        <div class="col s12 m3 users-view-timeline">
+          <span class="indigo-text m-0">Cargo : </span><span th:text="${colaborador.cargo}"></span>
+        </div>
+        <div class="col s12 m5 users-view-timeline">
+          <span class="indigo-text m-0">Formação : </span> <span th:text="${colaborador.formacao}"></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+        <h6 class="mb-2 mt-2"><i class="material-icons">person_outline</i> Informação Pessoal</h6>
+          <table class="striped">
+            <tbody>
+             <tr>
+                <td>Nome :</td>
+                <td th:text="${colaborador.nome+colaborador.sobrenome}"></td>
+              </tr>
+               <tr>
+                <td>Nascimento:</td>
+                <td th:text="${#temporals.format(colaborador.dataNascimento)}"></td>
+              </tr>
+               <tr>
+                <td>Empresa anterior:</td>
+                <td th:text="${colaborador.empresaAnterior}"></td>
+              </tr>
+              <tr>
+                <td>Experiência:</td>
+                <td th:text="${colaborador.experiencia}"></td>
+              </tr>              
+              <tr>
+                <td>Data Admissao:</td>
+                <td class="users-view" th:text="${#temporals.format(colaborador.dataAdmissao)}"></td>
+              </tr>
+            </tbody>
+          </table>
+          <h6 class="mb-2 mt-2"><i class="material-icons">location_on</i> Endereço</h6>
+          <table class="striped">
+            <tbody>
+              <tr>
+                <td>Logradouro:</td>
+                <td th:text="*{colaborador.endereco.logradouro}"></td>
+              </tr>
+              <tr>
+                <td>bairro:</td>
+                <td th:text="*{colaborador.endereco.bairro}"></td>
+              </tr>
+              <tr>
+                <td>Cidade:</td>
+                <td th:text="*{colaborador.endereco.cidade}"></td>
+              </tr>
+              <tr>
+                <td>Estado:</td>
+                <td th:text="*{colaborador.endereco.estado}"></td>
+              </tr>
+              <tr>
+                <td>Cep:</td>
+                <td th:text="*{colaborador.endereco.cep}"></td>
+              </tr>      
+            </tbody>
+          </table>
+          <h6 class="mb-2 mt-2"><i class="material-icons">contact_phone</i> Contatos</h6>
+          <table class="striped">
+            <tbody>              
+              <tr>
+                <td>E-mail:</td>
+                <td class="users-view-email" th:text="${colaborador.email.enderecoEmail}"></td>
+              </tr> 
+              <tr>
+                <td>Descrição:</td>
+                <td th:text="${colaborador.telefone.descricao.nome}"></td>
+              </tr>           
+              <tr>
+                <td>Contato:</td>
+                <td th:text="${colaborador.telefone.numero}"></td>
+              </tr> 
+            </tbody>            
+          </table>          
+          <h6 class="mb-2 mt-2"><i class="material-icons">link</i> Social Links</h6>
+          <table class="striped">
+            <tbody>
+              <tr>
+                <td>Twitter:</td>
+                <td><a href="#">https://www.twitter.com/</a></td>
+              </tr>
+              <tr>
+                <td>Facebook:</td>
+                <td><a href="#">https://www.facebook.com/</a></td>
+              </tr>
+              <tr>
+                <td>Instagram:</td>
+                <td><a href="#">https://www.instagram.com/</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- </div> -->
+    </div>
+  </div>
+  <!-- users view card details ends -->
+
+</div>
+<!-- users view ends -->
+   	
+
+<!-- INICIAR NAV DA BARRA LATERAL DIREITA -->
+   <div th:replace="~{dashboard-admin/fragmentos/menu-lateral-direita :: menu-direita}"></div>
+<!--FIM DA BARRA LATERAL DIREITA NAV--><!-- Intro -->
+          </div>
+          <div class="content-overlay"></div>
+        </div>
+      </div>
+    </div>    
+    <!-- END: Página principal-->
+    
+	<div th:replace="~{dashboard-admin/fragmentos/personaliza-tema :: temas}"></div>
+	<div th:replace="~{dashboard-admin/fragmentos/rodape :: footer}"></div>
+ 
+    
+   <!-- BEGIN VENDOR JS-->
+    <script src="../../../../app-assets/js/vendors.min.js"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="../../../../app-assets/vendors/data-tables/js/jquery.dataTables.min.js"></script>
+    <script src="../../../../app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js"></script>
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN THEME  JS-->
+    <script src="../../../../app-assets/js/plugins.min.js"></script>
+    <script src="../../../../app-assets/js/search.min.js"></script>
+    <script src="../../../../app-assets/js/custom/custom-script.min.js"></script>
+    <script src="../../../../app-assets/js/scripts/customizer.min.js"></script>
+    <!-- END THEME  JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="../../../../app-assets/js/scripts/page-users.min.js"></script>
+    <!-- END PAGE LEVEL JS-->  
+    <script>
+    	document.addEventListener('DOMContentLoaded', function() {
+    		var elems = document.querySelectorAll('.modal');
+    		var instances = M.Modal.init(elems, options);
+		});
+		$(document).ready(function(){
+   		 	$('.modal').modal();
+ 		 });
+    </script>
+  </body>
+</html>

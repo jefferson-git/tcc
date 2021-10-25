@@ -1,0 +1,487 @@
+
+<!DOCTYPE html>
+
+<html class="loading" lang="pt-br" data-textdirection="ltr" xmlns:th="http://www.thymeleaf.org">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
+    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
+    <meta name="author" content="ThemeSelect">
+    <title>Dashboard Usuário Perfil | Mamute - admin</title>
+    <link rel="apple-touch-icon" href="../../../../app-assets/images/favicon/apple-touch-icon-152x152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../app-assets/images/favicon/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/vendors.min.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/select2/select2.min.css" type="text/css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/select2/select2-materialize.css" type="text/css">
+    <!-- END: VENDOR CSS-->
+    <!-- BEGIN: Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/vertical-modern-menu-template/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/vertical-modern-menu-template/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/page-account-settings.min.css">
+    <!-- END: Page Level CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/custom/custom.css">
+    <!-- END: Custom CSS-->
+  </head>
+  <!-- FIM: Head-->
+   <div th:replace="~{dashboard-admin/fragmentos/topo-pagina :: topo}"></div>
+   <div th:replace="~{dashboard-admin/fragmentos/menu-principal :: menu-painel}"></div>
+    <!-- END: SideNav Fim menu lateral-->
+
+    <!-- INÍCIO: Página principal-->
+ <div id="main">
+      <div class="row">
+        <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+        <div class="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
+          <!-- Search for small screen-->
+          <div class="container">
+            <div class="row">
+              <div class="col s10 m6 l6">
+                <h5 class="breadcrumbs-title mt-0 mb-0"><span>Account Settings</span></h5>
+                <ol class="breadcrumbs mb-0">
+                  <li class="breadcrumb-item"><a href="index.html">Home</a>
+                  </li>
+                  <li class="breadcrumb-item"><a href="#">Pages</a>
+                  </li>
+                  <li class="breadcrumb-item active">Configurações da conta</li>
+                </ol>
+              </div>
+              <div class="col s2 m6 l6"><a class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" href="#!" data-target="dropdown1"><i class="material-icons hide-on-med-and-up">settings</i><span class="hide-on-small-onl">Settings</span><i class="material-icons right">arrow_drop_down</i></a>
+                <ul class="dropdown-content" id="dropdown1" tabindex="0">
+                  <li tabindex="0"><a class="grey-text text-darken-2" href="user-profile-page.html">Perfil<span class="new badge red">2</span></a></li>
+                  <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contatos</a></li>
+                  <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
+                  <li class="divider" tabindex="-1"></li>
+                  <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col s12">
+          <div class="container">
+            <!-- Account settings -->
+<section class="tabs-vertical mt-1 section">
+  <div class="row">
+    <div class="col l4 s12">
+      <!-- tabs  -->
+      <div class="card-panel">
+        <ul class="tabs">
+          <li class="tab">
+            <a href="#general">
+              <i class="material-icons">brightness_low</i>
+              <span>Geral</span>
+            </a>
+          </li>
+          <li class="tab">
+            <a href="#change-password">
+              <i class="material-icons">lock_open</i>
+              <span>Alterar a senha</span>
+            </a>
+          </li>
+          <li class="tab">
+            <a href="#info">
+              <i class="material-icons">error_outline</i>
+              <span> Informações</span>
+            </a>
+          </li>
+          <li class="tab">
+            <a href="#social-link">
+              <i class="material-icons">chat_bubble_outline</i>
+              <span>Links Sociais</span>
+            </a>
+          </li>
+          <li class="tab">
+            <a href="#connections">
+              <i class="material-icons">link</i>
+              <span>Conexões</span>
+            </a>
+          </li>
+          <li class="tab">
+            <a href="#notifications">
+              <i class="material-icons">notifications_none</i>
+              <span> Notificações</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col l8 s12">
+      <!-- tabs content -->
+      <div id="general">
+        <div class="card-panel">
+          <div class="display-flex">
+            <div class="media">
+              <img src="../../../app-assets/images/avatar/avatar-12.png" class="border-radius-4" alt="profile image"
+                height="64" width="64">
+            </div>
+            <div class="media-body">
+              <div class="general-action-btn">
+                <button id="select-files" class="btn indigo mr-2">
+                  <span>Carregar nova foto</span>
+                </button>
+                <button class="btn btn-light-pink">Limpar</button>
+              </div>
+              <small>JPG, GIF ou PNG permitidos. Tamanho máximo de 800kB</small>
+              <div class="upfilewrapper">
+                <input id="upfile" type="file" />
+              </div>
+            </div>
+          </div>
+          <div class="divider mb-1 mt-1"></div>
+          <form class="formValidate" method="get">
+            <div class="row">
+              <div class="col s12">
+                <div class="input-field">
+                  <label for="uname">Nome de Usuário</label>
+                  <input type="text" id="uname" name="uname" value="" data-error=".errorTxt1">
+                  <small class="errorTxt1"></small>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field">
+                  <label for="name">Nome</label>
+                  <input id="name" name="name" type="text" value="" data-error=".errorTxt2">
+                  <small class="errorTxt2"></small>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field">
+                  <label for="email">E-mail</label>
+                  <input id="email" type="email" name="email" value="" data-error=".errorTxt3">
+                  <small class="errorTxt3"></small>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="card-alert card orange lighten-5">
+                  <div class="card-content orange-text">
+                    <p>Seu email não foi confirmado. Por favor, verifique sua caixa de entrada.</p>
+                    <a href="javascript: void(0);">Reenviar confirmação</a>
+                  </div>
+                  <button type="button" class="close orange-text" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+              </div>
+              <div class="col s12 display-flex justify-content-end form-action">
+                <button type="submit" class="btn indigo waves-effect waves-light mr-2">Salvar alterações</button>
+                <button type="button" class="btn btn-light-pink waves-effect waves-light mb-1">Cancelar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="change-password">
+        <div class="card-panel">
+          <form class="paaswordvalidate">
+            <div class="row">
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="oldpswd" name="oldpswd" type="password" data-error=".errorTxt4">
+                  <label for="oldpswd">Senha Antiga</label>
+                  <small class="errorTxt4"></small>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="newpswd" name="newpswd" type="password" data-error=".errorTxt5">
+                  <label for="newpswd">Nova Senha</label>
+                  <small class="errorTxt5"></small>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="repswd" type="password" name="repswd" data-error=".errorTxt6">
+                  <label for="repswd">Repetir a Nova Senha</label>
+                  <small class="errorTxt6"></small>
+                </div>
+              </div>
+              <div class="col s12 display-flex justify-content-end form-action">
+                <button type="submit" class="btn indigo waves-effect waves-light mr-1">Salvar alterações</button>
+                <button type="reset" class="btn btn-light-pink waves-effect waves-light">Cancelar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="info">
+        <div class="card-panel">
+          <form class="infovalidate">
+            <div class="row">
+              <div class="col s12">
+                <div class="input-field">
+                  <textarea class="materialize-textarea" id="accountTextarea" name="accountTextarea"
+                    placeholder="Your Bio data here..."></textarea>
+                  <label for="accountTextarea">Bio</label>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="pick-birthday" type="text" class="birthdate-picker datepicker">
+                  <label for="pick-birthday">Data de nascimento</label>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field">
+                  <select class="validate" id="accountSelect">
+                    <option selected>USA</option>
+                    <option>India</option>
+                    <option>Canada</option>
+                  </select>
+                  <label for="accountSelect">Country</label>
+                </div>
+              </div>
+              <div class="col s12">
+                <label for="languageselect2">Languages</label>
+                <div class="input-field">
+                  <select class="browser-default" id="languageselect2" multiple="multiple">
+                    <option value="English" selected>English</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="French">French</option>
+                    <option value="Russian">Russian</option>
+                    <option value="German">German</option>
+                    <option value="Arabic" selected>Arabic</option>
+                    <option value="Sanskrit">Sanskrit</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="phone-num" type="text" class="validate" value="">
+                  <label for="phone-num">Phone</label>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="web-link" type="text" class="validate">
+                  <label for="web-link">Website</label>
+                </div>
+              </div>
+              <div class="col s12">
+                <label class="musicselect2">Favourite Music</label>
+                <div class="input-field">
+                  <select class="browser-default" id="musicselect2" multiple="multiple">
+                    <option value="Rock">Rock</option>
+                    <option value="Jazz" selected>Jazz</option>
+                    <option value="Disco">Disco</option>
+                    <option value="Pop">Pop</option>
+                    <option value="Techno">Techno</option>
+                    <option value="Folk" selected>Folk</option>
+                    <option value="Hip hop">Hip hop</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col s12">
+                <label for="moviesselect2">Favourite movies</label>
+                <div class="input-field">
+                  <select class="browser-default" id="moviesselect2" multiple="multiple">
+                    <option value="The Dark Knight" selected>
+                      The Dark Knight
+                    </option>
+                    <option value="Harry Potter" selected>Harry Potter</option>
+                    <option value="Airplane!">Airplane!</option>
+                    <option value="Perl Harbour">Perl Harbour</option>
+                    <option value="Spider Man">Spider Man</option>
+                    <option value="Iron Man" selected>Iron Man</option>
+                    <option value="Avatar">Avatar</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col s12 display-flex justify-content-end form-action">
+                <button type="submit" class="btn indigo waves-effect waves-light mr-2">Save
+                  changes</button>
+                <button type="button" class="btn btn-light-pink waves-effect waves-light ">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="social-link">
+        <div class="card-panel">
+          <form>
+            <div class="row">
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="twitter-link" type="text" class="validate" placeholder="Add link"
+                    value="https://www.twitter.com">
+                  <label for="twitter-link">Twitter</label>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="fb-link" type="text" class="validate" placeholder="Add link">
+                  <label for="fb-link">Facebook</label>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="google+link" type="text" class="validate" placeholder="Add link">
+                  <label for="google+link">Google+</label>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="linkedin" type="text" class="validate" placeholder="Add link"
+                    value="https://www.linkedin.com">
+                  <label for="linkedin">LinkedIn</label>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="instragram-link" type="text" class="validate" placeholder="Add link">
+                  <label for="instragram-link">Instagram</label>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="quora-link" type="text" class="validate" placeholder="Add link">
+                  <label for="quora-link">Quora</label>
+                </div>
+              </div>
+              <div class="col s12 display-flex justify-content-end form-action">
+                <button type="submit" class="btn indigo waves-effect waves-light mr-2">Save
+                  changes</button>
+                <button type="button" class="btn btn-light-pink waves-effect waves-light">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="connections">
+        <div class="card-panel">
+          <div class="row">
+            <div class="col s12 mt-1 mb-1">
+              <a href="javascript: void(0);" class="btn cyan waves-effect waves-light">
+                Connect to <strong>Twitter</strong>
+              </a>
+            </div>
+            <div class="col s12 mt-1 mb-1">
+              <button class="btn btn-small waves-effect waves-light btn-light-indigo float-right">edit</button>
+              <h6>You are connected to facebook.</h6>
+              <p>Johndoe@gmail.com</p>
+            </div>
+            <div class="col s12 mt-1 mb-1">
+              <a href="javascript: void(0);" class="btn waves-effect waves-light">Connect to
+                <strong>Google</strong>
+              </a>
+            </div>
+            <div class="col s12 mt-1 mb-1">
+              <button class="btn btn-small btn-light-indigo float-right waves-effect waves-light">edit</button>
+              <h6>You are connected to Instagram.</h6>
+              <p>Johndoe@gmail.com</p>
+            </div>
+            <div class="col s12 display-flex justify-content-end form-action">
+              <button type="submit" class="btn indigo waves-effect waves-light mr-2">Save
+                changes</button>
+              <button type="button" class="btn btn-light-pink waves-effect waves-light">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="notifications">
+        <div class="card-panel">
+          <div class="row">
+            <h6 class="col s12 mb-2">Atividade</h6>
+            <div class="col s12 mb-1">
+              <div class="switch">
+                <label>
+                  <input type="checkbox" checked id="accountSwitch1">
+                  <span class="lever"></span>
+                </label>
+                <span class="switch-label w-100">Envie-me um e-mail quando alguém comentar meu artigo</span>
+              </div>
+            </div>
+            <div class="col s12 mb-1">
+              <div class="switch">
+                <label>
+                  <input type="checkbox" checked id="accountSwitch2">
+                  <span class="lever"></span>
+                </label>
+                <span class="switch-label w-100">Envie-me um e-mail quando alguém responder no meu formulário</span>
+              </div>
+            </div>
+            <div class="col s12 mb-1">
+              <div class="switch">
+                <label>
+                  <input type="checkbox" id="accountSwitch3">
+                  <span class="lever"></span>
+                </label>
+                <span class="switch-label w-100">Me mande um e-mail quando alguém me seguir</span>
+              </div>
+            </div>
+            <h6 class="col s12 mb-2 mt-2">Aplicativo</h6>
+            <div class="col s12 mb-1">
+              <div class="switch">
+                <label>
+                  <input type="checkbox" checked id="accountSwitch4">
+                  <span class="lever"></span>
+                </label>
+                <span class="switch-label w-100">Notícias e anúncios</span>
+              </div>
+            </div>
+            <div class="col s12 mb-1">
+              <div class="switch">
+                <label>
+                  <input type="checkbox" id="accountSwitch5">
+                  <span class="lever"></span>
+                </label>
+                <span class="switch-label w-100">Atualizações semanais de produtos</span>
+              </div>
+            </div>
+            <div class="col s12 mb-1">
+              <div class="switch">
+                <label>
+                  <input type="checkbox" class="custom-control-input" checked id="accountSwitch6">
+                  <span class="lever"></span>
+                </label>
+                <span class="switch-label w-100">Resumo semanal do blog</span>
+              </div>
+            </div>
+            <div class="col s12 display-flex justify-content-end form-action mt-2">
+              <button type="submit" class="btn indigo waves-light waves-effect mr-sm-1 mr-2">Salvar Alterações</button>
+              <button type="button" class="btn btn-light-pink waves-light waves-effect">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- START RIGHT SIDEBAR NAV -->	
+	
+<!-- INICIAR NAV DA BARRA LATERAL DIREITA -->
+   <div th:replace="~{dashboard-admin/fragmentos/menu-lateral-direita :: menu-direita}"></div>
+<!--FIM DA BARRA LATERAL DIREITA NAV--><!-- Intro -->
+
+          </div>
+          <div class="content-overlay"></div>
+        </div>
+      </div>
+    </div>
+    <!-- END: Página principal-->
+    
+	<div th:replace="~{dashboard-admin/fragmentos/personaliza-tema :: temas}"></div>
+	<div th:replace="~{dashboard-admin/fragmentos/rodape :: footer}"></div>
+ 
+    <!-- END: Footer-->
+    <!-- BEGIN VENDOR JS-->
+    <script src="../../../app-assets/js/vendors.min.js"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="../../../app-assets/vendors/select2/select2.full.min.js"></script>
+    <script src="../../../app-assets/vendors/jquery-validation/jquery.validate.min.js"></script>
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN THEME  JS-->
+    <script src="../../../app-assets/js/plugins.min.js"></script>
+    <script src="../../../app-assets/js/search.min.js"></script>
+    <script src="../../../app-assets/js/custom/custom-script.min.js"></script>
+    <script src="../../../app-assets/js/scripts/customizer.min.js"></script>
+    <!-- END THEME  JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="../../../app-assets/js/scripts/page-account-settings.min.js"></script>
+    <!-- END PAGE LEVEL JS-->    
+  </body>
+</html>

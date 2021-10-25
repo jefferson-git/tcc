@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+
+<html class="loading" lang="pt-br" data-textdirection="ltr" xmlns:th="http://www.thymeleaf.org">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
+    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
+    <meta name="author" content="ThemeSelect">
+    <title>Dashboard Lista de Marcas | Mamute - admin</title>
+    <link rel="apple-touch-icon" href="../../../../app-assets/images/favicon/apple-touch-icon-152x152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../app-assets/images/favicon/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- BEGIN: VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/data-tables/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/data-tables/css/dataTables.checkboxes.css">
+    <!-- END: VENDOR CSS-->
+    <!-- BEGIN: Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/vertical-modern-menu-template/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/vertical-modern-menu-template/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/app-invoice.min.css">
+    <!-- END: Page Level CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/custom/custom.css">
+    <!-- END: Custom CSS-->
+  </head>
+  <!-- END: Head-->
+  </head>
+  <!-- FIM: Head-->
+   <div th:replace="~{dashboard-admin/fragmentos/topo-pagina :: topo}"></div>
+   <div th:replace="~{dashboard-admin/fragmentos/menu-principal :: menu-painel}"></div>
+    <!-- END: SideNav Fim menu lateral-->
+
+    <!-- INÍCIO: Página principal-->
+
+    <div id="main">
+      <div class="row">
+        <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>       
+      <div class="col s12">
+    <div class="container">
+   <section class="invoice-list-wrapper section">
+  <!-- create invoice button-->
+  <!-- Options and filter dropdown button-->
+  <!-- create invoice button-->
+  <div class="invoice-create-btn">
+    <a href="/dashboard-admin/produto/registrar" class="btn waves-effect waves-light invoice-create border-round z-depth-4">
+      <i class="material-icons">add</i>
+      <span class="hide-on-small-only">Cadastrar novo produto</span>
+    </a>
+  </div>
+  <div class="filter-btn">
+    <!-- Dropdown Trigger -->
+    <a class='dropdown-trigger btn waves-effect waves-light purple darken-1 border-round' href='#'
+      data-target='btn-filter'>
+      <span class="hide-on-small-only">Filtrar busca por</span>
+      <i class="material-icons">keyboard_arrow_down</i>
+    </a>
+    <!-- Dropdown Structure -->
+    <ul id='btn-filter' class='dropdown-content'>
+      <li><a href="#!">Paid</a></li>
+      <li><a href="#!">Unpaid</a></li>
+      <li><a href="#!">Partial Payment</a></li>
+    </ul>
+  </div>
+  <div class="responsive-table">
+    <table class="table invoice-data-table white border-radius-4 pt-1">
+      <thead>
+        <tr>
+          <!-- data table responsive icons -->
+          <th></th>
+          <!-- data table checkbox -->
+          <th></th>
+          <th>Nome do produto</th>
+          <th>Data cadastro</th>
+          <th>Custo</th>  
+          <th>Margem de lucro</th>  
+          <th>Valor de venda</th>               
+          <th>Imposto a pagar</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="produto : ${produtos}">
+          <td></td>
+          <td></td>
+          <td th:text="${produto.nome}">
+            <a href="app-invoice-view.html">INV-00956</a>
+          </td>
+          <td><small th:text="${#dates.format(produto.dataCadastro, 'dd/MM/yyyy')}"></small></td>
+          <td><span>R$ </span><span th:text="${#numbers.formatDecimal(produto.precoCusto, 0, 'COMMA', 2, 'POINT')}" class="invoice-amount"></span></td>
+          <td>
+            <span class="chip lighten-5 green green-text">
+            	<span th:text="${#numbers.formatDecimal(produto.lucro.porcentagem, 0, 'COMMA', 0, 'POINT')}"></span>
+            	<span  class="green-text">%</span>
+            </span>
+          </td>
+          <td><span>R$ </span><span th:text="${#numbers.formatDecimal(produto.precoVenda, 0, 'COMMA', 2, 'POINT')}" class="invoice-customer"></span></td>          
+          <td>
+            <span class="chip lighten-5 red red-text">
+            	<span th:text="${produto.imposto.porcentagem}"></span>
+            	<span  class="red-text">%</span>
+            </span>
+          </td>
+          <td>
+            <div class="invoice-action">
+              <a th:href="@{/dashboard-admin/produto/descricao/{id}(id=${produto.id})}" class="invoice-action-view mr-4">
+                <i class="material-icons">remove_red_eye</i>
+              </a>
+              <a th:href="@{/dashboard-admin/produto/editar/{id}(id=${produto.id})}" class="invoice-action-edit">
+                <i class="material-icons">edit</i>
+              </a>
+              <a th:href="@{/dashboard-admin/produto/deletar/{id}(id=${produto.id})}" class="invoice-action-delete">
+                <i class="material-icons">delete_forever</i>
+              </a>
+            </div>
+          </td>
+        </tr>        
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- INICIAR NAV DA BARRA LATERAL DIREITA -->
+   <div th:replace="~{dashboard-admin/fragmentos/menu-lateral-direita :: menu-direita}"></div>
+<!--FIM DA BARRA LATERAL DIREITA NAV--><!-- Intro -->
+          </div>
+          <div class="content-overlay"></div>
+        </div>
+      </div>
+    </div>  
+    <div class="alert alert-success" th:if="${not #strings.isEmpty(menssagem)}">
+		<script>					    
+			M.toast({html: '<i class="material-icons">[(${icone})]</i> &emsp; [(${menssagem})]', classes: 'rounded'});
+		</script>	
+	</div>  
+    <!-- END: Footer-->
+    <!-- BEGIN VENDOR JS-->
+    <script src="../../../app-assets/js/vendors.min.js"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="../../../app-assets/vendors/data-tables/js/jquery.dataTables.min.js"></script>
+    <script src="../../../app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../../../app-assets/vendors/data-tables/js/datatables.checkboxes.min.js"></script>
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN THEME  JS-->
+    <script src="../../../app-assets/js/plugins.min.js"></script>
+    <script src="../../../app-assets/js/search.min.js"></script>
+    <script src="../../../app-assets/js/custom/custom-script.min.js"></script>
+    <script src="../../../app-assets/js/scripts/customizer.min.js"></script>
+    <!-- END THEME  JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="../../../app-assets/js/scripts/app-invoice.min.js"></script>
+    <!-- END PAGE LEVEL JS-->
+    <script>
+    	document.addEventListener('DOMContentLoaded', function() {
+    		var elems = document.querySelectorAll('.modal');
+    		var instances = M.Modal.init(elems, options);
+		});
+		$(document).ready(function(){
+   		 	$('.modal').modal();
+ 		 });
+    </script>
+  </body>
+</html>

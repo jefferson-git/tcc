@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html class="loading" lang="pt-br" data-textdirection="ltr" xmlns:th="http://www.thymeleaf.org">
+    <!-- BEGIN: Head-->
+  <head>
+    <meta charset="utf-8">
+    <title>Mamute | Fashion Store v.1</title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="Mamute - Bootstrap E-commerce Template">
+    <meta name="keywords" content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap, html5, css3, js, gallery, slider, touch, creative, clean">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+    
+    <link rel="stylesheet" media="screen" href="../../vendor/simplebar/dist/simplebar.min.css"/>
+    <link rel="stylesheet" media="screen" href="../../vendor/tiny-slider/dist/tiny-slider.css"/>
+    <link rel="stylesheet" media="screen" href="../../vendor/drift-zoom/dist/drift-basic.min.css"/>
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="../../css/theme.min.css">
+    <!-- Google Tag Manager-->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WKV3GT5');
+    </script>
+  </head>
+	<body>	
+      <!-- Page Title (Dark)-->
+      <div th:fragment="rastreamento-pagina">
+      <div class="bg-dark py-4">
+        <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+          <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+                <li class="breadcrumb-item"><a class="text-nowrap" href="/mamute"><img src="../img/icon/house.svg"> Home</a></li>
+                <li><img src="../img/icon/chevron-right.svg"><a href="/mamute/shopping"> Comprar </a>
+                </li>
+                <img src="../img/icon/chevron-right.svg">
+                <li class="breadcrumb-item text-nowrap active" aria-current="page">Rastreamento de pedidos</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+            <h1 class="h3 text-light mb-0">Número de rastreamento: <span class="h4 fw-normal text-light">34VB5540K83</span></h1>
+          </div>
+        </div>
+      </div>
+      <div class="container py-5 mb-2 mb-md-3">
+        <!-- Details-->
+        <div class="row gx-4 mb-4">
+          <div class="col-md-4 mb-2">
+            <div class="bg-secondary h-100 p-4 text-center rounded-3"><span class="fw-medium text-dark me-2">Enviado por:</span>UPS Ground</div>
+          </div>
+          <div class="col-md-4 mb-2">
+            <div class="bg-secondary h-100 p-4 text-center rounded-3"><span class="fw-medium text-dark me-2">Status:</span>Processando o Pedido</div>
+          </div>
+          <div class="col-md-4 mb-2">
+            <div class="bg-secondary h-100 p-4 text-center rounded-3"><span class="fw-medium text-dark me-2">Data esperada de chegada:</span>Outubro 15, 2022</div>
+          </div>
+        </div>
+        <!-- Progress-->
+        <div class="card border-0 shadow-lg">
+          <div class="card-body pb-2">
+            <ul class="nav nav-tabs media-tabs nav-justified">
+              <li class="nav-item">
+                <div class="nav-link completed">
+                  <div class="d-flex align-items-center">
+                    <div class="media"><img src="../img/icon/bag-check.svg"></div>
+                    <div class="ps-3">
+                      <div class="media-tab-subtitle text-muted fs-xs mb-1">Primeiro passo</div>
+                      <h6 class="media-tab-title text-nowrap mb-0">Pedido feito</h6>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="nav-link active">
+                  <div class="d-flex align-items-center">
+                    <div class="media"><img src="../img/icon/gear.svg"></div>
+                    <div class="ps-3">
+                      <div class="media-tab-subtitle text-muted fs-xs mb-1">Segundo passo</div>
+                      <h6 class="media-tab-title text-nowrap mb-0">Processando o Pedido</h6>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="nav-link">
+                  <div class="d-flex align-items-center">
+                    <div class="media"><img src="../img/icon/star.svg"></div>
+                    <div class="ps-3">
+                      <div class="media-tab-subtitle text-muted fs-xs mb-1">Terceiro passo</div>
+                      <h6 class="media-tab-title text-nowrap mb-0">Verificação de qualidade</h6>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="nav-link">
+                  <div class="d-flex align-items-center">
+                    <div class="media"><img src="../img/icon/box-seam.svg"></div>
+                    <div class="ps-3">
+                      <div class="media-tab-subtitle text-muted fs-xs mb-1">Quarta etapa</div>
+                      <h6 class="media-tab-title text-nowrap mb-0">Produto despachado</h6>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Footer-->
+        <div class="d-sm-flex flex-wrap justify-content-between align-items-center text-center pt-4">
+          <div class="form-check mt-2 me-3">
+            <input class="form-check-input" type="checkbox" id="notify-me" checked>
+            <label class="form-check-label" for="notify-me">Notifique-me quando o pedido for entregue</label>
+          </div><a class="btn btn-primary btn-sm mt-2" href="#order-details" data-bs-toggle="modal">Exibir detalhes do pedido</a>
+        </div>
+      </div>
+      </div>
+    </body>
+</html>

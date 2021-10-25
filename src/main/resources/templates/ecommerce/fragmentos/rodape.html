@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html class="loading" lang="pt-br" data-textdirection="ltr" xmlns:th="http://www.thymeleaf.org">
+    <!-- BEGIN: Head-->
+  <head>
+    <meta charset="utf-8">
+    <title>Mamute | Fashion Store v.1</title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="Mamute - Bootstrap E-commerce Template">
+    <meta name="keywords" content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap, html5, css3, js, gallery, slider, touch, creative, clean">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+    
+    <link rel="stylesheet" media="screen" href="../../vendor/simplebar/dist/simplebar.min.css"/>
+    <link rel="stylesheet" media="screen" href="../../vendor/tiny-slider/dist/tiny-slider.css"/>
+    <link rel="stylesheet" media="screen" href="../../vendor/drift-zoom/dist/drift-basic.min.css"/>
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="../../css/theme.min.css">
+    <!-- Google Tag Manager-->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WKV3GT5');
+    </script>
+	<body>	
+    <footer th:fragment="footer" class="footer bg-dark pt-5">
+      <div class="container">
+        <div class="row pb-2">
+          <div class="col-md-4 col-sm-6">
+            <div class="widget widget-links widget-light pb-2 mb-4">
+              <h3 class="widget-title text-light">Departamentos da loja</h3>
+              <ul th:each="departamento : ${departamentos}"class="widget-list">
+                <li class="widget-list-item"><a th:text="${departamento.nome}" class="widget-list-link" href="#"></a></li>                
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <div class="widget widget-links widget-light pb-2 mb-4">
+              <h3 class="widget-title text-light">Conta &amp; Informação de Envio</h3>
+              <ul class="widget-list">
+                <li class="widget-list-item"><a class="widget-list-link" href="#">Sua conta</a></li>
+                <li class="widget-list-item"><a class="widget-list-link" href="#">Taxas de envio &amp; políticas</a></li>
+                <li class="widget-list-item"><a class="widget-list-link" href="#">Reembolsos &amp; substituições</a></li>
+                <li class="widget-list-item"><a class="widget-list-link" href="#">Rastreamento de pedidos</a></li>
+                <li class="widget-list-item"><a class="widget-list-link" href="#">Informação de entrega</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="widget pb-2 mb-4">
+              <h3 class="widget-title text-light pb-1">Fique informado</h3>
+              <form class="subscription-form validate" action="#" method="post" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+                <div class="input-group flex-nowrap"><i class="position-absolute top-50 translate-middle-y text-muted fs-base ms-3"><img src="../img/icon/chat-left-text.svg"></i>
+                  <input class="form-control rounded-start" type="email" name="EMAIL" placeholder="email" required>
+                  <button class="btn btn-primary" type="submit" name="subscribe">Se inscreva*</button>
+                </div>
+                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  <input class="subscription-form-antispam" type="text" name="" tabindex="-1">
+                </div>
+                <div class="form-text text-light opacity-50">*Assine nosso boletim informativo para receber ofertas de descontos antecipados, atualizações e informações sobre novos produtos.</div>
+                <div class="subscription-status"></div>
+              </form>
+            </div>
+            <div class="widget pb-2 mb-4">
+              <h3 class="widget-title text-light pb-1">Download do nosso aplicativo</h3>
+              <div class="d-flex flex-wrap">
+                <div class="me-2 mb-2"><a class="btn-market btn-apple" href="#" role="button"><span class="btn-market-subtitle">Download</span><span class="btn-market-title">App Store</span></a></div>
+                <div class="mb-2"><a class="btn-market btn-google" href="#" role="button"><span class="btn-market-subtitle">Download</span><span class="btn-market-title">Google Play</span></a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pt-5 bg-darker">
+        <div class="container">
+          <div class="row pb-3">
+            <div class="col-md-3 col-sm-6 mb-4">
+              <div class="d-flex"><img src="../img/icon/foguete.png" width="22%">
+                <div class="ps-3">
+                  <h6 class="fs-base text-light mb-1">Entrega rápida e grátis</h6>
+                  <p class="mb-0 fs-ms text-light opacity-50">Entrega gratuita para todos os pedidos acima de R$200</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+              <div class="d-flex"><img src="../img/icon/garantia-de-devolucao-de-dinheiro.png" width="20%">
+                <div class="ps-3">
+                  <h6 class="fs-base text-light mb-1">Garantia de devolução de dinheiro</h6>
+                  <p class="mb-0 fs-ms text-light opacity-50">Devolvemos o dinheiro em 30 dias</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+              <div class="d-flex"><img src="../img/icon/servicos-de-suporte.png" width="18%" class="text-primary" style="font-size: 2.25rem;"></i>
+                <div class="ps-3">
+                  <h6 class="fs-base text-light mb-1">Suporte ao cliente 24 horas por dia, 7 dias por semana</h6>
+                  <p class="mb-0 fs-ms text-light opacity-50">Suporte ao cliente amigável.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+              <div class="d-flex"><img src="../img/icon/pagamento-seguro.png" width="18%">
+                <div class="ps-3">
+                  <h6 class="fs-base text-light mb-1">Pagamento online seguro</h6>
+                  <p class="mb-0 fs-ms text-light opacity-50">Possuímos certificado SSL/seguro</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr class="hr-light mb-5">
+          <div class="row pb-2">
+            <div class="col-md-6 text-center text-md-start mb-4">
+              <div class="widget widget-links widget-light">
+                <ul class="widget-list d-flex flex-wrap justify-content-center justify-content-md-start">
+                  <li class="widget-list-item me-4"><a class="widget-list-link" href="#">Outlets</a></li>
+                  <li class="widget-list-item me-4"><a class="widget-list-link" href="#">Afiliados</a></li>
+                  <li class="widget-list-item me-4"><a class="widget-list-link" href="#">Suporte</a></li>
+                  <li class="widget-list-item me-4"><a class="widget-list-link" href="#">Privacidade</a></li>
+                  <li class="widget-list-item me-4"><a class="widget-list-link" href="#">Termos de uso</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6 text-center text-md-end mb-4">
+              <div class="mb-3">
+              <a class="btn-social bs-light bs-twitter ms-2 mb-2" href="#">
+              <img src="../img/icon/twitter.svg"></a>
+              <a class="btn-social bs-light bs-facebook ms-2 mb-2" href="#">
+              <img src="../img/icon/facebook.svg"></a><a class="btn-social bs-light bs-instagram ms-2 mb-2" href="#">
+              <img src="../img/icon/instagram.svg"></a><a class="btn-social bs-light bs-pinterest ms-2 mb-2" href="#">
+              <img src="../img/icon/youtube.svg"></a></div><img class="d-inline-block" src="../img/cards-alt.png" width="187" alt="Métodos de Pagamento">
+            </div>
+          </div>
+        </div>
+      </div>
+     </footer>
+    </body>
+</html>

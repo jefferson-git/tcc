@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+
+<html class="loading" lang="pt-br" data-textdirection="ltr" xmlns:th="http://www.thymeleaf.org">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
+    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
+    <meta name="author" content="ThemeSelect">
+    <title>Dashboard Lista de Colaboradores | Mamute - admin</title>
+    <link rel="apple-touch-icon" href="../../../../app-assets/images/favicon/apple-touch-icon-152x152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../app-assets/images/favicon/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- BEGIN: VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/data-tables/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css">
+    <!-- END: VENDOR CSS-->
+    <!-- BEGIN: Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/themes/vertical-modern-menu-template/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/themes/vertical-modern-menu-template/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/pages/page-users.min.css">
+    <!-- END: Page Level CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/custom/custom.css">
+    <!-- END: Custom CSS-->
+  </head>
+  <!-- END: Head-->
+  </head>
+  <!-- FIM: Head-->
+   <div th:replace="~{dashboard-admin/fragmentos/topo-pagina :: topo}"></div>
+   <div th:replace="~{dashboard-admin/fragmentos/menu-principal :: menu-painel}"></div>
+    <!-- END: SideNav Fim menu lateral-->
+
+    <!-- INÍCIO: Página principal-->
+
+    <div id="main">
+      <div class="row">
+        <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+        <div class="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
+          <!-- Search for small screen-->
+          <div class="container">
+            <div class="row">
+              <div class="col s10 m6 l6">
+                <h5 class="breadcrumbs-title mt-0 mb-0"><span>Lista de Colaboradores</span></h5>
+                <ol class="breadcrumbs mb-0">
+                  <li class="breadcrumb-item"><a href="dashboard-modern">Home</a>
+                  </li>
+                  <li class="breadcrumb-item"><a href="#">Colaboradores</a>
+                  </li>
+                  <li class="breadcrumb-item active">Lista
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col s12">
+          <div class="container">
+            <!-- users list start -->
+<section class="users-list-wrapper section">
+ <div class="card gradient-45deg-light-blue-cyan gradient-shadow">
+	<div class="card-content white-text">
+	 <i class="material-icons">playlist_add_check</i>
+	 <p class="caption mb-0"><span class="card-title">Lista de Colaboradores</span>
+	 <p>
+		Lista de Colaboradores no Sistema.
+	  </p>
+	</div>            
+  </div>
+  <div class="users-list-filter">
+    <div class="card-panel">    
+      <div class="row">
+        <form>
+          <div class="col s12 m6 l3">
+            <label for="users-list-verified">Modalidade de trabalho</label>
+            <div class="input-field">
+              <select class="form-control" id="users-list-verified">
+              	<option value="">Selecione o tipo</option>
+                <option value="presencial">Presencial</option>
+                <option value="remoto">Remoto</option>
+              </select>
+            </div>
+          </div>
+          <div class="col s12 m6 l3">
+            <label for="users-list-role">Função</label>
+            <div class="input-field">
+              <select class="form-control" id="users-list-role">
+              	<option value="">Selecione o tipo</option>
+                <option value="suporte">Suporte</option>
+                <option value="Desenvolvimento">Desenvolvimento</option>
+                <option value="Administrativo">Administrativo</option>
+                <option value="marketing">marketing</option>
+              </select>
+            </div>
+          </div>
+          <div class="col s12 m6 l3">
+            <label for="users-list-status">Status</label>
+            <div class="input-field">
+              <select class="form-control" id="users-list-status">
+                <option value="">Selecione o tipo</option>
+                <option value="Ativo">Ativo</option>
+                <option value="Desabilitado">Desabilitado</option>
+              </select>
+            </div>
+          </div>
+          <div class="col s12 m6 l3 display-flex align-items-center show-btn">
+            <button type="submit" class="btn btn-block indigo waves-effect waves-light">Mostrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="users-list-table">
+    <div class="card">
+      <div class="card-content">
+        <!-- datatable start -->
+        <div class="responsive-table">
+          <table >
+            <thead>
+              <tr>
+                <th></th>
+                <th>id</th>
+                <th></th>
+                <th>nome</th>
+                <th></th>
+                <th>Data admissão</th>
+                <th></th>
+                <th>Cargo</th>
+                <th>status</th>
+                <th>Função</th>
+                <th>editar</th>
+                <th>ver</th>
+                <th>deletar</th>
+              </tr>
+            </thead>
+            <tbody th:each="colaborador : ${colaboradores}">           
+              <tr>
+                <td><i class="material-icons prefix">vpn_key</i></td>
+                <td th:text="${colaborador.id}"></td>
+                <td><i class="material-icons prefix">perm_identity</i></td>
+                <td th:text="${colaborador.nome}"></td>
+                <td><i class="material-icons prefix">date_range</i></td>
+                <td th:text="${#temporals.format(colaborador.dataAdmissao, 'dd/MM/yyyy')}"></td>
+                 <td><i class="material-icons prefix">school</i></td>
+                <td th:text="${colaborador.cargo}"></td>
+                <td><span class="chip green lighten-5">
+                   	 <span th:if="${colaborador.usuario.status == 1}" class="green-text">habilitado</span>
+                   	 <span th:unless="${colaborador.usuario.status == 1}" class="red-text">desabilitado</span>
+                  	</span>
+                </td>
+                <td><i class="material-icons prefix">trending_flat</i></td>  
+                <td><a th:href="@{/dashboard-admin/colaborador/{id}(id=${colaborador.id})}"><i class="material-icons">edit</i></a></td>
+                <td><a th:href="@{/dashboard-admin/colaborador/visualizar/{id}(id=${colaborador.id})}"><i class="material-icons">remove_red_eye</i></a></td>
+                <td><a class="modal-trigger" href="#modalRemover"><i class="material-icons">delete_forever</i></a></td>
+                </tr>
+                 <!-- Modal deletar colaborador -->
+				  <div id="modalRemover" class="modal">
+				    <div class="modal-content">
+				      <h4>Remover</h4>
+				      <p>Deseja realmente excluir esses dados</p>
+				    </div>
+				    <div class="modal-footer">				    
+				      <a href="#!" class="modal-close waves-effect waves-red btn-flat">cancelar</a>
+				      <a th:href="@{/dashboard-admin/colaborador/deletar/{id}(id=${colaborador.id})}" class="btn waves-effect waves-light"><i class="material-icons">delete_forever</i>deletar</a>
+				    </div>
+				  </div>   
+            </tbody>
+          </table>
+        </div>
+        <!-- datatable ends -->
+      </div>
+    </div>
+  </div>
+</section> 
+<div class="alert alert-success" th:if="${not #strings.isEmpty(menssagem)}">
+	  <script>					    
+		M.toast({html: '<i class="material-icons">[(${icone})]</i> &emsp; [(${menssagem})]', classes: 'rounded'});
+	  </script>	
+	</div>  
+<!-- users list ends -->	
+
+<!-- INICIAR NAV DA BARRA LATERAL DIREITA -->
+   <div th:replace="~{dashboard-admin/fragmentos/menu-lateral-direita :: menu-direita}"></div>
+<!--FIM DA BARRA LATERAL DIREITA NAV--><!-- Intro -->
+          </div>
+          <div class="content-overlay"></div>
+        </div>
+      </div>
+    </div>    
+    <!-- END: Página principal-->
+    
+	<div th:replace="~{dashboard-admin/fragmentos/personaliza-tema :: temas}"></div>
+	<div th:replace="~{dashboard-admin/fragmentos/rodape :: footer}"></div>
+ 
+    
+   <!-- BEGIN VENDOR JS-->
+    <script src="../../../../app-assets/js/vendors.min.js"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="../../../../app-assets/vendors/data-tables/js/jquery.dataTables.min.js"></script>
+    <script src="../../../../app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js"></script>
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN THEME  JS-->
+    <script src="../../../../app-assets/js/plugins.min.js"></script>
+    <script src="../../../../app-assets/js/search.min.js"></script>
+    <script src="../../../../app-assets/js/custom/custom-script.min.js"></script>
+    <script src="../../../../app-assets/js/scripts/customizer.min.js"></script>
+    <!-- END THEME  JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="../../../../app-assets/js/scripts/page-users.min.js"></script>
+    <!-- END PAGE LEVEL JS-->  
+    <script>
+    	document.addEventListener('DOMContentLoaded', function() {
+    		var elems = document.querySelectorAll('.modal');
+    		var instances = M.Modal.init(elems, options);
+		});
+		$(document).ready(function(){
+   		 	$('.modal').modal();
+ 		 });
+    </script>
+  </body>
+</html>

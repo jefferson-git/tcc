@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html class="loading" lang="pt-br" data-textdirection="ltr" xmlns:th="http://www.thymeleaf.org">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
+    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
+    <meta name="author" content="ThemeSelect">
+    <title>Dashboard admin | Mamute - index</title>
+    <link rel="apple-touch-icon" href="../../../app-assets/images/favicon/apple-touch-icon-152x152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/favicon/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- BEGIN: VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/animate-css/animate.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/chartist-js/chartist.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/chartist-js/chartist-plugin-tooltip.css">
+    <!-- END: VENDOR CSS-->
+    <!-- BEGIN: Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/vertical-modern-menu-template/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/vertical-modern-menu-template/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/dashboard-modern.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/intro.min.css">
+    <!-- END: Page Level CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/custom/custom.css">
+    <!-- END: Custom CSS-->
+  </head>
+ <!-- rodapé -->
+
+      <div th:fragment="modal-introducao" id="intro">
+    <div class="row">
+        <div class="col s12">
+
+            <div id="img-modal" class="modal white">
+                <div class="modal-content">
+                    <div class="bg-img-div"></div>
+                    <p class="modal-header right modal-close">Pular introdução <span class="right"><i class="material-icons right-align">clear</i></span></p>
+                    <div class="carousel carousel-slider center intro-carousel">
+                        <div class="carousel-fixed-item center middle-indicator">
+                            <div class="left">                           
+                                <button class="movePrevCarousel middle-indicator-text btn btn-flat purple-text waves-effect waves-light btn-prev">
+                                    <i class="material-icons">navigate_before</i> <span class="hide-on-small-only">anterior</span>
+                                </button>
+                            </div>
+
+                            <div class="right"><br>
+                                <button class=" moveNextCarousel middle-indicator-text btn btn-flat purple-text waves-effect waves-light btn-next">
+                                    <span class="hide-on-small-only">próximo</span> <i class="material-icons">navigate_next</i>
+                                </button>
+                            </div>
+                        </div>
+											<div class="carousel-item slide-1">
+												<img
+													src="../../../app-assets/images/gallery/intro-slide-1.png"
+													alt="" class="responsive-img animated fadeInUp slide-1-img">
+												<h5 class="intro-step-title mt-7 center animated fadeInUp">bem-vindo
+													ao painel de controle</h5>
+												<p class="intro-step-text mt-5 animated fadeInUp">disponibilizamos
+													a você um painel de controle com várias funcionalidades nas
+													quais o ajudará no processo compras e gerenciamento e controle de 
+													sua históricos</p>
+											</div>
+											<div class="carousel-item slide-2">
+                            <img src="../../../app-assets/images/gallery/intro-features.png" alt="" class="responsive-img slide-2-img">
+                            <h5 class="intro-step-title mt-7 center">Solicitação de informações</h5>
+                            <p class="intro-step-text mt-5">use o menu ou a barra de busca</p>
+                            <div class="row">
+                                <div class="col s6">
+                                    <div class="input-field">
+                                        <label for="first_name">Nome</label>
+                                        <input placeholder="Name" id="first_name" type="text" class="validate">
+                                    </div>
+                                </div>
+                                <div class="col s6">
+                                    <div class="input-field">
+                                        <select>
+                                            <option value="" disabled selected>opção</option>
+                                            <option value="1">fornecedor</option>
+                                            <option value="2">compras</option>
+                                            <option value="3">parceiros</option>
+                                        </select>
+                                        <label>Selecione uma opção</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                       
+                        <div class="carousel-item slide-3">
+                            <img src="../../../app-assets/images/gallery/intro-app.png" alt="" class="responsive-img slide-1-img">
+                            <h5 class="intro-step-title mt-7 center">Mostrar recursos do aplicativo</h5>
+                            <div class="row">
+                                <div class="col m5 offset-m1 s12">
+                                    <ul class="feature-list left-align">
+                                        <li><i class="material-icons">check</i>históricos</li>
+                                        <li><i class="material-icons">check</i>entregas</li>
+                                        <li><i class="material-icons">check</i>Compra coletiva</li>
+                                    </ul>
+                                </div>
+                                <div class="col m6 s12">
+                                    <ul class="feature-list left-align">
+                                        <li><i class="material-icons">check</i>entrega exclusiva</li>
+                                        <li><i class="material-icons">check</i>email</li>
+                                        <li><i class="material-icons">check</i>chat</li>
+                                    </ul>
+                                </div>
+                                <div class="row">
+                                    <div class="col s12 center">
+                                        <button class="get-started btn waves-effect waves-light gradient-45deg-purple-deep-orange mt-3 modal-close">Iniciar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ Fim rodapé -->
+
+</body>
+</html>

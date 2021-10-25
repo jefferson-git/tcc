@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html class="loading" lang="pt-br" data-textdirection="ltr" xmlns:th="http://www.thymeleaf.org">
+
+  <!-- INÍCIO: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
+    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
+    <meta name="author" content="ThemeSelect">
+    <title>Dashboard Modern | Materialize - Material Design Admin Template</title>
+    <link rel="apple-touch-icon" href="../../../app-assets/images/favicon/apple-touch-icon-152x152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/favicon/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- INÍCIO: VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/animate-css/animate.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/chartist-js/chartist.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/chartist-js/chartist-plugin-tooltip.css">
+    <!-- FIM: VENDOR CSS-->
+    <!-- INÍCIO: CSS de nível de página-->
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/themes/vertical-modern-menu-template/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/themes/vertical-modern-menu-template/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/pages/dashboard-modern.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/pages/intro.min.css">
+    <!-- FIM: CSS de nível de página-->
+    <!-- INÍCIO: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/custom/custom.css">
+    <!-- FIM: Custom CSS-->
+  </head>
+  <!-- FIM: Head-->
+  <div th:replace="~{dashboard-admin/fragmentos/topo-pagina :: topo}"></div>
+   <div th:replace="~{dashboard-admin/fragmentos/menu-principal :: menu-painel}"></div>
+    <!-- FIM: SideNav Fim menu lateral-->
+
+    <!-- INÍCIO: Página principal-->
+    <div id="main">
+      <div class="row">
+        <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+        <div class="col s12">
+          <div class="container">
+            <div class="section">
+   <!-- Saldo atual e cartões de transações totais-->
+   <div class="row vertical-modern-dashboard">
+      <div class="col s12 m4 l4">
+         <!-- Saldo Atual -->
+         <div class="card animate fadeLeft">
+            <div class="card-content">
+               <h6 class="mb-0 mt-0 display-flex justify-content-between">Saldo Atual 
+              	  <i class="material-icons float-right">more_vert</i>
+               </h6>
+               <p class="medium-small">Ciclo de faturamento</p>
+               <div class="current-balance-container">
+                  <div id="current-balance-donut-chart" class="current-balance-shadow"></div>
+               </div>
+               <h5 class="center-align">R$ 50.000,00</h5>
+               <p class="medium-small center-align">Saldo usado neste ciclo de faturamento</p>
+            </div>
+         </div>
+      </div>
+      <div class="col s12 m8 l8 animate fadeRight">
+         <!--Transação Total -->
+         <div class="card">
+            <div class="card-content">
+               <h4 class="card-title mb-0">Total de Transação <i class="material-icons float-right">more_vert</i></h4>
+               <p class="medium-small">Transações deste semana</p>
+               <div class="total-transaction-container">
+                  <div id="total-transaction-line-chart" class="total-transaction-shadow"></div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!--/ Saldo atual e cartões de transações totais-->
+
+   <!-- Estatísticas do usuário e cartões de compromisso-->
+   <div class="row">
+      <div class="col s12 l5">
+         <!-- Estatísticas do usuário -->
+         <div class="card user-statistics-card animate fadeLeft">
+            <div class="card-content">
+               <h4 class="card-title mb-0">Estatísticas do usuário <i class="material-icons float-right">more_vert</i></h4>
+               <div class="row">
+                  <div class="col s12 m6">
+                     <ul class="collection border-none mb-0">
+                        <li class="collection-item avatar">
+                           <i class="material-icons circle pink accent-2">trending_up</i>
+                           <p class="medium-small">Este ano</p>
+                           <h5 class="mt-0 mb-0">60%</h5>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="col s12 m6">
+                     <ul class="collection border-none mb-0">
+                        <li class="collection-item avatar">
+                           <i class="material-icons circle purple accent-4">trending_down</i>
+                           <p class="medium-small">Ano passado</p>
+                           <h5 class="mt-0 mb-0">40%</h5>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="user-statistics-container">
+                  <div id="user-statistics-bar-chart" class="user-statistics-shadow ct-golden-section"></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col s12 l4">
+         <!-- Compradores Recentes -->
+         <div class="card recent-buyers-card animate fadeUp">
+            <div class="card-content">
+               <h4 class="card-title mb-0">Compradores Recentes <i class="material-icons float-right">more_vert</i></h4>
+               <p class="medium-small pt-2">Data</p>
+               <ul class="collection mb-0">
+                  <li class="collection-item avatar">
+                     <img src="../../../app-assets/images/avatar/avatar-7.png" alt="" class="circle" />
+                     <p class="font-weight-600">John Doe</p>
+                     <p class="medium-small">18 de janeiro de 2022</p>
+                     <a href="#!" class="secondary-content"><i class="material-icons">star_border</i></a>
+                  </li>
+                  <li class="collection-item avatar">
+                     <img src="../../../app-assets/images/avatar/avatar-3.png" alt="" class="circle" />
+                     <p class="font-weight-600">Adam Garza</p>
+                     <p class="medium-small">20, January 2022</p>
+                     <a href="#!" class="secondary-content"><i class="material-icons">star_border</i></a>
+                  </li>
+                  <li class="collection-item avatar">
+                     <img src="../../../app-assets/images/avatar/avatar-5.png" alt="" class="circle" />
+                     <p class="font-weight-600">Jennifer Rice</p>
+                     <p class="medium-small">25, janeiro de 2022</p>
+                     <a href="#!" class="secondary-content"><i class="material-icons">star_border</i></a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="col s12 l3">
+         <div class="card animate fadeRight">
+            <div class="card-content">
+               <h4 class="card-title mb-0">Taxa de conversão</h4>
+               <div class="conversion-ration-container mt-8">
+                  <div id="conversion-ration-bar-chart" class="conversion-ration-shadow"></div>
+               </div>
+               <p class="medium-small center-align">Taxa de conversão deste mês</p>
+               <h5 class="center-align mb-0 mt-0">62%</h5>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!--/ Saldo atual e cartões de compromisso-->
+
+   <div class="row">
+      <div class="col s12 m6 l4">
+         <div class="card padding-4 animate fadeLeft">
+            <div class="row">
+               <div class="col s5 m5">
+                  <h5 class="mb-0">885</h5>
+                  <p class="no-margin">Novos</p>
+                  <p class="mb-0 pt-8">12.900</p>
+               </div>
+               <div class="col s7 m7 right-align">
+                  <i
+                     class="material-icons background-round mt-5 mb-5 gradient-45deg-purple-amber gradient-shadow white-text">perm_identity</i>
+                  <p class="mb-0">Total de Clientes</p>
+               </div>
+            </div>
+         </div>
+         <div id="chartjs" class="card pt-0 pb-0 animate fadeLeft">
+            <div class="dashboard-revenue-wrapper padding-2 ml-2">
+               <span class="new badge gradient-45deg-indigo-purple gradient-shadow mt-2 mr-2">+ R$900</span>
+               <p class="mt-2 mb-0 font-weight-600">Receita de hoje</p>
+               <p class="no-margin grey-text lighten-3">R$2.400,51 média</p>
+               <h5>R$ 48.300,00</h5>
+            </div>
+            <div class="sample-chart-wrapper card-gradient-chart">
+               <canvas id="custom-line-chart-sample-three" class="center"></canvas>
+            </div>
+         </div>
+      </div>
+      <div class="col s12 m6 l8">
+         <div class="card subscriber-list-card animate fadeRight">
+            <div class="card-content pb-1">
+               <h4 class="card-title mb-0">Lista de Assinantes <i class="material-icons float-right">more_vert</i></h4>
+            </div>
+            <table class="subscription-table responsive-table highlight">
+               <thead>
+                  <tr>
+                     <th>Nome</th>
+                     <th>Empresa</th>
+                     <th>Data de início</th>
+                     <th>Status</th>
+                     <th>Resultado</th>
+                     <th>Açao</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>Michael Austin</td>
+                     <td>ABC Fintech LTD.</td>
+                     <td>Jan 1,2019</td>
+                     <td><span class="badge pink lighten-5 pink-text text-accent-2">Close</span></td>
+                     <td>$ 1000.00</td>
+                     <td class="center-align"><a href="#"><i class="material-icons pink-text">clear</i></a></td>
+                  </tr>
+                  <tr>
+                     <td>Aldin Rakić</td>
+                     <td>ACME Pvt LTD.</td>
+                     <td>Jan 10,2019</td>
+                     <td><span class="badge green lighten-5 green-text text-accent-4">Open</span></td>
+                     <td>$ 3000.00</td>
+                     <td class="center-align"><a href="#"><i class="material-icons pink-text">clear</i></a></td>
+                  </tr>
+                  <tr>
+                     <td>İris Yılmaz</td>
+                     <td>Collboy Tech LTD.</td>
+                     <td>Jan 12,2019</td>
+                     <td><span class="badge green lighten-5 green-text text-accent-4">Open</span></td>
+                     <td>$ 2000.00</td>
+                     <td class="center-align"><a href="#"><i class="material-icons pink-text">clear</i></a></td>
+                  </tr>
+                  <tr>
+                     <td>Lidia Livescu</td>
+                     <td>My Fintech LTD.</td>
+                     <td>Jan 14,2019</td>
+                     <td><span class="badge pink lighten-5 pink-text text-accent-2">Close</span></td>
+                     <td>$ 1100.00</td>
+                     <td class="center-align"><a href="#"><i class="material-icons pink-text">clear</i></a></td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- INICIAR NAV DA BARRA LATERAL DIREITA -->
+   <div th:replace="~{dashboard-admin/fragmentos/menu-lateral-direita :: menu-direita}"></div>
+<!--FIM DA BARRA LATERAL DIREITA NAV--><!-- Intro -->
+
+<!--Modal--><!--INÍCIO: Introdução --> 
+<!-- <div th:replace="~{dashboard-admin/fragmentos/modal-index :: modal-introducao}"></div> -->
+
+<!-- FIM: Introução -->
+          </div>
+          <div class="content-overlay"></div>
+        </div>
+      </div>
+    </div>
+   
+    <!-- END: Página principal-->
+	<div th:replace="~{dashboard-admin/fragmentos/personaliza-tema :: temas}"></div>
+	<div th:replace="~{dashboard-admin/fragmentos/rodape :: footer}"></div>	
+    
+    <!-- BEGIN VENDOR JS-->
+    <script src="../../../../app-assets/js/vendors.min.js"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="../../../../app-assets/vendors/chartjs/chart.min.js"></script>
+    <script src="../../../../app-assets/vendors/chartist-js/chartist.min.js"></script>
+    <script src="../../../../app-assets/vendors/chartist-js/chartist-plugin-tooltip.js"></script>
+    <script src="../../../../app-assets/vendors/chartist-js/chartist-plugin-fill-donut.min.js"></script>
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN THEME  JS-->
+    <script src="../../../../app-assets/js/plugins.min.js"></script>
+    <script src="../../../../app-assets/js/search.min.js"></script>
+    <script src="../../../../app-assets/js/custom/custom-script.min.js"></script>
+    <script src="../../../../app-assets/js/scripts/customizer.min.js"></script>
+    <!-- END THEME  JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="../../../../app-assets/js/scripts/dashboard-modern.js"></script>
+    <script src="../../../../app-assets/js/scripts/intro.min.js"></script>
+    <!-- END PAGE LEVEL JS-->   
+  </body>
+</html>

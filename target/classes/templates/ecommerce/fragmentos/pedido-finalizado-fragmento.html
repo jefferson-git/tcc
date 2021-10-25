@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html class="loading" lang="pt-br" data-textdirection="ltr" xmlns:th="http://www.thymeleaf.org">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta charset="utf-8">
+  </head>
+	<body>
+	<div th:fragment="pedido-pagina" class="container pb-5 mb-sm-4">
+        <div class="pt-5">
+          <div class="card py-3 mt-sm-3">
+            <div class="card-body text-center">
+              <h2 class="h4 pb-3">Obrigado pelo seu pedido!</h2>
+              <p class="fs-sm mb-2">Seu pedido foi feito e será processado assim que possível.</p>
+              <p class="fs-sm mb-2">Certifique-se de anotar o número do seu pedido, que é <span class='fw-medium'>34VB5540K83.</span></p>
+              <p class="fs-sm">Em breve, você receberá um e-mail com a confirmação do seu pedido. <u>Agora você pode:</u></p><a class="btn btn-secondary mt-3 me-3" href="/mamute/shopping"> Voltar às compras</a><a class="btn btn-primary mt-3" href="/mamute/rastreamento"><img src="../img/icon/geo-alt.svg">&nbsp;Acompanhar Pedido</a>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </body>
+</html>

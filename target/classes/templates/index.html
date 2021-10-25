@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <title>Mamute | Fashion Store v.1</title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="Mamute - Bootstrap E-commerce Template">
+    <meta name="keywords" content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap, html5, css3, js, gallery, slider, touch, creative, clean">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+       
+    <link rel="stylesheet" media="screen" href="../../vendor/simplebar/dist/simplebar.min.css"/>
+    <link rel="stylesheet" media="screen" href="../../vendor/tiny-slider/dist/tiny-slider.css"/>
+    <link rel="stylesheet" media="screen" href="../../vendor/drift-zoom/dist/drift-basic.min.css"/>
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="../../css/theme.min.css">
+    <!-- Google Tag Manager-->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WKV3GT5');
+    </script>
+  </head>
+  <!-- Body-->
+  <body class="handheld-toolbar-enabled">
+   <div th:replace="~{ecommerce/fragmentos/form-usuario :: formulario-usuario}"></div> 
+    <main class="page-wrapper">
+      <!-- Quick View Modal-->
+      <div class="modal-quick-view modal fade" id="quick-view" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title product-title"><a href="shop-single-v1.html" data-bs-toggle="tooltip" data-bs-placement="right" title="Go to product page">Sports Hooded Sweatshirt<i class="ci-arrow-right fs-lg ms-2"></i></a></h4>
+              <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <!-- Product gallery-->
+                <div class="col-lg-7 pe-lg-0">
+                  <div class="product-gallery">
+                    <div class="product-gallery-preview order-sm-2">
+                      <div class="product-gallery-preview-item active" id="first"><img class="image-zoom" src="../img/shop/single/gallery/01.jpg" data-zoom="img/shop/single/gallery/01.jpg" alt="Product image">
+                        <div class="image-zoom-pane"></div>
+                      </div>
+                      <div class="product-gallery-preview-item" id="second"><img class="image-zoom" src="../img/shop/single/gallery/02.jpg" data-zoom="img/shop/single/gallery/02.jpg" alt="Product image">
+                        <div class="image-zoom-pane"></div>
+                      </div>
+                      <div class="product-gallery-preview-item" id="third"><img class="image-zoom" src="../img/shop/single/gallery/03.jpg" data-zoom="img/shop/single/gallery/03.jpg" alt="Product image">
+                        <div class="image-zoom-pane"></div>
+                      </div>
+                      <div class="product-gallery-preview-item" id="fourth"><img class="image-zoom" src="../img/shop/single/gallery/04.jpg" data-zoom="img/shop/single/gallery/04.jpg" alt="Product image">
+                        <div class="image-zoom-pane"></div>
+                      </div>
+                    </div>
+                    <div class="product-gallery-thumblist order-sm-1"><a class="product-gallery-thumblist-item active" href="#first"><img src="../img/shop/single/gallery/th01.jpg" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#second"><img src="../img/shop/single/gallery/th02.jpg" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#third"><img src="../img/shop/single/gallery/th03.jpg" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#fourth"><img src="../img/shop/single/gallery/th04.jpg" alt="Product thumb"></a></div>
+                  </div>
+                </div>
+                <!-- Product details-->
+      			<div th:replace="~{ecommerce/fragmentos/modal-detalhe-produto-fragmento.html :: detalhe-produto}"></div>       			
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Navbar 3 Level (Light)-->
+      <header class="shadow-sm">
+        <!-- Topbar-->
+        <div th:replace="~{ecommerce/fragmentos/topo :: topo-pagina}"></div>        
+        <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
+		<div th:replace="~{ecommerce/fragmentos/menu :: menu-pagina}"></div>
+      </header>
+      <!-- Hero slider-->
+      <div th:replace="~{ecommerce/fragmentos/carrocel :: carrocel-pagina}"></div>
+      <!-- Popular categories-->
+      <section class="container position-relative pt-3 pt-lg-0 pb-5 mt-lg-n10" style="z-index: 10;">
+        <div class="row">
+          <div class="col-xl-8 col-lg-9">
+            <div class="card border-0 shadow-lg">
+              <div class="card-body px-3 pt-grid-gutter pb-0">
+                <div class="row g-0 ps-1">
+                  <div class="col-sm-4 px-2 mb-grid-gutter"><a class="d-block text-center text-decoration-none me-1" href="/mamute/shopping"><img class="d-block rounded mb-3" src="img/home/categories/cat-sm01.jpg" alt="Men">
+                      <h3 class="fs-base pt-1 mb-0">Masculino</h3></a></div>
+                  <div class="col-sm-4 px-2 mb-grid-gutter"><a class="d-block text-center text-decoration-none me-1" href="/mamute/shopping"><img class="d-block rounded mb-3" src="img/home/categories/cat-sm02.jpg" alt="Women">
+                      <h3 class="fs-base pt-1 mb-0">Feminino</h3></a></div>
+                  <div class="col-sm-4 px-2 mb-grid-gutter"><a class="d-block text-center text-decoration-none me-1" href="/mamute/shopping"><img class="d-block rounded mb-3" src="img/home/categories/cat-sm03.jpg" alt="Kids">
+                      <h3 class="fs-base pt-1 mb-0">Kids</h3></a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+	  <div th:replace="~{ecommerce/fragmentos/produto :: produtos}"></div>
+      <!-- Banners-->
+	  <div th:replace="~{ecommerce/fragmentos/banner-central-index :: banner}"></div>
+      <!-- Featured category (Hoodie)-->
+	  <div th:replace="~{ecommerce/fragmentos/produto-promocao :: produto-promocao-index}"></div>
+      <!-- Shop by brand-->
+   	  <div th:replace="~{ecommerce/fragmentos/marca-fragmento :: marca}"></div>   		
+      <!-- Blog + Instagram info cards-->
+      <section class="container-fluid px-0">
+        <div class="row g-0">
+          <div class="col-md-6"><a class="card border-0 rounded-0 text-decoration-none py-md-4 bg-faded-primary" href="blog-list-sidebar.html">
+              <div class="card-body text-center"><img src="../img/icon/blog.png" width="5%">
+                <h3 class="h5 mb-1">Leia o blog</h3>
+                <p class="text-muted fs-sm">Últimas lojas, novidades e tendências de moda</p>
+              </div></a></div>
+          <div class="col-md-6"><a class="card border-0 rounded-0 text-decoration-none py-md-4 bg-faded-accent" href="#">
+              <div class="card-body text-center"><img src="../img/icon/instagram.png" width="5%">
+                <h3 class="h5 mb-1">Siga no Instagram</h3>
+                <p class="text-muted fs-sm">#Mamute</p>
+              </div></a></div>
+        </div>
+      </section>
+    </main>
+  	<div th:replace="~{ecommerce/fragmentos/rodape :: footer}"></div>
+    <!-- Toolbar for handheld devices (Default)-->
+    <div class="handheld-toolbar">
+      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span class="handheld-toolbar-label">$265.00</span></a></div>
+    </div>
+    <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">   </i></a>
+    <!-- Vendor scrits: js libraries and plugins-->
+    <script src="../vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/simplebar/dist/simplebar.min.js"></script>
+    <script src="../vendor/tiny-slider/dist/min/tiny-slider.js"></script>
+    <script src="../vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+    <script src="../vendor/drift-zoom/dist/Drift.min.js"></script>
+    <!-- Main theme script-->
+    <script src="../js/theme.min.js"></script>
+  </body>
+</html>

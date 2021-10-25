@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html class="loading" lang="pt-br" data-textdirection="ltr" xmlns:th="http://www.thymeleaf.org">
+    <!-- BEGIN: Head-->
+  <head>
+    <meta charset="utf-8">
+    <title>Mamute | Fashion Store v.1</title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="Mamute - Bootstrap E-commerce Template">
+    <meta name="keywords" content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap, html5, css3, js, gallery, slider, touch, creative, clean">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+    
+    <link rel="stylesheet" media="screen" href="../../vendor/simplebar/dist/simplebar.min.css"/>
+    <link rel="stylesheet" media="screen" href="../../vendor/tiny-slider/dist/tiny-slider.css"/>
+    <link rel="stylesheet" media="screen" href="../../vendor/drift-zoom/dist/drift-basic.min.css"/>
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="../../css/theme.min.css">
+    <!-- Google Tag Manager-->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WKV3GT5');
+    </script>
+	<body>	 
+	   <div th:fragment="login-pagina" class="container py-4 py-lg-5 my-4">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card border-0 shadow">
+              <div class="card-body">
+                <h2 class="h4 mb-1">Entrar</h2>
+                <hr> 
+                <div class="py-3">
+                 <h3 class="fs-base pt-4 pb-2">Usando o formulário abaixo</h3>
+                </div>                            
+                <form class="needs-validation" action="/mamute/login" method="post" novalidate>
+                  <div class="input-group mb-3"><i class="position-absolute top-50 translate-middle-y text-muted fs-base ms-3"><img src="../img/icon/pencil.svg"></i>
+                    <input class="form-control rounded-start" name="username" type="text" placeholder="Nome de usuário" required>
+                  </div>
+                  <div class="input-group mb-3"><i class="position-absolute top-50 translate-middle-y text-muted fs-base ms-3"><img src="../img/icon/unlock.svg"></i>
+                    <div class="password-toggle w-100">
+                      <input class="form-control" name="password" type="password" placeholder="Senha" required>
+                      <label class="password-toggle-btn" aria-label="Show/hide password">
+                        <input class="password-toggle-check" type="checkbox"><img src="../img/icon/tropical-storm.svg">
+                      </label>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-wrap justify-content-between">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" checked id="remember_me">
+                      <label class="form-check-label" for="remember_me">Lembre de mim</label>
+                    </div><a class="nav-link-inline fs-sm" href="/mamute/recupera">Esqueceu sua senha?</a>
+                  </div>
+                  <hr class="mt-4">
+                  <div class="text-end pt-4">
+                    <button class="btn btn-primary" type="submit"><i class="me-2 ms-n21"><img src="../img/icon/box-arrow-in-right.svg"></i>Entrar</button>
+                  </div>
+                  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 pt-4 mt-3 mt-md-0">
+            <h2 class="h4 mb-3">Sem conta? Inscrever-se   <hr> </h2>             
+            <p class="fs-sm text-muted mb-4">O registro leva menos de um minuto, mas oferece controle total sobre seus pedidos.</p>
+            <form class="needs-validation" novalidate>
+              <div class="row gx-4 gy-3">
+                <div class="col-sm-6">
+                  <label class="form-label" for="reg-fn">Primeiro nome</label>
+                  <input class="form-control" type="text" required id="reg-fn">
+                  <div class="invalid-feedback">Por favor entre com seu primeiro nome!</div>
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="reg-ln">Sobrenome</label>
+                  <input class="form-control" type="text" required id="reg-ln">
+                  <div class="invalid-feedback">Por favor insira seu sobrenome!</div>
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="reg-email">E-mail</label>
+                  <input class="form-control" type="email" required id="reg-email">
+                  <div class="invalid-feedback">Por favor insira o endereço de e-mail válido!</div>
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="reg-phone">Telefone</label>
+                  <input class="form-control" type="text" required id="reg-phone">
+                  <div class="invalid-feedback">Por favor, digite seu número de telefone!</div>
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="reg-password">Senha</label>
+                  <input class="form-control" type="password" required id="reg-password">
+                  <div class="invalid-feedback">Por favor, insira a senha!</div>
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="reg-password-confirm">Confirme a Senha</label>
+                  <input class="form-control" type="password" required id="reg-password-confirm">
+                  <div class="invalid-feedback">As senhas não coincidem!</div>
+                </div>
+                <div class="col-12 text-end">
+                  <button class="btn btn-primary" type="submit"><i class="me-2 ms-n1"><img src="../img/icon/person.svg"></i>Inscrever-se</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>  
+    </body>
+</html>

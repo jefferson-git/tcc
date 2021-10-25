@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+
+<html class="loading" lang="pt-br" data-textdirection="ltr" xmlns:th="http://www.thymeleaf.org">
+  <!-- BEGIN: Head-->
+  <head>
+   
+	<title>Lista de Estados e Cidades Usando Jquery e JSON</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+
+  <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+	
+  </head>
+  
+    <!-- INÍCIO: Página principal-->
+<div id="main">
+	<div class="row">
+		<div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+		<div class="col s12">
+			<div class="container">
+				<div class="section">
+				<div class="col-sm-6">
+				
+				
+				
+	<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>You are about to delete one track, this procedure is irreversible.</p>
+                    <p>Do you want to proceed?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger btn-ok">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" data-href="/delete.php?id=23" data-toggle="modal" data-target="#confirm-delete">Delete record #23</a><br>
+    
+    <button class="btn btn-default" data-href="/delete.php?id=54" data-toggle="modal" data-target="#confirm-delete">
+        Delete record #54
+    </button>
+   </div>
+	</div>
+	</div>
+	</div>
+
+    <script>
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            
+            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+        });
+    </script> 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     <tbody>
+                                        <tr th:each="stockItem,index :${stock}">
+                                            <td th:text="${stockItem.id}"></td>
+                                            <td th:text="${stockItem.productName}"></td>
+                                            <td th:text="${stockItem.productPrice}"></td>
+                                            <td th:text="${stockItem.productQuantity}"></td>
+                                            <td>
+                                                <a class="btn btn-danger" role="button"
+                                                   th:href="@{/stock/removeAll/{id}(id=${stockItem.id})}">
+                                                    Remove all
+                                                </a>
+                                                <br>
+                                                <a data-target="#removeSetStockQuantityModal" data-toggle="modal"
+                                                   th:attrappend="data-target=${stockItem.id}" class="btn btn-danger" role="button">Set Quantity</a>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="removeSetStockQuantityModal"
+                                                     th:attrappend="id=${stockItem.id}" tabindex="-1" role="dialog"
+                                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Delete <span
+                                                                        th:text="${stockItem.productName}"></span></h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action="#" method="get"
+                                                                      th:action="@{/stock/delete}"
+                                                                      th:object="${stockItem}">
+                                                                    <input  hidden name="id" th:value="${stockItem.id}"/>
+                                                                    <label th:for="${stockProduct.productQuantity}">
+                                                                        <input  type="number"
+                                                                               placeholder="Enter quantity to delete" th:default="0"
+                                                                               th:field="${stockProduct.productQuantity}"/>
+                                                                    </label>
+                                                                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                                                                </form>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Cancel
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+    
+  </body>
+</html>

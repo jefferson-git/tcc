@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+
+<html class="loading" lang="pt-br" data-textdirection="ltr" xmlns:th="http://www.thymeleaf.org">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
+    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
+    <meta name="author" content="ThemeSelect">
+    <title>Dashboard index | Mamute - Material admin</title>
+    <link rel="apple-touch-icon" href="../../../../app-assets/images/favicon/apple-touch-icon-152x152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../app-assets/images/favicon/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- BEGIN: VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/animate-css/animate.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/chartist-js/chartist.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/chartist-js/chartist-plugin-tooltip.css">
+    <!-- END: VENDOR CSS-->
+    <!-- BEGIN: Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/themes/vertical-modern-menu-template/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/themes/vertical-modern-menu-template/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/pages/dashboard-modern.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/pages/intro.min.css">
+    <!-- END: Page Level CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/custom/custom.css">
+    <!-- END: Custom CSS-->
+  </head>
+  <!-- FIM: Head-->
+   <div th:replace="~{dashboard-admin/fragmentos/topo-pagina :: topo}"></div>
+   <div th:replace="~{dashboard-admin/fragmentos/menu-principal :: menu-painel}"></div>
+    <!-- END: SideNav Fim menu lateral-->
+
+    <!-- INÍCIO: Página principal-->
+<!-- BEGIN: Page Main-->
+    <div id="main">
+      <div class="row">
+        <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+        <div class="col s12">
+          <div class="container">
+            <!-- app invoice View Page -->
+<section class="invoice-view-wrapper section">
+  <div class="row">
+    <!-- invoice view page -->
+    <div class="col xl12 m8 s12" th:object="${produto}">
+      <div class="card">
+        <div class="card-content invoice-print-area">
+          <!-- logo and title -->
+          <div class="row mt-3 invoice-logo-title">
+            <div class="col m6 s12 display-flex invoice-logo mt-1 push-m6">
+              <img th:src="@{/dashboard-admin/produto/visualizar/{imagem}(imagem=${produto.imagem})}" width="50%">
+            </div>
+            <div class="col m6 s12 pull-m6">
+              <h4 class="indigo-text">Descrição do produto</h4>
+              <div>
+             	<span class="blue-text text-darken-2">Id do produto :</span>
+              	<span class="black-text" th:text="*{id}"></span>
+              </div>
+              <div>
+              	<div class="divider mb-3 mt-3"></div>
+                <span class="blue-text text-darken-2">Date de cadastro :</span>
+                <span class="black-text" th:text="${#dates.format(produto.dataCadastro, 'dd/MM/yyyy')}"></span>            	
+             </div>
+             <div>
+             	<div class="divider mb-3 mt-3"></div>
+                <span class="blue-text text-darken-2">Cor do produto :</span>
+                <span class="black-text" th:text="*{cor}"></span>            	
+             </div>
+             <div>
+             	<div class="divider mb-3 mt-3"></div>
+                <span class="blue-text text-darken-2">Categoria do produto :</span>
+                <span class="black-text" th:text="*{categoria.nome}"></span>            	
+             </div>
+             <div>
+            	<div class="divider mb-3 mt-3"></div>
+                <span class="blue-text text-darken-2">Marca do produto :</span>
+                <span class="black-text" th:text="*{marca.nome}"></span>            	
+             </div>
+             <div>
+             	<div class="divider mb-3 mt-3"></div>
+                <span class="blue-text text-darken-2">Unidade de Medida :</span>
+                <span class="black-text" th:text="*{unidadeDeMedida.nome}"></span>            	
+             </div>
+          </div>
+          </div>
+          <div class="divider mb-3 mt-3"></div>
+          <!-- product details table-->
+          <div class="invoice-product-details">
+            <table class="striped responsive-table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Descrição</th>                 
+                  <th>Qtd</th>                  
+                  <th>Custo</th>
+                  <th>Desconto</th>
+                  <th>imposto</th>
+                  <th>Margem de lucro</th>
+                  <th class="right-align">Preço de venda</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td th:text="*{nome}"></td>
+                  <td th:text="*{descricao}"></td>
+                  <td th:text="*{quantidade}"></td>
+                  <td>
+                  	<span class="chip lighten-5 red green-text">
+                  	  <span th:text="*{#numbers.formatDecimal(precoCusto, 0, 'COMMA', 2, 'POINT')}"></span>
+            		</span>
+                  </td>
+                  <td>
+                  	<span class="chip lighten-5 red red-text">
+            			<span th:text="*{imposto.porcentagem}"></span>
+            			<span  class="red-text">%</span>
+            		</span>
+                  </td>
+                  <td>
+                  	<span class="chip lighten-5 red red-text">
+            			<span th:text="*{imposto.porcentagem}"></span>
+            			<span  class="red-text">%</span>
+                    </span>
+                  </td>   
+                  <td>
+                  	<span class="chip lighten-5 red blue-text">
+            			 <span th:text="*{#numbers.formatDecimal(lucro.porcentagem, 0, 'COMMA', 0, 'POINT')}"></span>
+            			<span  class="blue-text">%</span>
+                    </span>
+                  </td>               
+                  <td class="right-align">
+                  	<span class="chip lighten-5 red black-text">
+                  	  <span>R$</span>                  	  
+            		  <span th:text="${#numbers.formatDecimal(produto.precoVenda, 0, 'COMMA', 2, 'POINT')}"></span>            		</span>
+                  </td>                  
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- invoice subtotal -->
+          <div class="divider mt-3 mb-3"></div>
+          <div class="invoice-subtotal">
+            <div class="row">
+              <div class="col m5 s12">
+                <p class="black-text text-darken-2">Balanço movimentação finaceira do produto no negócio.</p>
+              </div>
+              <div class="col xl4 m7 s12 offset-xl3">
+                <ul>
+                  <li class="display-flex justify-content-between">
+                    <span class="invoice-subtotal-title">Subtotal</span>
+                    <h6 class="invoice-subtotal-value">$72.00</h6>
+                  </li>
+                  <li class="display-flex justify-content-between">
+                    <span class="invoice-subtotal-title">Desconto</span>
+                    <h6 class="invoice-subtotal-value">- $ 09.60</h6>
+                  </li>
+                  <li class="display-flex justify-content-between">
+                    <span class="invoice-subtotal-title">Imposto</span>
+                    <h6 class="invoice-subtotal-value">21%</h6>
+                  </li>
+                  <li class="divider mt-2 mb-2"></li>
+                  <li class="display-flex justify-content-between">
+                    <span class="invoice-subtotal-title">Invoice Total</span>
+                    <h6 class="invoice-subtotal-value">$ 61.40</h6>
+                  </li>
+                  <li class="display-flex justify-content-between">
+                    <span class="invoice-subtotal-title">Paid to date</span>
+                    <h6 class="invoice-subtotal-value">- $ 00.00</h6>
+                  </li>
+                  <li class="display-flex justify-content-between">
+                    <span class="invoice-subtotal-title">Balance (USD)</span>
+                    <h6 class="invoice-subtotal-value">$ 10,953</h6>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- START RIGHT SIDEBAR NAV -->
+
+
+<!-- INICIAR NAV DA BARRA LATERAL DIREITA -->
+   <div th:replace="~{dashboard-admin/fragmentos/menu-lateral-direita :: menu-direita}"></div>
+<!--FIM DA BARRA LATERAL DIREITA NAV--><!-- Intro -->
+
+          </div>
+          <div class="content-overlay"></div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- END: Página principal-->
+    
+	<div th:replace="~{dashboard-admin/fragmentos/personaliza-tema :: temas}"></div>
+	<div th:replace="~{dashboard-admin/fragmentos/rodape :: footer}"></div>
+ 
+    
+    <!-- BEGIN VENDOR JS-->
+    <script src="../../../../app-assets/js/vendors.min.js"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="../../../../app-assets/vendors/chartjs/chart.min.js"></script>
+    <script src="../../../../app-assets/vendors/chartist-js/chartist.min.js"></script>
+    <script src="../../../../app-assets/vendors/chartist-js/chartist-plugin-tooltip.js"></script>
+    <script src="../../../../app-assets/vendors/chartist-js/chartist-plugin-fill-donut.min.js"></script>
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN THEME  JS-->
+    <script src="../../../../app-assets/js/plugins.min.js"></script>
+    <script src="../../../../app-assets/js/search.min.js"></script>
+    <script src="../../../../app-assets/js/custom/custom-script.min.js"></script>
+    <script src="../../../../app-assets/js/scripts/customizer.min.js"></script>
+    <!-- END THEME  JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="../../../../app-assets/js/scripts/intro.min.js"></script>
+    <!-- END PAGE LEVEL JS-->     
+  </body>
+</html>

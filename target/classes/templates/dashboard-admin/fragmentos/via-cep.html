@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+
+<html class="loading" lang="pt-br" data-textdirection="ltr" xmlns:th="http://www.thymeleaf.org">
+  <!-- BEGIN: Head-->
+  <head>
+   
+	<title>Lista de Estados e Cidades Usando Jquery e JSON</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  
+    <!-- INÍCIO: Página principal-->
+<div id="main">
+	<div class="row">
+		<div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+		<div class="col s12">
+			<div class="container">
+				<div class="section">
+				<div class="col-sm-6">
+		 <input th:fragment="imputCep" type="text" th:field="${colaborador.endereco.cep}"
+		  id="cep" maxlength="10" onkeydown="javascript: fMasc( this, mCEP );">	
+		
+	
+	<script type="text/javascript">
+		$("#cep").focusout(function(){
+			//Início do Comando AJAX
+			$.ajax({
+				//O campo URL diz o caminho de onde virá os dados
+				//É importante concatenar o valor digitado no CEP
+				url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
+				//Aqui você deve preencher o tipo de dados que será lido,
+				//no caso, estamos lendo JSON.
+				dataType: 'json',
+				//SUCESS é referente a função que será executada caso
+				//ele consiga ler a fonte de dados com sucesso.
+				//O parâmetro dentro da função se refere ao nome da variável
+				//que você vai dar para ler esse objeto.
+				success: function(resposta){
+					//Agora basta definir os valores que você deseja preencher
+					//automaticamente nos campos acima.
+					$("#logradouro").val(resposta.logradouro);
+					$("#complemento").val(resposta.complemento);
+					$("#bairro").val(resposta.bairro);
+					$("#cidade").val(resposta.localidade);
+					$("#uf").val(resposta.uf);
+					//Vamos incluir para que o Número seja focado automaticamente
+					//melhorando a experiência do usuário
+					$("#numero").focus();
+				}
+			});
+		});
+	</script>
+
+			</div>
+          </div>
+          <div class="content-overlay"></div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+  	<script>
+	$(document).ready(function(){
+		carregar_json('Estado');
+		function carregar_json(id, cidade_id){
+			var html = '';
+
+			$.getJSON('https://gist.githubusercontent.com/letanure/3012978/raw/36fc21d9e2fc45c078e0e0e07cce3c81965db8f9/estados-cidades.json', function(data){
+				html += '<option>Selecionar '+ id +'</option>';
+				console.log(data);
+				if(id == 'Estado' && cidade_id == null){
+					for(var i = 0; i < data.estados.length; i++){
+						html += '<option value='+ data.estados[i].sigla +'>'+ data.estados[i].nome+'</option>';
+					}
+				}else{
+					for(var i = 0; i < data.estados.length; i++){
+						if(data.estados[i].sigla == cidade_id){
+							for(var j = 0; j < data.estados[i].cidades.length; j++){
+								html += '<option value='+ data.estados[i].sigla +'>'+data.estados[i].cidades[j]+ '</option>';
+							}
+						}
+					}
+				}
+
+				$('#'+id).html(html);
+			});
+			
+		}
+
+		$(document).on('change', '#Estado', function(){
+			var cidade_id = $(this).val();
+			console.log(cidade_id);
+			if(cidade_id != null){
+				carregar_json('Cidade', cidade_id);
+			}
+		});
+
+	});
+</script>	
+   
+    
+  </body>
+</html>

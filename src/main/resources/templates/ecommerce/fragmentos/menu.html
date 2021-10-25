@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html class="loading" lang="pt-br" data-textdirection="ltr" xmlns:th="http://www.thymeleaf.org">
+    <!-- BEGIN: Head-->
+  <head>
+    <meta charset="utf-8">
+    <title>Mamute | Fashion Store v.1</title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="Mamute - Bootstrap E-commerce Template">
+    <meta name="keywords" content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap, html5, css3, js, gallery, slider, touch, creative, clean">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+    
+    <link rel="stylesheet" media="screen" href="../../vendor/simplebar/dist/simplebar.min.css"/>
+    <link rel="stylesheet" media="screen" href="../../vendor/tiny-slider/dist/tiny-slider.css"/>
+    <link rel="stylesheet" media="screen" href="../../vendor/drift-zoom/dist/drift-basic.min.css"/>
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="../../css/theme.min.css">
+    <!-- Google Tag Manager-->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WKV3GT5');
+    </script>
+  </head>
+	<body>	
+    <div th:fragment="menu-pagina">
+              <div class="navbar-sticky bg-light">
+          <div class="navbar navbar-expand-lg navbar-light">
+            <div class="container"><a class="navbar-brand d-none d-sm-block flex-shrink-0" href="/mamute"><img src="../img/mamute-logo-color.png" width="100%" alt="Mamute"></a><span>Mamute</span><a class="navbar-brand d-sm-none flex-shrink-0 me-2" href="/mamute"><img src="../img/mamute-logo-color.png" width="74%" alt="Mamute"><span></span></a>
+              <div class="input-group d-none d-lg-flex mx-4">
+                <input class="form-control rounded-end pe-5" type="text" placeholder="Pesquisar produtos"><i class="position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"><img src="../img/icon/search.svg"></i>
+              </div>
+              <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button><a class="navbar-tool navbar-stuck-toggler" href="#"><span class="navbar-tool-tooltip">Expandir menu</span>
+                  <div class="navbar-tool-icon-box"></div></a><a class="navbar-tool d-none d-lg-flex" href="/dashboard-admin"  target="_blank"><span class="navbar-tool-tooltip">dashboard</span><img src="../img/icon/speedometer2.svg" width="50%">                  
+                  <div class="navbar-tool-icon-box"></div></a><a class="navbar-tool d-none d-lg-flex" href=""><span class="navbar-tool-tooltip">Lista de Desejos</span><img src="../img/icon/suit-heart.svg" width="50%">
+                  <div class="navbar-tool-icon-box"></div></a><a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="#signin-modal" data-bs-toggle="modal">
+                  <div class="navbar-tool-icon-box"><img src="../img/icon/person.svg" width="60%"></div>
+                  <div class="navbar-tool-text ms-n3"><small>Olá, faça login</small>Minha conta</div></a>
+                <div class="navbar-tool dropdown ms-3"><a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="/mamute/carrinho"><span th:text="${compras.size}" class="navbar-tool-label">3</span>
+                <img src="../img/icon/cart3.svg" width="50%"></a><a class="navbar-tool-text" href="/mamute/carrinho"><small>Meu carrinho</small>R$<span th:text="${#numbers.formatDecimal(pedido.valorTotal, 0, 'COMMA', 2, 'POINT')}"></span></a>
+                  <!-- Cart dropdown-->
+                  <div class="dropdown-menu dropdown-menu-end">                  
+                    <div th:if="${compras.isEmpty()}" class="widget widget-cart px-3 pt-2 pb-3" style="width: 14rem;">
+                      <div style="height: 1rem;" data-simplebar data-simplebar-auto-hide="false">
+                      <div class="ps-2">
+                          <h6 class="widget-product-title">Seu carrinho está vazio</h6>
+                        </div>
+                      </div>
+                    </div>               
+                    <div th:if="${not compras.isEmpty()}">
+                    <div class="widget widget-cart px-3 pt-2 pb-3" style="width: 20rem;">
+                      <div style="height: 15rem;" data-simplebar data-simplebar-auto-hide="false">
+                        <div th:each="compra : ${compras}" class="widget-cart-item pb-2 border-bottom">
+                          <a th:href="@{/mamute/carrinho/remover/{id}(id=${compra.produto.id})}" class="btn-close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></a>
+                          <div  class="d-flex align-items-center"><a class="flex-shrink-0" href="#"><img th:src="@{/mamute/carrinho/produto/visualizar/{imagem}(imagem=${compra.produto.imagem})}" width="64" alt="Produto"></a>
+                            <div class="ps-2">
+                              <h6 th:text="${compra.produto.nome}" class="widget-product-title"><a href="shop-single-v1.html"></a></h6>
+                              <div class="widget-product-meta"><span class="text-accent me-2">R$<small th:text="${#numbers.formatDecimal(compra.produto.precoVenda, 0, 'COMMA', 2, 'POINT')}"></small></span>
+                              <span>x</span><span th:text="${compra.quantidade}"class="text-muted"></span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
+                        <div class="fs-sm me-2 py-2"><span class="text-muted">Subtotal:</span><span class="text-accent fs-base ms-1">R$<small th:text="${#numbers.formatDecimal(pedido.valorTotal, 0, 'COMMA', 2, 'POINT')}"></small></span></div><a class="btn btn-outline-secondary btn-sm" href="/mamute/carrinho">Meu carrinho<img src="../img/icon/chevron-right.svg"></a>
+                      </div><a class="btn btn-primary btn-sm d-block w-100" href="/mamute/detalhes"><img src="../img/icon/credit-card.svg"> Checkout</a>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="navbar navbar-expand-lg navbar-light navbar-stuck-menu mt-n2 pt-0 pb-2">
+            <div class="container">
+              <div class="collapse navbar-collapse" id="navbarCollapse">
+                <!-- Search-->
+                <div class="input-group d-lg-none my-3"><i class="ci-search position-absolute top-50 start-0 translate-middle-y text-muted fs-base ms-3"></i>
+                  <input class="form-control rounded-start" type="text" placeholder="Search for products">
+                </div>
+                <!-- Departments menu-->
+                <ul class="navbar-nav navbar-mega-nav pe-lg-2 me-lg-2">
+                  <li class="nav-item dropdown"><a class="nav-link dropdown-toggle ps-lg-0" href="#" data-bs-toggle="dropdown"><img src="../img/icon/grid.svg"> Departamentos</a>
+                    <div class="dropdown-menu px-2 pb-4">
+                      <div class="d-flex flex-wrap flex-sm-nowrap">
+                        <div th:each="departamento,cont : ${departamentos}" class="mega-dropdown-column pt-3 pt-sm-4 px-2 px-lg-3">
+						 <div class="widget widget-links">
+						<!--  <div th:if="${cont.index == 2}" class="d-flex flex-wrap flex-sm-nowrap">	 -->					 
+							<a class="d-block overflow-hidden rounded-3 mb-3" href="#">
+		                    <img th:src="@{/mamute/departamento/visualizar/{imagem}(imagem=${departamento.imagem})}" alt="Clothing"></a>                            
+		                    <h6 th:text="${departamento.nome}" class="fs-base mb-2"></h6>
+						 	  <div th:each="categoria : ${categorias}"> 
+						 		<div th:if="${departamento.id == categoria.departamento.id}">
+		                           	 <ul class="widget-list">
+		                              	<li th:text="${categoria.nome}" class="widget-list-item mb-1">
+		                              	<a class="widget-list-link" href="#"></a></li>
+		                            </ul> 
+							 	</div>							 	
+						 	  </div>						 	                                                                     
+                          </div>
+                        </div>
+                      </div>                
+                    </div>
+                  </li>
+                </ul>
+                <!-- Primary menu-->
+                <ul class="navbar-nav">
+                  <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Conta</a>
+                    <ul class="dropdown-menu">
+                      <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Conta de usuário da loja</a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="/usuario/historico">Histórico de Pedidos</a></li>
+                          <li><a class="dropdown-item" href="/usuario/perfil">Configurações de perfil</a></li>
+                          <li><a class="dropdown-item" href="/usuario/endereço">Endereços de conta</a></li>
+                          <li><a class="dropdown-item" href="/usuario/pagamento">Métodos de Pagamento</a></li>
+                          <li><a class="dropdown-item" href="/usuario/desejos">Lista de Desejos</a></li>
+                          <li><a class="dropdown-item" href="/usuario/tickets">Meus tickets promocionais</a></li>
+                        </ul>
+                      </li>
+                      <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Painel de controle do fornecedor</a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="/dashboard-admin">Configurações</a></li>
+                        </ul>
+                      </li>
+                      <li><a class="dropdown-item" href="/mamute/login">Entrar / Inscrever-se</a></li>
+                      <li><a class="dropdown-item" href="/mamute/recupera">Recuperação de senha</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+     </div>
+    </body>
+</html>
