@@ -11,7 +11,7 @@ import br.com.mamute.cotacaoapi.ecommerceService.ClienteLoginService;
 import br.com.mamute.cotacaoapi.model.Usuario;
 
 @Controller
-@RequestMapping("/usuario/login")
+@RequestMapping("/mamute/login")
 public class ClienteLoginController {
 	
 	@Autowired
