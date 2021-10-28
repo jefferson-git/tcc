@@ -91,25 +91,25 @@
      			 	<div class="indeterminate"></div>
   				 </div>
               </div>
-                <br>	                      	
+                <br>                      	
                   <div class="input-field col m4 s12">
                     <label>Nome do Categoria: <span class="red-text">*</span></label>
                     <input type="text" th:field="*{nome}" name="nome" min="2" maxlength="30" required pattern="[a-zA-Záãâéêíîóôõúç-.,\s]+$" title="O campo nome não pode conter números">
                   	<p th:if="${#fields.hasErrors('nome')}" th:errorclass="error" th:errors="*{nome}" />
                   	<p>campo obrigatório</p>
-                  </div>
+                  </div> 
                   <div class="input-field col m4 s12">                  
                     <label>Descrição: <span class="red-text">*</span></label>
                     <input type="text" th:field="*{descricao}" name="descricao"  min="4" maxlength="255" required />                    
                  	<p>campo obrigatório</p>
-                  </div>
+                  </div> <!--	
                   <div class="col s12 m4">	           
 		            <div class="input-field">
 		            <i class="material-icons prefix">format_list_bulleted</i>
 		             <select th:field="*{departamento}" class="form-control" required="required">
 		              	<option value="#">Selecione o departamento</option>
 		              	<option th:each="departamento: ${departamentos}" th:value="${departamento.id}" th:text="${departamento.nome}" ></option>		               
-		              </select >
+		              </select >-->
 		            </div>
 		          </div>
                 </div> 

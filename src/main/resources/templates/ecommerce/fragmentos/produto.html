@@ -48,7 +48,7 @@
               <img th:src="@{/mamute/produto/visualizar/{imagem}(imagem=${produto.imagem})}" alt="Produto"></a>
               <div class="card-body py-2">
               	<a th:text="${produto.descricao}" class="product-meta d-block fs-xs pb-1" href="#" ></a>
-                <h3 th:text="${produto.nome}" class="product-title fs-sm"><a href="shop-single-v1.html"></a></h3>
+                <h3 th:text="${produto.nome}" class="product-title fs-sm"><a href="#"></a></h3>
                 <div class="d-flex justify-content-between">
                   <div class="product-price"><small>R$</small><span class="text-accent" th:text="${#numbers.formatDecimal(produto.precoVenda, 0, 'COMMA', 2, 'POINT')}"></span></div>
                   <div class="star-rating"><img src="../img/icon/star.svg"><img src="../img/icon/star.svg"><img src="../img/icon/star.svg">
