@@ -6,17 +6,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.mamute.cotacaoapi.ecommerceService.UsuarioListaDesejosService;
+import br.com.mamute.cotacaoapi.ecommerceService.UsuarioMedotoPagamentoService;
 
 @Controller
-@RequestMapping("/mamute/desejos")
-public class UsuarioListaDesejosController {
+@RequestMapping("/mamute/metodo-pagamento")
+public class UsuarioMetodoPagamentoController {
 	
 	@Autowired
-	private UsuarioListaDesejosService usuarioListaDesejosService;
+	private UsuarioMedotoPagamentoService usuarioMedotoPagamento;
 	
     @GetMapping()
 	ModelAndView pedido() {
-		return usuarioListaDesejosService.desejos();
+		return usuarioMedotoPagamento.MedotoPagamento();
     }
 }
