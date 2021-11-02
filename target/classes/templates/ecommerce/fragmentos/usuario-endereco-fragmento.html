@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html class="loading" lang="pt-br" data-textdirection="ltr" xmlns:th="http://www.thymeleaf.org">
+    <!-- BEGIN: Head-->
+  <head>
+    <meta charset="utf-8">
+    <title>Mamute | Fashion Store v.1</title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="Mamute - Bootstrap E-commerce Template">
+    <meta name="keywords" content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap, html5, css3, js, gallery, slider, touch, creative, clean">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+    
+    <link rel="stylesheet" media="screen" href="../../vendor/simplebar/dist/simplebar.min.css"/>
+    <link rel="stylesheet" media="screen" href="../../vendor/tiny-slider/dist/tiny-slider.css"/>
+    <link rel="stylesheet" media="screen" href="../../vendor/drift-zoom/dist/drift-basic.min.css"/>
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="../../css/theme.min.css">
+    <!-- Google Tag Manager-->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WKV3GT5');
+    </script>
+	<body>	 
+ 	  <!-- Page Title-->
+ 	  <div th:fragment="usuario-endereco-pagina">
+       <div class="page-title-overlap bg-dark pt-4">
+        <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+          <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+                <li class="breadcrumb-item"><a class="text-nowrap" href="/mamute"><img src="../img/icon/house.svg"> Home</a></li>
+                <li><a href="#"><img src="../img/icon/chevron-right.svg"> endereço</a>
+                </li>
+                <li class="breadcrumb-item text-nowrap active" aria-current="page"><img src="../img/icon/chevron-right.svg"> Meus endereços</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+            <h1 class="h3 text-light mb-0"> Meus endereços</h1>
+          </div>
+        </div>
+      </div>
+      <div class="container pb-5 mb-2 mb-md-4">
+        <div class="row">
+          <!-- Sidebar-->
+			<div th:replace="~{ecommerce/fragmentos/menu-usuario :: menu-usuario}"></div>
+         <section class="col-lg-8">
+            <!-- Toolbar-->
+            <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
+              <h6 class="fs-base text-light mb-0">Lista dos seus endereços registrados:</h6><a class="btn btn-primary btn-sm" href="account-signin.html"><img src="../img/icon/box-arrow-in-right.svg">&nbsp;  Sair</a>
+            </div>
+            <div th:replace="~{ecommerce/fragmentos/modal-endereco :: endereco}"></div>
+            <!-- Payment methods list-->
+            <!-- Content  -->       		
+            <!-- Addresses list-->
+            <div class="table-responsive fs-md">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Endereço</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="py-3 align-middle">Rua A, Setor Leste Vila Nova, Goiânia - GO - CEP 74645210<span class="align-middle badge bg-info ms-2">Principal</span></td>
+                    <td class="py-3 align-middle">
+                    	<a class="nav-link-style me-2" href="#" data-bs-toggle="tooltip" title="Editar"><img src="../img/icon/pencil-square.svg"></a>
+                    	<a class="nav-link-style text-danger" href="#" data-bs-toggle="tooltip" title="Remover"><img src="../img/icon/trash.svg"></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 align-middle">Rua 120, Setor Sul, Goiânia - GO - CEP 74085450</td>
+                    <td class="py-3 align-middle">
+                    	<a class="nav-link-style me-2" href="#" data-bs-toggle="tooltip" title="Editar"><img src="../img/icon/pencil-square.svg"></a>
+                    	<a class="nav-link-style text-danger" href="#" data-bs-toggle="tooltip" title="Remover"><img src="../img/icon/trash.svg"></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="text-sm-end pt-4"><a class="btn btn-primary" href="#add-address" data-bs-toggle="modal">adicionar novo endereço</a></div>
+          </section>
+        </div>
+      </div>
+      </div>
+    </body>
+</html>
