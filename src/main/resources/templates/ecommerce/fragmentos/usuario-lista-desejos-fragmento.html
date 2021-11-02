@@ -74,56 +74,33 @@
                 </select>
               </div><a class="btn btn-primary btn-sm d-none d-lg-inline-block"  href="#"><img src="../img/icon/box-arrow-in-right.svg">&nbsp;  Sair</a>
             </div>
-            <!-- 
-			<div class="d-sm-flex justify-content-between mt-lg-4 mb-4 pb-3 pb-sm-2 border-bottom" th:each="desejo, cont : ${desejos}" >
+             <!-- Item -->
+			<div th:if="${!desejos.isEmpty()}"class="d-sm-flex justify-content-between mt-lg-4 mb-4 pb-3 pb-sm-2 border-bottom" th:each="desejo, cont : ${desejos}" >
               <div class="d-block d-sm-flex align-items-start text-center text-sm-start"><a class="d-block flex-shrink-0 mx-auto me-sm-4" href="#" style="width: 10rem;">
-              <img th:src="@{/mamute/produto/visualizar/{imagem}(imagem=${produto.imagem})}" alt="Produto"></a>
+              <img th:src="@{/mamute/desejos/produto/visualizar/{imagem}(imagem=${desejo.produto.imagem})}" alt="Produto"></a> 
                 <div class="pt-2">
-                  <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">TH Jeans City Backpack</a></h3>
-                  <div class="fs-sm" th:text="${produto.nome}" ><span class="text-muted me-2">Brand:</span>Tommy Hilfiger</div>
-                  <div class="fs-sm"><span class="text-muted me-2">Color:</span>Khaki</div>
-                  <div class="fs-lg text-accent pt-2" th:text="${#numbers.formatDecimal(produto.precoVenda, 0, 'COMMA', 2, 'POINT')}">$79</div>
+                  <h3 class="product-title fs-base mb-2"><a href="#" th:text="${desejo.produto.descricao}"></a></h3>
+                  <div class="fs-sm"><span class="text-muted me-2">Data:</span> <span th:text="${#dates.format(desejo.data, 'dd/MM/yyyy')}"></span></div>
+                  <div class="fs-sm"><span class="text-muted me-2">Nome:</span> <span th:text="${desejo.produto.nome}"></span></div>
+                  <div class="fs-sm"><span class="text-muted me-2">Color:</span> <span th:text="${desejo.produto.cor}"></span></div>
+                  <div class="fs-lg text-accent pt-2">R$ <span th:text="${#numbers.formatDecimal(desejo.produto.precoVenda, 0, 'COMMA', 2, 'POINT')}"></span></div>
                 </div>
               </div>
-              <div class="pt-2 ps-sm-3 mx-auto mx-sm-0 text-center">
-                <button class="btn btn-outline-danger btn-sm" type="button"><img src="../img/icon/trash.svg"> Remove</button>
+             <div class="pt-2 ps-sm-3 mx-auto mx-sm-0 text-center">
+                <a th:href="@{/mamute/desejos/remover/{id}(id=${desejo.id})}" class="btn btn-outline-danger btn-sm" type="button"><img src="../img/icon/trash.svg"> Remover</a>
               </div>
             </div>
-            -->
-            <!-- Item-->
-            <div class="d-sm-flex justify-content-between my-4 pb-3 pb-sm-2 border-bottom">
-              <div class="d-block d-sm-flex align-items-start text-center text-sm-start"><a class="d-block flex-shrink-0 mx-auto me-sm-4" href="#" style="width: 10rem;"><img src="img/shop/cart/03.jpg" alt="Produto"></a>
+            <!-- Caso a lista esteja vazia -->
+            <div th:if="${desejos.isEmpty()}" class="d-sm-flex justify-content-between mt-4">
+              <div class="d-block d-sm-flex align-items-start text-center text-sm-start"><a class="d-block flex-shrink-0 mx-auto me-sm-4" href="#" style="width: 10rem;"><img src="../img/voto-negativo.png" width="50%" alt="icone"></a>
                 <div class="pt-2">
-                  <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">3-Color Sun Stash Hat</a></h3>
-                  <div class="fs-sm"><span class="text-muted me-2">Brand:</span>The North Face</div>
-                  <div class="fs-sm"><span class="text-muted me-2">Color:</span>Pink / Beige / Dark blue</div>
-                  <div class="fs-lg text-accent pt-2">$22.<small>50</small></div>
+                  <h3 class="product-title fs-base mb-2"><a href="/mamute">Retornar as Compras</a></h3>
+                  <div class="fs-sm"><span class="text-muted me-2"><strong>Lista de desejos está vazia!</strong> </span></div>
                 </div>
-              </div>
-              <div class="pt-2 ps-sm-3 mx-auto mx-sm-0 text-center">
-                <button class="btn btn-outline-danger btn-sm" type="button"><img src="../img/icon/trash.svg"> Remover</button>
-              </div>
-            </div>
-            <!-- Item-->
-            <div class="d-sm-flex justify-content-between mt-4">
-              <div class="d-block d-sm-flex align-items-start text-center text-sm-start"><a class="d-block flex-shrink-0 mx-auto me-sm-4" href="shop-single-v1.html" style="width: 10rem;"><img src="img/shop/cart/04.jpg" alt="Product"></a>
-                <div class="pt-2">
-                  <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">Cotton Polo Regular Fit</a></h3>
-                  <div class="fs-sm"><span class="text-muted me-2">Size:</span>42</div>
-                  <div class="fs-sm"><span class="text-muted me-2">Color:</span>Light blue</div>
-                  <div class="fs-lg text-accent pt-2">$9.<small>00</small></div>
-                </div>
-              </div>
-              <div class="pt-2 ps-sm-3 mx-auto mx-sm-0 text-center">
-                <button class="btn btn-outline-danger btn-sm" type="button"><img src="../img/icon/trash.svg"> Remover</button>
               </div>
             </div>
           </section>
         </div>
-      </div>
-          </section>
-        </div>
-      </div> 
       </div>
     </body>
 </html>

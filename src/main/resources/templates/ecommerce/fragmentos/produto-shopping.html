@@ -40,7 +40,7 @@
 	        <div class="row mx-n2">
 	          <div th:each="produto, cont : ${produtos}" th:if="${cont.index <= 18 and produto.nome != 'Moletom'}" class="col-md-4 col-sm-6 px-2 mb-4">
 	            <div class="card product-card">            
-	              <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><img src="../img/icon/heart.svg"></button>
+	              <a th:href="@{/mamute/desejos/adicionar/{id}(id=${produto.id})}"><button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><img src="../img/icon/heart.svg"></button></a>
 	              <a class="card-img-top d-block overflow-hidden" href="#">
 	              <img th:src="@{/mamute/produto/visualizar/{imagem}(imagem=${produto.imagem})}" alt="Produto"></a>
 	              <div class="card-body py-2">
@@ -120,7 +120,7 @@
               <!-- Product-->
 	          <div th:each="produto, cont : ${produtos}" th:if="${cont.index <= 5}" class="col-md-4 col-sm-6 px-2 mb-4">
 	            <div class="card product-card">            
-	              <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><img src="../img/icon/heart.svg"></button>
+	              <a th:href="@{/mamute/desejos/adicionar/{id}(id=${produto.id})}"><button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><img src="../img/icon/heart.svg"></button></a>
 	              <a class="card-img-top d-block overflow-hidden" href="#">
 	              <img th:src="@{/mamute/produto/visualizar/{imagem}(imagem=${produto.imagem})}" alt="Produto"></a>
 	              <div class="card-body py-2">

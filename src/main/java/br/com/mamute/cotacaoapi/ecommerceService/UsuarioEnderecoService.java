@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 import br.com.mamute.cotacaoapi.repository.CategoriaRepository;
 import br.com.mamute.cotacaoapi.repository.DepartamentoRepository;
+import br.com.mamute.cotacaoapi.repository.listaDesejosRepository;
 
 @Service
 public class UsuarioEnderecoService {
@@ -17,12 +18,17 @@ public class UsuarioEnderecoService {
 	
 	@Autowired
 	private CarrinhoService carrinhoService;
+	
+	@Autowired
+	private listaDesejosRepository desejosRepository;
 			
 	public ModelAndView endereco() {
-		ModelAndView mvLogin = new ModelAndView("ecommerce/usuario-endereco");
-		mvLogin.addObject("pedido",carrinhoService.compra);
-		mvLogin.addObject("departamentos", departamentoRepository.findAll());
-		mvLogin.addObject("categorias", categoriaRepository.findAll());
-		return mvLogin.addObject("compras", carrinhoService.listaCompras);
+		ModelAndView mvEndereco = new ModelAndView("ecommerce/usuario-endereco");
+		mvEndereco.addObject("pedido",carrinhoService.compra);
+		mvEndereco.addObject("departamentos", departamentoRepository.findAll());
+		mvEndereco.addObject("categorias", categoriaRepository.findAll());
+		mvEndereco.addObject("compras", carrinhoService.listaCompras);
+		mvEndereco.addObject("desejos", desejosRepository.findAll());
+		return mvEndereco;
     }	
 }

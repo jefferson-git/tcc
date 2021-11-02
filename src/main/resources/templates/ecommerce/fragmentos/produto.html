@@ -43,8 +43,8 @@
           <!-- Product-->
           <div th:each="produto, cont : ${produtos}" th:if="${produto.nome != 'Moletom' and cont.index <= 20}" class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
             <div class="card product-card">            
-              <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="lista de desejos"><img src="../img/icon/heart.svg"></button>
-              <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html">
+              <a th:href="@{/mamute/desejos/adicionar/{id}(id=${produto.id})}"><button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="lista de desejos"><img src="../img/icon/heart.svg"></button></a>
+              <a class="card-img-top d-block overflow-hidden" href="#">
               <img th:src="@{/mamute/produto/visualizar/{imagem}(imagem=${produto.imagem})}" alt="Produto"></a>
               <div class="card-body py-2">
               	<a th:text="${produto.descricao}" class="product-meta d-block fs-xs pb-1" href="#" ></a>
