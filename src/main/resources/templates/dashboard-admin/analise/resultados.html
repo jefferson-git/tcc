@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 
-<html class="loading" lang="pt-br" data-textdirection="ltr" xmlns:th="http://www.thymeleaf.org">
+<html class="loading" lang="pt-br" data-textdirection="ltr"
+ xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
   <!-- INÍCIO: Head-->
   <head>
@@ -248,7 +250,11 @@
         </div>
       </div>
     </div>
-   
+   <div class="alert alert-success" th:if="${not #strings.isEmpty(menssagem)}">
+		<script>					    
+			M.toast({html: '[(${menssagem})]', classes: 'rounded'});
+		</script>	
+	  </div>
     <!-- END: Página principal-->
 	<div th:replace="~{dashboard-admin/fragmentos/personaliza-tema :: temas}"></div>
 	<div th:replace="~{dashboard-admin/fragmentos/rodape :: footer}"></div>	

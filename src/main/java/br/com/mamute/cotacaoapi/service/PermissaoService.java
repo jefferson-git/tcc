@@ -23,33 +23,36 @@ import br.com.mamute.cotacaoapi.repository.UsuarioRepository;
 @Service
 public class PermissaoService {
 	
-	@Autowired
-	private PermissaoRepository permissaoRepository;
-	
-	@Autowired
-	private PapelRepository papelRepository;
-	
-	@Autowired
-	private ColaboradorRepository colaboradorRepository;
-	
-	@Autowired
-	private UsuarioRepository usuarioRepository;
+	@Autowired private PermissaoRepository permissaoRepository;	
+	@Autowired private PapelRepository papelRepository;	
+	@Autowired private ColaboradorRepository colaboradorRepository;	
+	@Autowired private UsuarioRepository usuarioRepository;
+	@Autowired private UsuarioService usuarioService;	
+
 	
 	public ModelAndView form(Long id, RedirectAttributes attributes) {	
-		Usuario usuario = usuarioRepository.findById(id).get();
-		Colaborador colaborador = colaboradorRepository.findById(id).get();
-		if(colaborador == null) {
+		ModelAndView mvForm = new ModelAndView("dashboard-admin/permissao/form-registrar-permissao");
+		Optional<Usuario> usuario = usuarioRepository.findById(id);
+		Optional<Colaborador> colaborador = colaboradorRepository.findById(id);
+		try {
+			if (usuario.isEmpty() || colaborador.isEmpty()) {
+				attributes.addFlashAttribute("icone", "thumb_down");
+				attributes.addFlashAttribute("menssagem", "Colaborador inesistente.");	
+				return new ModelAndView("redirect:/dashboard-admin/permissao/listar");
+			}
+			
+			
+			mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
+			mvForm.addObject("usuario", usuario);
+			mvForm.addObject("colaborador", colaborador);
+			mvForm.addObject("papeis", papelRepository.findAll());
+			mvForm.addObject("permissao", new  Permissao());
+			return mvForm;
+		} catch (Exception e) {
 			attributes.addFlashAttribute("icone", "thumb_down");
 			attributes.addFlashAttribute("menssagem", "Colaborador inesistente.");	
-			return new ModelAndView("redirect:/dashboard-admin/permissao/listar");
-		}
-		
-		ModelAndView mvForm = new ModelAndView("dashboard-admin/permissao/form-registrar-permissao");
-		mvForm.addObject("usuario", usuario);
-		mvForm.addObject("colaborador", colaborador);
-		mvForm.addObject("papeis", papelRepository.findAll());
-		mvForm.addObject("permissao", new  Permissao());
-		return mvForm;		
+			return new ModelAndView("redirect:/dashboard-admin/permissao/registrar");			
+		}		
 	}
 	
 	public ModelAndView salvar(@Valid Long id, Permissao permissao, BindingResult result, RedirectAttributes attributes) {
@@ -68,7 +71,8 @@ public class PermissaoService {
 		}		
 	}
 	
-	public ModelAndView listar(RedirectAttributes attributes) {		
+	public ModelAndView listar(RedirectAttributes attributes) {	
+		ModelAndView mvLista = new ModelAndView("dashboard-admin/permissao/lista-permissao");
 		try {
 			List<Permissao> permissaoes = permissaoRepository.findAll();
 			if(permissaoes.size() == 0) {
@@ -76,8 +80,7 @@ public class PermissaoService {
 				attributes.addFlashAttribute("menssagem", "No momento a lista está vazia, realize um registro!");
 				return new ModelAndView("redirect:/dashboard-admin/colaborador/listar");
 			}
-			
-			ModelAndView mvLista = new ModelAndView("dashboard-admin/permissao/lista-permissao");
+			mvLista.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 			mvLista.addObject("permissoes", permissaoes);		 
 			return mvLista;
 			 

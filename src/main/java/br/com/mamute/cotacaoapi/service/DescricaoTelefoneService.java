@@ -16,11 +16,12 @@ import br.com.mamute.cotacaoapi.repository.DescricaoTelefoneRepository;
 @Service
 public class DescricaoTelefoneService {
 
-	@Autowired
-	private DescricaoTelefoneRepository descricaoTelefoneRepository;
+	@Autowired private DescricaoTelefoneRepository descricaoTelefoneRepository;
+	@Autowired private UsuarioService usuarioService;
 	
 	public ModelAndView form(DescricaoTelefone descricao) {
 		ModelAndView mvForm = new ModelAndView("dashboard-admin/descricao-telefone/form-registrar-descricao-telefone");
+		mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 		return mvForm.addObject("descricao", descricao);
     }
 	
@@ -70,6 +71,7 @@ public class DescricaoTelefoneService {
 			}
 			
 			ModelAndView mvLista = new ModelAndView("dashboard-admin/descricao-telefone/lista-descricao-telefone");
+			mvLista.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 			return mvLista.addObject("descricoes", descricoes);
 			
 		} catch (Exception e) {
@@ -79,9 +81,7 @@ public class DescricaoTelefoneService {
 		}
 	}
 	
-	public ModelAndView editar(Integer id, RedirectAttributes attributes) {	
-		
-		ModelAndView mvForm = new ModelAndView("dashboard-admin/descricao-telefone/form-registrar-descricao-telefone");
+	public ModelAndView editar(Integer id, RedirectAttributes attributes) {			
 		Optional<DescricaoTelefone> descricao = descricaoTelefoneRepository.findById(id);
 		
 		try {	
@@ -89,8 +89,10 @@ public class DescricaoTelefoneService {
 				attributes.addFlashAttribute("icone", "thumb_down");
 				attributes.addFlashAttribute("menssagem", "Erro, id inesistente!");
 				return new ModelAndView("redirect:/dashboard-admin/descricao-telefone/listar");
-			}	
+			}
 			
+			ModelAndView mvForm = new ModelAndView("dashboard-admin/descricao-telefone/form-registrar-descricao-telefone");
+			mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 			return mvForm.addObject("descricao", descricao);
 			
 		} catch (Exception e) {

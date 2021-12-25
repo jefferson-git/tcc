@@ -17,11 +17,12 @@ import br.com.mamute.cotacaoapi.repository.ImpostoRepository;
 @Service
 public class ImpostoService {
 
-	@Autowired
-	private ImpostoRepository impostoRepository;
+	@Autowired private ImpostoRepository impostoRepository;
+	@Autowired private UsuarioService usuarioService;
 	
 	public ModelAndView form(Imposto imposto) {
     	ModelAndView mvForm = new ModelAndView("dashboard-admin/imposto/form-registrar-imposto");
+    	mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 		return mvForm.addObject("imposto", imposto);
     }
 	
@@ -73,6 +74,7 @@ public class ImpostoService {
 			}
 			
 			ModelAndView mvLista = new ModelAndView("dashboard-admin/imposto/lista-imposto");
+			mvLista.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 			return mvLista.addObject("impostos", impostos);
 			
 		} catch (Exception e) {
@@ -92,7 +94,7 @@ public class ImpostoService {
 				attributes.addFlashAttribute("menssagem", "Erro, id inesistente!");
 				return new ModelAndView("redirect:/dashboard-admin/imposto/listar");
 			}
-			
+			mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 			return mvForm.addObject("imposto", imposto);			
 			
 		} catch (Exception e) {

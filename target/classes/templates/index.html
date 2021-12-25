@@ -19,7 +19,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
-       
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <link rel="stylesheet" media="screen" href="../../vendor/simplebar/dist/simplebar.min.css"/>
     <link rel="stylesheet" media="screen" href="../../vendor/tiny-slider/dist/tiny-slider.css"/>
     <link rel="stylesheet" media="screen" href="../../vendor/drift-zoom/dist/drift-basic.min.css"/>
@@ -38,43 +38,6 @@
   <body class="handheld-toolbar-enabled">
    <div th:replace="~{ecommerce/fragmentos/form-usuario :: formulario-usuario}"></div> 
     <main class="page-wrapper">
-      <!-- Quick View Modal-->
-      <div class="modal-quick-view modal fade" id="quick-view" tabindex="-1">
-        <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title product-title"><a href="shop-single-v1.html" data-bs-toggle="tooltip" data-bs-placement="right" title="Go to product page">Sports Hooded Sweatshirt<i class="ci-arrow-right fs-lg ms-2"></i></a></h4>
-              <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <!-- Product gallery-->
-                <div class="col-lg-7 pe-lg-0">
-                  <div class="product-gallery">
-                    <div class="product-gallery-preview order-sm-2">
-                      <div class="product-gallery-preview-item active" id="first"><img class="image-zoom" src="../img/shop/single/gallery/01.jpg" data-zoom="img/shop/single/gallery/01.jpg" alt="Product image">
-                        <div class="image-zoom-pane"></div>
-                      </div>
-                      <div class="product-gallery-preview-item" id="second"><img class="image-zoom" src="../img/shop/single/gallery/02.jpg" data-zoom="img/shop/single/gallery/02.jpg" alt="Product image">
-                        <div class="image-zoom-pane"></div>
-                      </div>
-                      <div class="product-gallery-preview-item" id="third"><img class="image-zoom" src="../img/shop/single/gallery/03.jpg" data-zoom="img/shop/single/gallery/03.jpg" alt="Product image">
-                        <div class="image-zoom-pane"></div>
-                      </div>
-                      <div class="product-gallery-preview-item" id="fourth"><img class="image-zoom" src="../img/shop/single/gallery/04.jpg" data-zoom="img/shop/single/gallery/04.jpg" alt="Product image">
-                        <div class="image-zoom-pane"></div>
-                      </div>
-                    </div>
-                    <div class="product-gallery-thumblist order-sm-1"><a class="product-gallery-thumblist-item active" href="#first"><img src="../img/shop/single/gallery/th01.jpg" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#second"><img src="../img/shop/single/gallery/th02.jpg" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#third"><img src="../img/shop/single/gallery/th03.jpg" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#fourth"><img src="../img/shop/single/gallery/th04.jpg" alt="Product thumb"></a></div>
-                  </div>
-                </div>
-                <!-- Product details-->
-      			<div th:replace="~{ecommerce/fragmentos/modal-detalhe-produto-fragmento.html :: detalhe-produto}"></div>       			
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <!-- Navbar 3 Level (Light)-->
       <header class="shadow-sm">
         <!-- Topbar-->

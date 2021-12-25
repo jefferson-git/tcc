@@ -100,17 +100,17 @@
                   </div> 
                   <div class="input-field col m4 s12">                  
                     <label>Descrição: <span class="red-text">*</span></label>
-                    <input type="text" th:field="*{descricao}" name="descricao"  min="4" maxlength="255" required />                    
+                    <input type="text" th:field="${categoria.descricao}" name="descricao"  min="4" maxlength="255" required />                    
                  	<p>campo obrigatório</p>
-                  </div> <!--	
+                  </div> 
                   <div class="col s12 m4">	           
 		            <div class="input-field">
 		            <i class="material-icons prefix">format_list_bulleted</i>
 		             <select th:field="*{departamento}" class="form-control" required="required">
 		              	<option value="#">Selecione o departamento</option>
 		              	<option th:each="departamento: ${departamentos}" th:value="${departamento.id}" th:text="${departamento.nome}" ></option>		               
-		              </select >-->
-		            </div>
+		              </select >
+		            </div> 
 		          </div>
                 </div> 
                 <div>                   

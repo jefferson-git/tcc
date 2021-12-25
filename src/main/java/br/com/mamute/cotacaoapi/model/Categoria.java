@@ -12,25 +12,19 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import com.sun.istack.NotNull;
 
-@Entity
-@Table(name = "categoria")
-@Getter
-@Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+import lombok.Data;
+
+@Entity @Table(name = "categoria")
+@SuppressWarnings("serial") @Data
 public class Categoria implements Serializable{
-	private static final long serialVersionUID = 1L;
 
 	@Id
-	@EqualsAndHashCode.Include
 	@SequenceGenerator(name = "seq_categoria", sequenceName = "seq_id_categoria", allocationSize = 1)
 	@GeneratedValue(generator = "seq_categoria", strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
-	@EqualsAndHashCode.Include
 	@NotBlank(message = "O nome da categoria não pode ser nulo ou em branco.")
 	@Size(min = 2, max = 30, message = "O nome da categoria de ter entre 2 e 30 caracteres.")
 	private String nome;
@@ -39,6 +33,6 @@ public class Categoria implements Serializable{
 	@Size(min = 4, max = 255, message = "O nome da categoria deve ter entre 4 e 255 caracteres.")
 	private String descricao;
 	  
-	@OneToOne()
+	@OneToOne() @NotNull
 	private Departamento departamento; 
 }

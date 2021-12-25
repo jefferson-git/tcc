@@ -13,13 +13,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.mamute.cotacaoapi.model.Permissao;
 import br.com.mamute.cotacaoapi.service.PermissaoService;
+import br.com.mamute.cotacaoapi.service.UsuarioService;
 
 @Controller
 @RequestMapping("/dashboard-admin/permissao")
 public class PermissaoController {
 	
-	@Autowired
-	PermissaoService permissaoService;
+	@Autowired PermissaoService permissaoService;
 	
 	@GetMapping("/registrar/{id}")
 	ModelAndView form(@PathVariable Long id, RedirectAttributes attributes) {		

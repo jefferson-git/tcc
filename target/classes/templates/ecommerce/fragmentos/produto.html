@@ -20,6 +20,8 @@
     <meta name="theme-color" content="#ffffff">
     <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
     
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" media="screen" href="../../vendor/simplebar/dist/simplebar.min.css"/>
     <link rel="stylesheet" media="screen" href="../../vendor/tiny-slider/dist/tiny-slider.css"/>
     <link rel="stylesheet" media="screen" href="../../vendor/drift-zoom/dist/drift-basic.min.css"/>
@@ -85,7 +87,7 @@
                   </select>
                   <a th:href="@{/mamute/carrinho/adicionar/{id}(id=${produto.id})}" class="btn btn-primary btn-sm" type="button"><img src="../img/icon/cart-plus.svg"> Add carrinho</a>
                 </div>
-                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view" data-bs-toggle="modal"><img src="../img/icon/eye.svg"> Olhada rápida</a></div>
+                <div class="text-center"><a class="nav-link-style fs-ms" th:attr="data-target='#descricao'+${produto}" href="#descricao" data-bs-toggle="modal"><img src="../img/icon/eye.svg"> Olhada rápida</a></div>
               </div>
               <div th:if="${produto.categoria.departamento.nome == 'Calçados'}"  class="card-body card-body-hidden">
                 <div class="text-center pb-2">
@@ -107,15 +109,56 @@
                   </div>
                 </div>
                 <a th:href="@{/mamute/carrinho/adicionar/{id}(id=${produto.id})}" class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><img src="../img/icon/cart-plus.svg"> Adicionar ao carrinho</a>
-                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view" data-bs-toggle="modal"><img src="../img/icon/eye.svg"> Olhada rápida</a></div>
+                <div class="text-center"><a class="nav-link-style fs-ms" href="#descricao" data-bs-toggle="modal"><img src="../img/icon/eye.svg"> Olhada rápida</a></div>
                </div>               
 	           <div th:if="${produto.categoria.departamento.nome == 'Acessórios'}" class="card-body card-body-hidden">
                 <a th:href="@{/mamute/carrinho/adicionar/{id}(id=${produto.id})}" class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><img src="../img/icon/cart-plus.svg"> Adicionar ao carrinho</a>
-	              <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view" data-bs-toggle="modal"><img src="../img/icon/eye.svg"> Olhada rápida</a></div>
+	              <div class="text-center">
+	              	<a class="nav-link-style fs-ms" href="#descricao" data-bs-toggle="modal">
+	             	<img src="../img/icon/eye.svg"> Olhada rápida</a></div>
 	           </div>
 	          <hr class="d-sm-none">
           	 </div>          
-            <hr class="d-sm-none">
+            <hr class="d-sm-none">            
+          <!-- inicio Modal-->
+	      <div class="modal-quick-view modal fade" id="quick-view" tabindex="-1">
+	        <div class="modal-dialog modal-xl">
+	          <div class="modal-content">
+	            <div class="modal-header">
+	              <h4 class="modal-title product-title"><a href="shop-single-v1.html" data-bs-toggle="tooltip" data-bs-placement="right" title="Go to product page">modal da index<i class="ci-arrow-right fs-lg ms-2"></i></a></h4>
+	              <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+	            </div>
+	            <div class="modal-body">
+	              <div class="row">
+	                <!-- Product gallery-->
+	                <div class="col-lg-7 pe-lg-0">
+	                  <div class="product-gallery">
+	                    <div class="product-gallery-preview order-sm-2">
+	                      <div class="product-gallery-preview-item active" id="first"><img class="image-zoom" src="../img/shop/single/gallery/01.jpg" data-zoom="img/shop/single/gallery/01.jpg" alt="Product image">
+	                        <div class="image-zoom-pane"></div>
+	                      </div>
+	                      <div class="product-gallery-preview-item" id="second"><img class="image-zoom" src="../img/shop/single/gallery/02.jpg" data-zoom="img/shop/single/gallery/02.jpg" alt="Product image">
+	                        <div class="image-zoom-pane"></div>
+	                      </div>
+	                      <div class="product-gallery-preview-item" id="third"><img class="image-zoom" src="../img/shop/single/gallery/03.jpg" data-zoom="img/shop/single/gallery/03.jpg" alt="Product image">
+	                        <div class="image-zoom-pane"></div>
+	                      </div>
+	                      <div class="product-gallery-preview-item" id="fourth"><img class="image-zoom" src="../img/shop/single/gallery/04.jpg" data-zoom="img/shop/single/gallery/04.jpg" alt="Product image">
+	                        <div class="image-zoom-pane"></div>
+	                      </div>
+	                    </div>
+	                    <div class="product-gallery-thumblist order-sm-1"><a class="product-gallery-thumblist-item active" href="#first"><img src="../img/shop/single/gallery/th01.jpg" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#second"><img src="../img/shop/single/gallery/th02.jpg" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#third"><img src="../img/shop/single/gallery/th03.jpg" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#fourth"><img src="../img/shop/single/gallery/th04.jpg" alt="Product thumb"></a></div>
+	                  </div>
+	                </div>
+	                <!-- Product details-->
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	      </div> 
+		  <!-- inicio Modal-->	      
+	       <div th:replace="~{ecommerce/fragmentos/modal-detalhe-produto-fragmento.html :: detalhe-produto}"></div>       			      
+	      <!-- fim Modal-->           
           </div>      
           <!-- Product-->          
         </div>

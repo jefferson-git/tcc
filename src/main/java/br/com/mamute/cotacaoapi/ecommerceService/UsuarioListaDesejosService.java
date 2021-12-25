@@ -62,7 +62,7 @@ public class UsuarioListaDesejosService {
 		item.setProduto(produto);
 		desejosRepository.save(item);
 		
-    	return "redirect:/mamute/desejos";	
+    	return "redirect:/mamute/desejos";	 
 	} 
 	
 	public String remover(Long id) {

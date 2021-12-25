@@ -16,11 +16,12 @@ import br.com.mamute.cotacaoapi.repository.DescontoRepository;
 @Service
 public class DescontoService {
 
-	@Autowired
-	private DescontoRepository descontoRepository;
+	@Autowired private DescontoRepository descontoRepository;
+	@Autowired private UsuarioService usuarioService;
 	
 	public ModelAndView form(Desconto desconto) {
     	ModelAndView mvForm = new ModelAndView("dashboard-admin/desconto/form-registrar-desconto");
+    	mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 		return mvForm.addObject("desconto", desconto);
     }
 	
@@ -71,6 +72,7 @@ public class DescontoService {
 			}
 			
 			ModelAndView mvLista = new ModelAndView("dashboard-admin/desconto/lista-desconto");
+			mvLista.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 			return mvLista.addObject("descontos", descontos);
 			
 		} catch (Exception e) {
@@ -90,7 +92,9 @@ public class DescontoService {
 				attributes.addFlashAttribute("menssagem", "Erro, id inesistente!");
 				return new ModelAndView("redirect:/dashboard-admin/desconto/listar");
 			}
-				return mvForm.addObject("desconto", desconto);
+			
+			mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
+			return mvForm.addObject("desconto", desconto);
 			
 			
 			

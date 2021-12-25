@@ -2,12 +2,19 @@ package br.com.mamute.cotacaoapi.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -15,18 +22,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@SuppressWarnings("serial")
-@Table(name = "usuario")
-public class Usuario implements Serializable {	
+
+@Entity @Data @AllArgsConstructor @NoArgsConstructor
+@SuppressWarnings("serial") @Table(name = "usuario")
+public class Usuario implements Serializable{	
 
 	@Id
 	@SequenceGenerator(name = "seq_usuario", sequenceName = "seq_id_usuario", allocationSize = 1)
@@ -46,9 +48,14 @@ public class Usuario implements Serializable {
 	@Column(nullable = false, length = 20)
 	private Integer status;	
 	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "usuarios_papeis", 
+			   joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"), 
+	           inverseJoinColumns = @JoinColumn(name = "papel_id", referencedColumnName = "id")) 
+	private Set<Papel> papeis = new HashSet<>();
+	
 	public void setPassword(String password) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		this.password = passwordEncoder.encode(password);
 	}
-
 }

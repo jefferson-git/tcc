@@ -8,43 +8,48 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.mamute.cotacaoapi.model.Colaborador;
 import br.com.mamute.cotacaoapi.model.Marca;
+import br.com.mamute.cotacaoapi.model.Pessoa;
+import br.com.mamute.cotacaoapi.model.Usuario;
+import br.com.mamute.cotacaoapi.repository.ColaboradorRepository;
 import br.com.mamute.cotacaoapi.repository.MarcaRepository;
+import br.com.mamute.cotacaoapi.repository.PessoaRepository;
+import br.com.mamute.cotacaoapi.repository.UsuarioRepository;
 
 @Service
 public class MarcaService {
 	
 	private static String caminhoDaImagem = "/cotacao_api/marca/";
 
-	@Autowired
-	private MarcaRepository marcaRepository;
+	@Autowired private MarcaRepository marcaRepository;	
+	@Autowired private UsuarioService usuarioService;
 	
 	public ModelAndView form(Marca marca, MultipartFile arquivo) {
     	ModelAndView mvForm = new ModelAndView("dashboard-admin/marca/form-registrar-marca");
+    	mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 		mvForm.addObject("marca", marca);
 		mvForm.addObject("arquivo", arquivo);
 		return mvForm;
 
     }
 	
-	public ModelAndView salvar(Marca marca, MultipartFile file,	BindingResult result, RedirectAttributes attributes){
-		
+	public ModelAndView salvar(Marca marca, MultipartFile file,	BindingResult result, RedirectAttributes attributes){		
 		if(result.hasErrors()) 
-			form(marca, file);	
-		
+			form(marca, file);			
 		if(marca.getNome() == null || marca.getNome().isBlank()) {
 			attributes.addFlashAttribute("icone", "thumb_down");
 			attributes.addFlashAttribute("menssagem", "Campo nome não podem ser nulos ou vazio.");	
 			return new ModelAndView("redirect:/dashboard-admin/marca/registrar");
 		}						
-		try {	
-						
+		try {							
 			if(!file.isEmpty()) {
 				byte[] bytes = file.getBytes();
 				Path caminho = Paths.get(caminhoDaImagem+file.getOriginalFilename());
@@ -89,7 +94,9 @@ public class MarcaService {
 			}
 			
 			ModelAndView mvLista = new ModelAndView("dashboard-admin/marca/lista-marca");
+	    	mvLista.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 			return mvLista.addObject("marcas", marcas);
+			
 			
 		} catch (Exception e) {
 			attributes.addFlashAttribute("icone", "thumb_down");
@@ -108,7 +115,7 @@ public class MarcaService {
 				attributes.addFlashAttribute("menssagem", "Erro, id inesistente!");
 				return new ModelAndView("redirect:/dashboard-admin/marca/listar");
 			}
-			
+	    	mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 			return mvForm.addObject("marca", marca);
 					
 		} catch (Exception e) {

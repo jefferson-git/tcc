@@ -3,9 +3,9 @@
 
 (function (window, document, $) {
   // //menssagem ao abrir a tela
-  setTimeout(function () {
-    M.toast({ html: "Olá! seja bem vindo." , classes: 'rounded'})
-  }, 2000)
+  //setTimeout(function () {
+  //  M.toast({ html: "Olá! seja bem vindo." , classes: 'rounded'})
+  //}, 2000)
 
   // card Saldo Atual
 

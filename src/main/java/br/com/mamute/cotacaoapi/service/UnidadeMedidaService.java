@@ -16,11 +16,13 @@ import br.com.mamute.cotacaoapi.repository.UnidadeDeMedidaRepository;
 @Service
 public class UnidadeMedidaService {
 
-	@Autowired
-	private UnidadeDeMedidaRepository unidadeDeMedidaRepository;
+	@Autowired private UnidadeDeMedidaRepository unidadeDeMedidaRepository;
+	@Autowired private UsuarioService usuarioService;	
+
 	
 	public ModelAndView form(UnidadeDeMedida unidadeDeMedida) {
     	ModelAndView mvForm = new ModelAndView("dashboard-admin/unidade-medida/form-registrar-unidade");
+    	mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 		return mvForm.addObject("unidadeDeMedida", unidadeDeMedida);
     }
 	
@@ -71,6 +73,7 @@ public class UnidadeMedidaService {
 			}
 			
 			ModelAndView mvLista = new ModelAndView("dashboard-admin/unidade-medida/lista-unidade");
+	    	mvLista.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 			return mvLista.addObject("unidadeDeMedidas", unidadeDeMedidas);
 			
 		} catch (Exception e) {
@@ -91,6 +94,7 @@ public class UnidadeMedidaService {
 			}
 			
 			ModelAndView mvForm = new ModelAndView("dashboard-admin/unidade-medida/form-registrar-unidade");
+	    	mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 			return mvForm.addObject("unidadeDeMedida", unidadeDeMedida);			
 			
 		} catch (Exception e) {

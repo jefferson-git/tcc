@@ -16,11 +16,12 @@ import br.com.mamute.cotacaoapi.repository.LucroRepository;
 @Service
 public class LucroService {
 
-	@Autowired
-	private LucroRepository lucroRepository;
+	@Autowired private LucroRepository lucroRepository;
+	@Autowired private UsuarioService usuarioService;
 	
 	public ModelAndView form(Lucro lucro) {
     	ModelAndView mvForm = new ModelAndView("dashboard-admin/lucro/form-registrar-lucro");
+    	mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 		return mvForm.addObject("lucro", lucro);
     }
 	
@@ -71,6 +72,7 @@ public class LucroService {
 			}
 			
 			ModelAndView mvLista = new ModelAndView("dashboard-admin/lucro/lista-lucro");
+	    	mvLista.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 			return mvLista.addObject("lucros", lucros);
 			
 		} catch (Exception e) {
@@ -90,7 +92,7 @@ public class LucroService {
 				attributes.addFlashAttribute("menssagem", "Erro, id inesistente!");
 				return new ModelAndView("redirect:/dashboard-admin/lucro/listar");
 			}			
-			
+	    	mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 			return mvForm.addObject("lucro", lucro);
 			
 		} catch (Exception e) {
