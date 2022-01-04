@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.mamute.cotacaoapi.ecommerceService.DetalhesService;
 
 @Controller
-@RequestMapping("/mamute/detalhes")
+@RequestMapping("/usuario/detalhes")
 public class DetalhesController {
 	
 	@Autowired

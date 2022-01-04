@@ -28,7 +28,7 @@ public class CategoriaController {
 	@PostMapping("/salvar")
 	ModelAndView salvar(Categoria categoria, BindingResult result,RedirectAttributes attributes) {
 		return categoriaService.salvar(categoria, result, attributes);				
-	}
+	} 
 	
 	@GetMapping("/listar")
 	ModelAndView listar(RedirectAttributes attributes) {		

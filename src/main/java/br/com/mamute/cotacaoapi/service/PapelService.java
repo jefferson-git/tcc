@@ -17,13 +17,13 @@ import br.com.mamute.cotacaoapi.repository.PapelRepository;
 @Service
 public class PapelService {
 
-	@Autowired
-	private PapelRepository papelRepository;
-	
+	@Autowired private PapelRepository papelRepository;
+	@Autowired private UsuarioService usuarioService;	
 	ModelAndView mvForm = new ModelAndView("/dashboard-admin/papel/form-registrar-papel");
 	ModelAndView mvLista = new ModelAndView("/dashboard-admin/papel/lista-papel");
 	
 	public ModelAndView form(Papel papel) {
+		mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 		return mvForm.addObject("papel",papel);
 	}
 	
@@ -77,7 +77,7 @@ public class PapelService {
 			attributes.addFlashAttribute("menssagem", "No momento a lista está vazia, realize um registro!");
 			return mvForm;			
 		}
-		
+		mvLista.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 		return mvLista.addObject("papeis", lista);
 	}
 	
@@ -90,6 +90,7 @@ public class PapelService {
 			attributes.addFlashAttribute("menssagem", "id inesistente!");
 			return lista;	
 		}
+		mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 		return mvForm.addObject("papel", papel);
 	}
 	
@@ -112,5 +113,4 @@ public class PapelService {
 			return new ModelAndView("redirect:/dashboard-admin/papel/listar");
 		}		
 	}
-
 }

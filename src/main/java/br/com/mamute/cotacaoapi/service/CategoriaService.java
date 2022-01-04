@@ -17,14 +17,13 @@ import br.com.mamute.cotacaoapi.repository.DepartamentoRepository;
 @Service
 public class CategoriaService {
 
-	@Autowired
-	private CategoriaRepository categoriaRepository;
-	
-	@Autowired
-	private DepartamentoRepository departamentoRepository;
+	@Autowired private CategoriaRepository categoriaRepository;	
+	@Autowired private DepartamentoRepository departamentoRepository;
+	@Autowired private UsuarioService usuarioService;
 	
 	public ModelAndView form(Categoria categoria) {
-    	ModelAndView mvForm = new ModelAndView("dashboard-admin/categoria/form-registrar-categoria");
+    	ModelAndView mvForm = new ModelAndView("dashboard-admin/categoria/form-registrar-categoria");    	
+		mvForm.addObject("colaboradorLogado",usuarioService.usuarioLogado());
 		mvForm.addObject("categoria", categoria);
 		mvForm.addObject("departamentos", departamentoRepository.findAll());
 		return mvForm;
@@ -77,7 +76,8 @@ public class CategoriaService {
 				return new ModelAndView("redirect:/dashboard-admin/categoria/registrar");
 			}
 			
-			ModelAndView mvLista = new ModelAndView("dashboard-admin/categoria/lista-categoria");
+			ModelAndView mvLista = new ModelAndView("dashboard-admin/categoria/lista-categoria");			
+			mvLista.addObject("colaboradorLogado",usuarioService.usuarioLogado());
 			return mvLista.addObject("categorias", categorias);
 			
 		} catch (Exception e) {
@@ -87,8 +87,7 @@ public class CategoriaService {
 		}
 	}
 	
-	public ModelAndView editar(Long id, RedirectAttributes attributes) {	
-		
+	public ModelAndView editar(Long id, RedirectAttributes attributes) {			
 		Optional<Categoria> categoria = categoriaRepository.findById(id);
 		
 		try {	
@@ -96,10 +95,13 @@ public class CategoriaService {
 				attributes.addFlashAttribute("icone", "thumb_down");
 				attributes.addFlashAttribute("menssagem", "Erro, id inesistente!");
 				return new ModelAndView("redirect:/dashboard-admin/categoria/listar");
-			}	
+			}
 			
-			ModelAndView mvForm = new ModelAndView("dashboard-admin/categoria/form-registrar-categoria");
-			return mvForm.addObject("categoria", categoria);
+			ModelAndView mvForm = new ModelAndView("dashboard-admin/categoria/form-registrar-categoria");    	
+			mvForm.addObject("colaboradorLogado",usuarioService.usuarioLogado());
+			mvForm.addObject("categoria", categoria);
+			mvForm.addObject("departamentos", departamentoRepository.findAll());
+			return mvForm;
 			
 		} catch (Exception e) {
 			attributes.addFlashAttribute("icone", "thumb_down");

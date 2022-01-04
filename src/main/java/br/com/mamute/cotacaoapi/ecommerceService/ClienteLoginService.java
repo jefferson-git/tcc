@@ -11,14 +11,9 @@ import br.com.mamute.cotacaoapi.repository.DepartamentoRepository;
 @Service
 public class ClienteLoginService {
 		
-	@Autowired
-	private DepartamentoRepository departamentoRepository;
-	
-	@Autowired
-	private CategoriaRepository categoriaRepository;
-	
-	@Autowired
-	private CarrinhoService carrinhoService;
+	@Autowired private DepartamentoRepository departamentoRepository;	
+	@Autowired private CategoriaRepository categoriaRepository;	
+	@Autowired private CarrinhoService carrinhoService;
 			
 	public ModelAndView logar() {
 		ModelAndView mvLogin = new ModelAndView("ecommerce/login");

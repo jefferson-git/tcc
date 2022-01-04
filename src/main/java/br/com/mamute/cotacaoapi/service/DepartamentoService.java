@@ -17,18 +17,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.mamute.cotacaoapi.model.Departamento;
 import br.com.mamute.cotacaoapi.repository.DepartamentoRepository;
 
+
 @Service
 public class DepartamentoService {
 	
 	private static String caminhoDaImagem = "/cotacao_api/departamento/";
 
-	@Autowired
-	private DepartamentoRepository departamentoRepository;
+	@Autowired private DepartamentoRepository departamentoRepository;
+	@Autowired private UsuarioService usuarioService;	
 	
 	public ModelAndView form(Departamento departamento, MultipartFile arquivo) {
     	ModelAndView mvForm = new ModelAndView("dashboard-admin/departamento/form-registrar-departamento");
 		mvForm.addObject("departamentos", departamentoRepository.findAll());
 		mvForm.addObject("arquivo", arquivo);
+		mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 		return mvForm;
     }
 	
@@ -88,6 +90,7 @@ public class DepartamentoService {
 			}
 			
 			ModelAndView mvLista = new ModelAndView("dashboard-admin/departamento/lista-departamento");
+			mvLista.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 			return mvLista.addObject("departamentos", departamentos);
 			
 		} catch (Exception e) {
@@ -107,7 +110,7 @@ public class DepartamentoService {
 				attributes.addFlashAttribute("menssagem", "Erro, id inesistente!");
 				return new ModelAndView("redirect:/dashboard-admin/departamento/listar");
 			}
-			
+			mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 			return mvForm.addObject("departamento", departamento);
 					
 		} catch (Exception e) {

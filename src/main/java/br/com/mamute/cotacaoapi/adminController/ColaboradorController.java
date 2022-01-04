@@ -33,36 +33,28 @@ import br.com.mamute.cotacaoapi.repository.EnderecoRepository;
 import br.com.mamute.cotacaoapi.repository.TelefoneRepository;
 import br.com.mamute.cotacaoapi.repository.DescricaoTelefoneRepository;
 import br.com.mamute.cotacaoapi.repository.UsuarioRepository;
+import br.com.mamute.cotacaoapi.service.UsuarioService;
 
 @Controller
 @RequestMapping("/dashboard-admin/colaborador")
 public class ColaboradorController {
 	
-	private static String caminhoDaImagem = "/cotacao_api/imagens/";
-	
-	@Autowired
-	private UsuarioRepository usuarioRepository;	
-	
-	@Autowired
-	private ColaboradorRepository colaboradorRepository;
-	
-	@Autowired
-	private DescricaoTelefoneRepository descricaoTelefoneRepository;
-		
-	@Autowired
-	private TelefoneRepository telefoneRepositoty;
-	
-	@Autowired
-	private EnderecoRepository enderecoRepository;	
-	
-	@Autowired
-	private EmailRepository emailRepository;
+	private static String caminhoDaImagem = "/cotacao_api/imagens/";	
+	@Autowired private UsuarioRepository usuarioRepository;		
+	@Autowired private ColaboradorRepository colaboradorRepository;	
+	@Autowired private DescricaoTelefoneRepository descricaoTelefoneRepository;		
+	@Autowired private TelefoneRepository telefoneRepositoty;	
+	@Autowired private EnderecoRepository enderecoRepository;		
+	@Autowired private EmailRepository emailRepository;
+	@Autowired private UsuarioService usuarioService;
 	
 	private ModelAndView mvForm = new ModelAndView("dashboard-admin/colaborador/form-registrar-colaborador");
 	private ModelAndView mvLista = new ModelAndView("dashboard-admin/colaborador/lista-colaborador");
 	
 	@GetMapping("/registrar")
 	ModelAndView form(Colaborador colaborador, DescricaoTelefone descricao, MultipartFile arquivo) {
+		mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
+		mvForm.addObject("colaborador", colaborador);
 		mvForm.addObject("colaborador", colaborador);
 		mvForm.addObject("descricoes", descricaoTelefoneRepository.findAll());		
 		mvForm.addObject("arquivo", arquivo);
@@ -109,8 +101,9 @@ public class ColaboradorController {
 				return new ModelAndView("redirect:/dashboard-admin/colaborador/registrar");
 			}
 			
-			ModelAndView mvLista = new ModelAndView("dashboard-admin/colaborador/lista-colaborador");
-			return mvLista.addObject("colaboradores", colaboradores);
+		ModelAndView mvLista = new ModelAndView("dashboard-admin/colaborador/lista-colaborador");
+		mvLista.addObject("colaboradorLogado", usuarioService.usuarioLogado());
+		return mvLista.addObject("colaboradores", colaboradores);
 			
 		} catch (Exception e) {
 			attributes.addFlashAttribute("icone", "thumb_down");
@@ -122,6 +115,7 @@ public class ColaboradorController {
 	@GetMapping("/{id}")
 	ModelAndView editar(@PathVariable(name = "id") Long id, RedirectAttributes attributes) {
 		mvForm.addObject("tipos", descricaoTelefoneRepository.findAll());
+		mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 		mvForm.addObject("colaborador", colaboradorRepository.findById(id));
         return mvForm;
 	}
@@ -138,6 +132,7 @@ public class ColaboradorController {
 		ModelAndView mv = new ModelAndView("dashboard-admin/colaborador/visao-colaborador");
 		Optional<Colaborador> colab = colaboradorRepository.findById(id);
 		Colaborador colaborador = colab.get();
+		mv.addObject("colaboradorLogado", usuarioService.usuarioLogado());
         mv.addObject("colaborador", colaborador); 
 		return mv;
 	}

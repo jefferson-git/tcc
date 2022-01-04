@@ -35,33 +35,21 @@ import br.com.mamute.cotacaoapi.repository.UnidadeDeMedidaRepository;
 @Service
 public class ProdutoService {
 
-	private static String caminhoDaImagem = "/cotacao_api/produto/";
-	
-	@Autowired
-	private ImpostoRepository impostoRepository;
-	
-	@Autowired
-	private CategoriaRepository categoriaRepository;
-	
-	@Autowired
-	private MarcaRepository marcaRepository;
-	
-	@Autowired
-	private LucroRepository lucroRepository;
-	
-	@Autowired
-	private DescontoRepository descontoRepository;
-	
-	@Autowired
-	private UnidadeDeMedidaRepository unidadeDeMedidaRepository;
-	
-	@Autowired
-	private ProdutoRepository produtoRepository;
+	private static String caminhoDaImagem = "/cotacao_api/produto/";	
+	@Autowired private ImpostoRepository impostoRepository;	
+	@Autowired private CategoriaRepository categoriaRepository;	
+	@Autowired private MarcaRepository marcaRepository;	
+	@Autowired private LucroRepository lucroRepository;	
+	@Autowired private DescontoRepository descontoRepository;	
+	@Autowired private UnidadeDeMedidaRepository unidadeDeMedidaRepository;	
+	@Autowired private ProdutoRepository produtoRepository;
+	@Autowired private UsuarioService usuarioService;
 	
 	public ModelAndView form(Produto produto, MultipartFile arquivo, Imposto imposto,
-		Categoria categoria, Marca marca, Lucro lucro, Desconto desconto, UnidadeDeMedida unidadeDeMedida) {
+		Categoria categoria, Marca marca, Lucro lucro, Desconto desconto, UnidadeDeMedida unidadeDeMedida) {		
 		
     	ModelAndView mvForm = new ModelAndView("dashboard-admin/produto/form-registrar-produto");
+    	mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 		mvForm.addObject("produto", produto);
 		mvForm.addObject("arquivo", arquivo);
 		mvForm.addObject("margem", lucro);
@@ -119,24 +107,19 @@ public class ProdutoService {
 					attributes.addFlashAttribute("menssagem", "Produto alterada com sucesso.");	
 					return new ModelAndView("redirect:/dashboard-admin/produto/registrar");
 				}		
-			}			
+			}	
 			
 			produtoRepository.saveAndFlush(produto);
 			attributes.addFlashAttribute("icone", "thumb_up");
 			attributes.addFlashAttribute("menssagem", "Produto salva com sucesso.");	
 			return new ModelAndView("redirect:/dashboard-admin/produto/registrar");			
 		
-		//} catch (Exception e) {
-			
-			//attributes.addFlashAttribute("icone", "thumb_down");
-			//attributes.addFlashAttribute("menssagem", "Erro ao estabelecer contato com o banco de dados.");	
-		//	return new ModelAndView("redirect:/dashboard-admin/produto/registrar");
-			
-		}catch (Exception e) {
-			e.printStackTrace();
-			return null;
+		} catch (Exception e) {			
+			attributes.addFlashAttribute("icone", "thumb_down");
+			attributes.addFlashAttribute("menssagem", "Erro ao estabelecer contato com o banco de dados.");	
+			return new ModelAndView("redirect:/dashboard-admin/produto/registrar");
 		}
-		}
+	}
 	
 	public ModelAndView editado(Produto produto, Imposto imposto, Categoria categoria, Marca marca,
 			Lucro margem, Desconto desconto, UnidadeDeMedida unidadeDeMedida, BindingResult result, RedirectAttributes attributes){	
@@ -173,31 +156,24 @@ public class ProdutoService {
 				attributes.addFlashAttribute("menssagem", "Produto salva com sucesso.");	
 				return new ModelAndView("redirect:/dashboard-admin/produto/registrar");			
 			
-			//} catch (Exception e) {
-				
-				//attributes.addFlashAttribute("icone", "thumb_down");
-				//attributes.addFlashAttribute("menssagem", "Erro ao estabelecer contato com o banco de dados.");	
-			//	return new ModelAndView("redirect:/dashboard-admin/produto/registrar");
-				
-			}catch (Exception e) {
-				e.printStackTrace();
+			} catch (Exception e) {				
+				attributes.addFlashAttribute("icone", "thumb_down");
+				attributes.addFlashAttribute("menssagem", "Erro ao estabelecer contato com o banco de dados.");	
 				return new ModelAndView("redirect:/dashboard-admin/produto/registrar");
 			}
 	}		
 	
-	public ModelAndView listar(RedirectAttributes attributes) {	
-		
+	public ModelAndView listar(RedirectAttributes attributes) {			
 		List<Produto> produtos = produtoRepository.findAll();
 		try {
 			if(produtos.size() == 0) {			
 				attributes.addFlashAttribute("icone", "visibility_off");
 				attributes.addFlashAttribute("menssagem", "No momento a lista está vazia, realize um registro!");
 				return new ModelAndView("redirect:/dashboard-admin/produto/registrar");
-			}
-			
+			}			
 			ModelAndView mvLista = new ModelAndView("dashboard-admin/produto/lista-produto");
-			return mvLista.addObject("produtos", produtos);
-			
+			mvLista.addObject("colaboradorLogado", usuarioService.usuarioLogado());
+			return mvLista.addObject("produtos", produtos);			
 		} catch (Exception e) {
 			attributes.addFlashAttribute("icone", "thumb_down");
 			attributes.addFlashAttribute("menssagem", "Produto não pode ser deletada!");
@@ -206,9 +182,9 @@ public class ProdutoService {
 	}
 	
 	public ModelAndView formEditar(Produto produto, String imagem, Imposto imposto,
-			Categoria categoria, Marca marca, Lucro lucro, Desconto desconto, UnidadeDeMedida unidadeDeMedida) {
-			
+			Categoria categoria, Marca marca, Lucro lucro, Desconto desconto, UnidadeDeMedida unidadeDeMedida) {			
 	    	ModelAndView mvForm = new ModelAndView("dashboard-admin/produto/form-registrar-produto");
+	    	mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
 			mvForm.addObject("produto", produto);
 			mvForm.addObject("imagem", imagem);
 			mvForm.addObject("margem", lucro);
@@ -242,21 +218,17 @@ public class ProdutoService {
 		}
 	}
 	
-	public ModelAndView deletar(Long id, RedirectAttributes attributes) {		
-		
+	public ModelAndView deletar(Long id, RedirectAttributes attributes) {				
 		try {
 			if(produtoRepository.findById(id).isEmpty()) {
 				attributes.addFlashAttribute("icone", "thumb_down");
 				attributes.addFlashAttribute("menssagem", "Erro, id inesistente!");
 				return new ModelAndView("redirect:/dashboard-admin/produto/listar");
-			}				
-			
+			}
 			produtoRepository.deleteById(id);
 			attributes.addFlashAttribute("icone", "thumb_up");
 			attributes.addFlashAttribute("menssagem", "Produto deletada!");
-			return new ModelAndView("redirect:/dashboard-admin/produto/listar");
-			
-			
+			return new ModelAndView("redirect:/dashboard-admin/produto/listar");			
 		} catch (Exception e) {
 			attributes.addFlashAttribute("icone", "thumb_down");
 			attributes.addFlashAttribute("menssagem", "Produto não pode ser deletado!");
@@ -269,19 +241,17 @@ public class ProdutoService {
 		return Files.readAllBytes(imagemProduto.toPath());
 	}
 
-	public ModelAndView descricao(Long id, RedirectAttributes attributes) {
-		
+	public ModelAndView descricao(Long id, RedirectAttributes attributes) {		
 		Optional<Produto> produto = produtoRepository.findById(id);
 		try {	
 			if(produto.isEmpty()) {
 				attributes.addFlashAttribute("icone", "thumb_down");
 				attributes.addFlashAttribute("menssagem", "Erro, id inesistente!");
 				return new ModelAndView("redirect:/dashboard-admin/produto/listar");
-			}
-			
+			}			
 			ModelAndView mvDesc = new ModelAndView("dashboard-admin/produto/descricao-produto");
-			return mvDesc.addObject("produto", produto.get());
-						
+	    	mvDesc.addObject("colaboradorLogado", usuarioService.usuarioLogado());
+			return mvDesc.addObject("produto", produto.get());						
 		} catch (Exception e) {
 			attributes.addFlashAttribute("icone", "thumb_down");
 			attributes.addFlashAttribute("menssagem", "Erro ao estabelecer contato com o banco de dados!");
