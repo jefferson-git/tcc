@@ -18,7 +18,7 @@ public class CarrinhoController {
 	
 	@Autowired
 	private CarrinhoService carrinhoService;
-	
+	 
     @GetMapping()
 	ModelAndView carrinho() {
 		return carrinhoService.carrinho();
@@ -38,7 +38,12 @@ public class CarrinhoController {
 	String remover(@PathVariable Long id, RedirectAttributes attributes){
 		return carrinhoService.remover(id, attributes);
 	}
-	
+    
+    @GetMapping("/taxa/{id}")
+	String taxa(@PathVariable Long id){
+		return carrinhoService.taxaEntrega(id);
+	}
+   
 	@ResponseBody
 	@GetMapping("/produto/visualizar/{imagem}")
 	byte[] imagemProduto(@PathVariable(name = "imagem") String imagem) throws IOException{

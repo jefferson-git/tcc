@@ -56,6 +56,7 @@ public class ConfiguracaoDeSegurancaWeb extends WebSecurityConfigurerAdapter{
 				.and()
 					.formLogin()
 					.loginPage("/dashboard-admin/user-login").permitAll()
+					.defaultSuccessUrl("/dashboard-admin",true)
 				.and()
 					.logout()
 					.invalidateHttpSession(true)
@@ -78,7 +79,7 @@ public class ConfiguracaoDeSegurancaWeb extends WebSecurityConfigurerAdapter{
     			.and()
     				.formLogin()
     				.loginPage("/usuario/login").permitAll()
-    				.defaultSuccessUrl("/usuario/perfil")
+    				.defaultSuccessUrl("/usuario/perfil", true)
     			.and()
     				.logout()
     				.invalidateHttpSession(true)
@@ -89,5 +90,4 @@ public class ConfiguracaoDeSegurancaWeb extends WebSecurityConfigurerAdapter{
     	}
     }
 }
-
 

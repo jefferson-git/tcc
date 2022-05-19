@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.mamute.cotacaoapi.ecommerceService.PagamentoService;
 @Controller
-@RequestMapping("/mamute/pagamento")
+@RequestMapping("/usuario/pagamento")
 public class PagamentoController {
 	
 	@Autowired
@@ -24,9 +24,9 @@ public class PagamentoController {
 		return pagamentoService.pagamento();
     }
     
-    @PostMapping("/cartao")
-	String dadosCartao() {
-		return pagamentoService.dadosCartao();
+    @GetMapping("/cartao/{id}")
+	String dadosCartao(@PathVariable Long id, RedirectAttributes attributes) {
+		return pagamentoService.pagamentoCartao(id, attributes);
     }
     	
 	@ResponseBody

@@ -21,16 +21,13 @@ import lombok.Getter;
 import lombok.Setter;
 	
 
-@Entity
+@Entity @Getter @Setter
 @Table(name = "pessoa")
-@Getter
-@Setter
 @SuppressWarnings("serial")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "tipo_entidade")
-public abstract class Pessoa implements Serializable{
-	
+public abstract class Pessoa implements Serializable{	
 	
 	@Id
 	@Column(name = "pes_id")
@@ -45,15 +42,12 @@ public abstract class Pessoa implements Serializable{
 	@OneToOne(cascade={CascadeType.PERSIST,CascadeType.REMOVE})	
 	private Telefone telefone;
 	
-	@Valid
-	@OneToOne(cascade={CascadeType.PERSIST,CascadeType.REMOVE})	
+	@Valid @OneToOne(cascade={CascadeType.PERSIST,CascadeType.REMOVE})
 	private Endereco endereco;
 	
-	@Valid
-	@OneToOne(cascade={CascadeType.PERSIST,CascadeType.REMOVE})	
+	@Valid @OneToOne(cascade={CascadeType.PERSIST,CascadeType.REMOVE})	
 	private Email email;
 	
-	@Valid
-	@OneToOne(cascade={CascadeType.PERSIST,CascadeType.REMOVE})	
+	@Valid @OneToOne(cascade={CascadeType.PERSIST,CascadeType.REMOVE})	
 	private Usuario usuario;
 }

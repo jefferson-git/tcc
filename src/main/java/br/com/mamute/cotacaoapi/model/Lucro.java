@@ -33,5 +33,4 @@ public class Lucro implements Serializable{
 	@NotBlank(message = "O campo descrição não pode ser nulo ou vazio.")
 	@Size(min = 4, max = 255, message = "O campo descrição deve ter entre 4 e 255 caracteres.")
 	private String descricao;
-
 }

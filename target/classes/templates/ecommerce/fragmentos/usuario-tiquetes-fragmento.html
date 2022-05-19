@@ -59,9 +59,12 @@
 			<div th:replace="~{ecommerce/fragmentos/menu-usuario :: menu-usuario}"></div>
          <section class="col-lg-8">
             <!-- Toolbar-->
+            <form name="formulario" action="/usuario/logout" method="post">
             <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
-              <h6 class="fs-base text-light mb-0">Método de pagamento principal é usado por padrão</h6><a class="btn btn-primary btn-sm" href="account-signin.html"><img src="../img/icon/box-arrow-in-right.svg">&nbsp;  Sair</a>
+              <h6 class="fs-base text-light mb-0">Seus tiquetes abaixo</h6><a class="btn btn-primary btn-sm"  href="javascript: submitform()"><i class="me-2"><img src="../img/icon/box-arrow-in-right.svg"></i> Sair</a>
             </div>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"  />
+            </form>            
             <div th:replace="~{ecommerce/fragmentos/modal-metodo-pagamento :: metodo-pagamento}"></div>
             <!-- Payment methods list-->
                         <div class="table-responsive fs-md mb-4">
@@ -110,8 +113,14 @@
             <div class="text-end">
               <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#open-ticket">Envie um novo Cupom</button>
             </div>
+            <script type="text/javascript">
+    		function submitform() {
+        	  document.formulario.submit();
+    	    }
+	      </script>
           </section>
         </div>
       </div>
+     </div>
     </body>
 </html>

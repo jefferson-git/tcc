@@ -60,36 +60,57 @@
           <!-- Content  -->
           <section class="col-lg-8">
             <!-- Toolbar-->
+            <form name="formulario" th:action="@{~/usuario/login?logout}" th:method="post">
             <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
-              <h6 class="fs-base text-light mb-0">Atualize os detalhes do seu perfil abaixo:</h6><a class="btn btn-primary btn-sm" href="#"><i class="me-2"><img src="../img/icon/box-arrow-in-right.svg"></i> Sair</a>
+              <h6 class="fs-base text-light mb-0">Atualize os detalhes do seu perfil abaixo:</h6><a class="btn btn-primary btn-sm"  href="javascript: submitform()"><i class="me-2"><img src="../img/icon/box-arrow-in-right.svg"></i> Sair</a>
             </div>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"  />
+            </form>
             <!-- Profile form-->
-            <form>
-              <div class="bg-secondary rounded-3 p-4 mb-4">
-                <div class="d-flex align-items-center"><img class="rounded" src="img/shop/account/avatar.jpg" width="90" alt="foto usuário">
+            <form action="/usuario/perfil/editar" enctype="multipart/form-data" th:object="${usuarioLogado}" method="post">
+			
+			   <div class="bg-secondary rounded-3 p-4 mb-4">
+                <div class="d-flex align-items-center">
+                 <div class="personal-image">
+				  <label class="label">
+				    <input type="file" name="file" accept="image/*"/>
+				    <figure class="personal-figure">
+				      <img src="/img/undraw_profile_pic_ic-5-t.svg" class="personal-avatar" alt="avatar">
+				      <figcaption class="personal-figcaption"><img src="/img/camera-white.png"></figcaption>
+				    </figure>
+				  </label>
+			      </div> 
                   <div class="ps-3">
-                    <button class="btn btn-light btn-shadow btn-sm mb-2" type="button"><img src="../img/icon/cloud-upload.svg">  Mudar foto</button>
-                    <div class="p mb-0 fs-ms text-muted">Faça upload de imagem JPG, GIF ou PNG. 300 x 300 necessários.</div>
+                    <div class="p mb-0 fs-ms text-muted">Faça upload de imagem JPG, GIF ou PNG.<br>Para atualizar imagem.</div>
                   </div>
                 </div>
-              </div>
+              </div>         
               <div class="row gx-4 gy-3">
                 <div class="col-sm-6">
                   <label class="form-label" for="account-fn">Primeiro nome</label>
-                  <input class="form-control" type="text" id="account-fn" required>
+                  <input class="form-control" type="text" th:field="${usuarioLogado.nome}"  required>
                 </div>
                 <div class="col-sm-6">
                   <label class="form-label" for="account-ln">Sobrenome</label>
-                  <input class="form-control" type="text" id="account-ln" required>
+                  <input class="form-control" type="text" th:field="${usuarioLogado.sobrenome}" required>
                 </div>
                 <div class="col-sm-6">
                   <label class="form-label" for="account-email">Email</label>
-                  <input class="form-control" type="email" id="account-email">
+                  <input class="form-control" type="email" th:field="${usuarioLogado.email.enderecoEmail}" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                 </div>
+                <div class="col-sm-6" th:object="${descricoes}">
+                <br>
+	                <select class="form-select" th:field="${usuarioLogado.telefone.descricao.id}" required="required" aria-label="Default select example">
+					   <option value="">Tipo do Contato Fone</option>
+                      <option th:each="descricao: ${descricoes}" th:value="${descricao.id}" th:text="${descricao.nome}"></option>                    
+					</select>
+				</div>
                 <div class="col-sm-6">
                   <label class="form-label" for="account-phone">Telefone</label>
-                  <input class="form-control" type="text" id="account-phone" required>
-                </div>
+                  <input class="form-control" type="text" th:field="${usuarioLogado.telefone.numero}" th:value="${usuarioLogado.telefone.numero}" maxlength="14"
+                    name="tel" onkeydown="javascript: fMasc( this, mTel );" required="required">
+                </div>           
+               <div class="row">              
                 <div class="col-sm-6">
                   <label class="form-label" for="account-pass">Nova Senha</label>
                   <div class="password-toggle">
@@ -108,6 +129,7 @@
                     </label>
                   </div>
                 </div>
+                </div> 
                 <div class="col-12">
                   <hr class="mt-2 mb-3">
                   <div class="d-flex flex-wrap justify-content-between align-items-center">
@@ -115,14 +137,23 @@
                       <input class="form-check-input" type="checkbox" id="subscribe_me" checked>
                       <label class="form-check-label" for="subscribe_me">Assine o boletim informativo</label>
                     </div>
-                    <button class="btn btn-primary mt-3 mt-sm-0" type="button">Atualizar perfil</button>
+                     <input type="hidden" id="id" th:field="${usuarioLogado.id}" name="id">    
+          			 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <button class="btn btn-primary mt-3 mt-sm-0" type="submit">Atualizar perfil</button>
                   </div>
                 </div>
               </div>
             </form>
+           <script type="text/javascript">
+    		function submitform() {
+        	  document.formulario.submit();
+    	    }
+	      </script>
           </section>
         </div>
       </div> 
-      </div>
-    </body>
+     </div>
+	<script src="../../../../app-assets/js/mask.js"></script>  
+	<script src="../../../../app-assets/js/viaCep.js"></script>
+   </body>
 </html>

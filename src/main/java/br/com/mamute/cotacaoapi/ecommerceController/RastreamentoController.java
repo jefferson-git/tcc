@@ -9,7 +9,7 @@ import br.com.mamute.cotacaoapi.ecommerceService.RastreamentoService;
 import br.com.mamute.cotacaoapi.model.Departamento;
 
 @Controller
-@RequestMapping("/mamute")
+@RequestMapping("/usuario")
 public class RastreamentoController {
 	
 	@Autowired

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.mamute.cotacaoapi.ecommerceService.UsuarioTiquetesService;
 
 @Controller
-@RequestMapping("/mamute/tiquetes")
+@RequestMapping("/usuario/tiquetes")
 public class UsuarioTiquetesController {
 	
 	@Autowired

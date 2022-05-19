@@ -16,20 +16,13 @@ import lombok.Data;
 @Table(name = "itens_compra")
 public class ItensCompra implements Serializable{
 	
-	@Id
-	@SequenceGenerator(name = "seq_itens_compra", sequenceName = "seq_id_itens_compra", allocationSize = 1)
+	@Id @SequenceGenerator(name = "seq_itens_compra", sequenceName = "seq_id_itens_compra", allocationSize = 1)
 	@GeneratedValue(generator = "seq_itens_compra", strategy = GenerationType.SEQUENCE)
 	private Long id;
-		
-	private Integer quantidade = 0;
 	
-	private Double valorUnitario = 0.;
-	
-	private Double valorTotalItens = 0.;
-	
-	@ManyToOne
-	private Produto produto;
-	
-	@ManyToOne
-	private Compra compra;
+	private Integer quantidade = 0;	
+	private Double valorUnitario = 0.;	
+	private Double valorTotalItens = 0.;	
+	@ManyToOne private Produto produto;	
+	//@ManyToOne private Compra compra;
 }

@@ -44,8 +44,8 @@
               </div>
               <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button><a class="navbar-tool navbar-stuck-toggler" href="#"><span class="navbar-tool-tooltip">Expandir menu</span>
-                  <div class="navbar-tool-icon-box"></div></a><a class="navbar-tool d-none d-lg-flex" href="/dashboard-admin"  target="_blank"><span class="navbar-tool-tooltip">dashboard</span><img src="../img/icon/speedometer2.svg" width="50%">                  
-                  <div class="navbar-tool-icon-box"></div></a><a class="navbar-tool d-none d-lg-flex" href="/mamute/desejos"><span class="navbar-tool-tooltip">Lista de Desejos</span><img src="../img/icon/suit-heart.svg" width="50%">
+                  <div class="navbar-tool-icon-box"></div></a><a class="navbar-tool d-none d-lg-flex" href="/dashboard-admin/user-login"  target="_blank"><span class="navbar-tool-tooltip">dashboard</span><img src="../img/icon/speedometer2.svg" width="50%">                  
+                  <div class="navbar-tool-icon-box"></div></a><a class="navbar-tool d-none d-lg-flex" href="/usuario/desejos"><span class="navbar-tool-tooltip">Lista de Desejos</span><img src="../img/icon/suit-heart.svg" width="50%">
                   <div class="navbar-tool-icon-box"></div></a><a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="#signin-modal" data-bs-toggle="modal">
                   <div class="navbar-tool-icon-box"><img src="../img/icon/person.svg" width="60%"></div>
                   <div class="navbar-tool-text ms-n3"><small>Olá, faça login</small>Minha conta</div></a>
@@ -76,7 +76,7 @@
                       </div>
                       <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
                         <div class="fs-sm me-2 py-2"><span class="text-muted">Subtotal:</span><span class="text-accent fs-base ms-1">R$<small th:text="${#numbers.formatDecimal(pedido.valorTotal, 0, 'COMMA', 2, 'POINT')}"></small></span></div><a class="btn btn-outline-secondary btn-sm" href="/mamute/carrinho">Meu carrinho<img src="../img/icon/chevron-right.svg"></a>
-                      </div><a class="btn btn-primary btn-sm d-block w-100" href="/mamute/detalhes"><img src="../img/icon/credit-card.svg"> Checkout</a>
+                      </div><a class="btn btn-primary btn-sm d-block w-100" href="/usuario/detalhes"><img src="../img/icon/credit-card.svg"> Checkout</a>
                     </div>
                     </div>
                   </div>
@@ -120,22 +120,22 @@
                 <ul class="navbar-nav">
                   <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Conta</a>
                     <ul class="dropdown-menu">
-                      <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Conta de usuário da loja</a>
+                      <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Conta de usuário</a>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="/mamute/pedidos">Histórico de Pedidos</a></li>
-                          <li><a class="dropdown-item" href="/mamute/perfil">Configurações de perfil</a></li>
-                          <li><a class="dropdown-item" href="/mamute/endereco">Endereços de conta</a></li>
-                          <li><a class="dropdown-item" href="/mamute/pagamento">Métodos de Pagamento</a></li>
-                          <li><a class="dropdown-item" href="/mamute/desejos">Lista de Desejos</a></li>
-                          <li><a class="dropdown-item" href="/mamute/tiquetes">Meus tickets promocionais</a></li>
+                          <li><a class="dropdown-item" href="/usuario/pedidos">Histórico de Pedidos</a></li>
+                          <li><a class="dropdown-item" href="/usuario/perfil">Configurações de perfil</a></li>
+                          <li><a class="dropdown-item" href="/usuario/endereco">Endereços de conta</a></li>
+                          <li><a class="dropdown-item" href="/usuario/pagamento">Métodos de Pagamento</a></li>
+                          <li><a class="dropdown-item" href="/usuario/desejos">Lista de Desejos</a></li>
+                          <li><a class="dropdown-item" href="/usuario/tiquetes">Meus tickets promocionais</a></li>
                         </ul>
                       </li>
-                      <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Painel de controle do fornecedor</a>
+                      <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Painel de controle</a>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="/dashboard-admin">Configurações</a></li>
+                          <li><a class="dropdown-item" href="/dashboard-admin">administrativo</a></li>
                         </ul>
                       </li>
-                      <li><a class="dropdown-item" href="/mamute/login">Entrar / Inscrever-se</a></li>
+                      <li><a class="dropdown-item" href="/usuario/login">Entrar / Inscrever-se</a></li>
                       <li><a class="dropdown-item" href="/mamute/recupera">Recuperação de senha</a></li>
                     </ul>
                   </li>

@@ -37,11 +37,11 @@
 	<body>
      <div th:fragment="metodo-pagamento">
       <!-- Add Payment Method-->
-      <form class="needs-validation modal fade" method="post" id="add-payment" tabindex="-1" novalidate>
+      <form class="needs-validation modal fade" action="/usuario/metodo-pagamento/registrar" th:object="${usuario}" method="post" id="add-payment" tabindex="-1" novalidate>
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Adicione um método de pagamento</h5>
+              <h5 class="modal-title" ></h5>
               <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -57,29 +57,30 @@
               </div>
               <div class="row g-3 mb-2">
                 <div class="col-sm-6">
-                  <input class="form-control" type="text" name="number" placeholder="Número do cartão" required>
+                  <input class="form-control" type="text" th:field="${usuarioLogado.cartao.numero}" maxlength="20" name="number" placeholder="Número do cartão" required>
                   <div class="invalid-feedback">Por favor, preencha o número do cartão!</div>
                 </div>
                 <div class="col-sm-6">
-                  <input class="form-control" type="text" name="name" placeholder="Nome completo" required>
+                  <input class="form-control" type="text" th:field="${usuarioLogado.cartao.nomeCompleto}" maxlength="50" name="name" placeholder="Nome completo" required>
                   <div class="invalid-feedback">Por favor, forneça o nome no cartão!</div>
                 </div>
                 <div class="col-sm-3">
-                  <input class="form-control" type="text" name="expiry" placeholder="MM/YY" required>
+                  <input class="form-control" type="text" th:field="${usuarioLogado.cartao.dataVencimento}" maxlength="7" name="expiry" placeholder="MM/YY" required>
                   <div class="invalid-feedback">Forneça a data de validade do cartão!</div>
                 </div>
                 <div class="col-sm-3">
-                  <input class="form-control" type="text" name="cvc" placeholder="CVC" required>
+                  <input class="form-control" type="text" th:field="${usuarioLogado.cartao.cvc}" maxlength="3" name="cvc" placeholder="CVC" required>
                   <div class="invalid-feedback">Forneça o código CVC do cartão!</div>
                 </div>
                 <div class="col-sm-6">
-                  <button class="btn btn-primary d-block w-100" type="submit">Registre este cartão</button>
+          		  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                  <button class="btn btn-primary d-block w-100" type="submit" th:text="${usuarioLogado.cartao.id == null ? 'Registre este cartão' : 'Alterar informação'}"></button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </form>
-      </div>
+     </div>
     </body>
 </html>

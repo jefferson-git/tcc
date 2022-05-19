@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.mamute.cotacaoapi.model.Cliente;
 import br.com.mamute.cotacaoapi.repository.CategoriaRepository;
 import br.com.mamute.cotacaoapi.repository.DepartamentoRepository;
+import br.com.mamute.cotacaoapi.repository.DescricaoTelefoneRepository;
 import br.com.mamute.cotacaoapi.repository.MarcaRepository;
 import br.com.mamute.cotacaoapi.repository.ProdutoRepository;
 
@@ -18,25 +20,18 @@ public class HomeService {
 	private static String caminhoDaImagemMarca = "/cotacao_api/marca/";
 	private static String caminhoDaImagemProduto = "/cotacao_api/produto/";
 	private static String caminhoDaImagemDepartamento = "/cotacao_api/departamento/";
-
-	@Autowired
-	private MarcaRepository marcaRepository;
-	
-	@Autowired
-	private CategoriaRepository categoriaRepository;
-	
-	@Autowired
-	private ProdutoRepository produtoRepository ;
-	
-	@Autowired
-	private DepartamentoRepository departamentoRepository;
-	
-	@Autowired
-	private CarrinhoService carrinhoService; 
+	@Autowired private MarcaRepository marcaRepository; 	
+	@Autowired private CategoriaRepository categoriaRepository;	
+	@Autowired private ProdutoRepository produtoRepository ;	
+	@Autowired private DepartamentoRepository departamentoRepository;	
+	@Autowired private CarrinhoService carrinhoService; 
+	@Autowired private DescricaoTelefoneRepository descricaoTelefoneRepository;
 	
 	public ModelAndView index() {
     	ModelAndView mvIndex = new ModelAndView("index");
     	carrinhoService.totalDaCompra();
+		mvIndex.addObject("cliente", new Cliente());
+		mvIndex.addObject("descricoes", descricaoTelefoneRepository.findAll());
 		mvIndex.addObject("marcas", marcaRepository.findAll());	
 		mvIndex.addObject("departamentos", departamentoRepository.findAll());
 		mvIndex.addObject("categorias", categoriaRepository.findAll());

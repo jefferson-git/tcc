@@ -11,75 +11,71 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.mamute.cotacaoapi.model.Cliente;
 import br.com.mamute.cotacaoapi.model.ListaDesejos;
 import br.com.mamute.cotacaoapi.model.Produto;
 import br.com.mamute.cotacaoapi.repository.CategoriaRepository;
+import br.com.mamute.cotacaoapi.repository.CompraRepository;
 import br.com.mamute.cotacaoapi.repository.DepartamentoRepository;
+import br.com.mamute.cotacaoapi.repository.DescricaoTelefoneRepository;
 import br.com.mamute.cotacaoapi.repository.ProdutoRepository;
 import br.com.mamute.cotacaoapi.repository.listaDesejosRepository;
+import br.com.mamute.cotacaoapi.service.UsuarioService;
 
 @Service
 public class UsuarioListaDesejosService {
 		
 	private static String caminhoDaImagemProduto = "/cotacao_api/produto/";
-	protected List <ListaDesejos> desejos = new ArrayList<>();
+	protected List <ListaDesejos> desejos = new ArrayList<>();	
+	@Autowired private DepartamentoRepository departamentoRepository;	
+	@Autowired private CategoriaRepository categoriaRepository;	
+	@Autowired private ProdutoRepository produtoRepository;	
+	@Autowired private CarrinhoService carrinhoService;		
+	@Autowired private listaDesejosRepository desejosRepository; 
+	@Autowired private UsuarioService usuarioService;
+	@Autowired private DescricaoTelefoneRepository descricaoTelefoneRepository;
+	@Autowired private CompraRepository compraRepository;
+
 	
-	@Autowired
-	private DepartamentoRepository departamentoRepository;
-	
-	@Autowired
-	private CategoriaRepository categoriaRepository;
-	
-	@Autowired
-	private ProdutoRepository produtoRepository;
-	
-	@Autowired
-	private CarrinhoService carrinhoService;
-		
-	@Autowired
-	private listaDesejosRepository desejosRepository;
-	
-	public ModelAndView desejos() {
-		ModelAndView mvdesejo = new ModelAndView("ecommerce/usuario-lista-desejos");
-		mvdesejo.addObject("pedido",carrinhoService.compra);
-		mvdesejo.addObject("departamentos", departamentoRepository.findAll());
-		mvdesejo.addObject("categorias", categoriaRepository.findAll());
-		mvdesejo.addObject("compras", carrinhoService.listaCompras);
-		mvdesejo.addObject("desejos", desejosRepository.findAll());
-		return mvdesejo;
+	public ModelAndView desejos() { 
+		ModelAndView mvDesejo = new ModelAndView("ecommerce/usuario-lista-desejos");
+		mvDesejo.addObject("cliente", new Cliente());
+		mvDesejo.addObject("descricoes", descricaoTelefoneRepository.findAll());
+		mvDesejo.addObject("usuarioLogado",usuarioService.ClienteLogado());
+		mvDesejo.addObject("comprasRealizadas", compraRepository.listarCompras(usuarioService.ClienteLogado().getId()));
+		mvDesejo.addObject("pedido",carrinhoService.compra);
+		mvDesejo.addObject("departamentos", departamentoRepository.findAll());
+		mvDesejo.addObject("categorias", categoriaRepository.findAll());
+		mvDesejo.addObject("compras", carrinhoService.listaCompras);
+		mvDesejo.addObject("desejos", desejosRepository.findAll());
+		return mvDesejo;
     }	
 	
-	public String adicionar(Long id) {		 
-	
+	public String adicionar(Long id) {	
 		for (ListaDesejos lista : desejosRepository.findAll())
 			if(lista.getProduto().getId() == id)
 				return "redirect:/mamute/desejos";
 		
 		Optional<Produto> produtOptional = produtoRepository.findById(id);
-		Produto produto = produtOptional.get();
-	
+		Produto produto = produtOptional.get();	
 		ListaDesejos item = new ListaDesejos();
-		item.setProduto(produto);
-		desejosRepository.save(item);
-		
-    	return "redirect:/mamute/desejos";	 
+		item.setCliente(usuarioService.ClienteLogado());
+		item.setProduto(produto);		
+		desejosRepository.save(item);		
+    	return "redirect:/usuario/desejos";	 
 	} 
 	
 	public String remover(Long id) {
 		try {
-			if(desejosRepository.findById(id).isEmpty()) {
-				return "redirect:/mamute/desejos";
-			}				
+			if(desejosRepository.findById(id).isEmpty()) 
+				return "redirect:/usuario/desejos";				
 			
 			desejosRepository.deleteById(id);
-			return "redirect:/mamute/desejos";
-			
-			
+			return "redirect:/usuario/desejos";				
 		} catch (Exception e) {			
 			return "redirect:/mamute";
 		}		
 	}
-
 	
 	public byte[] imagemProduto(String imagem) throws IOException {		
 		File imagemProduto = new File(caminhoDaImagemProduto+imagem);

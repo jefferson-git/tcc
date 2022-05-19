@@ -13,20 +13,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Table(name = "colaborador")
-@Getter
-@Setter
-@DiscriminatorValue("colaborador")
-public class Colaborador extends PessoaFisica{				
-	private static final long serialVersionUID = 1L;
+@SuppressWarnings("serial")
+@Entity @Table(name = "colaborador")
+@Getter @Setter @DiscriminatorValue("colaborador")
+public class Colaborador extends PessoaFisica{		
 
-	@NotBlank
-	@Column(name = "formacao",length = 40)
+	@NotBlank @Column(name = "formacao",length = 40)
 	private String formacao;	
 	
-	@NotBlank
-	@Column(name = "cargo", length = 100)
+	@NotBlank @Column(name = "cargo", length = 100)
 	private String cargo;		
 	
 	@Column(name = "empresa_anterior",nullable = true, length = 40)
@@ -47,6 +42,5 @@ public class Colaborador extends PessoaFisica{
 	private String modalidadeDeTrabalho;	
 	
 	@Column(name = "salario")
-	private Double salario;		
-	
+	private Double salario;			
 }

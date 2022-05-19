@@ -18,12 +18,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 
-@Entity
-@Table(name = "pessoa_fisica")
-@Getter
-@Setter
-@DiscriminatorValue("pessoa_fisica")
-@SuppressWarnings("serial")
+@Entity @Table(name = "pessoa_fisica") @SuppressWarnings("serial")
+@Getter @Setter @DiscriminatorValue("pessoa_fisica")
 public class PessoaFisica extends Pessoa implements Serializable {	
 	
 
@@ -40,15 +36,15 @@ public class PessoaFisica extends Pessoa implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataNascimento;
 	
-	@NotBlank(message = "O cpf não pode ficar em branco")
+	//@NotBlank(message = "O cpf não pode ficar em branco")
 	private String rg;
 	
-	@NotBlank(message = "O cpf não pode ficar em branco")
+	//@NotBlank(message = "O cpf não pode ficar em branco")
 	@Pattern(regexp = "(^\\d{3}\\x2E\\d{3}\\x2E\\d{3}\\x2D\\d{2}$)")
 	@CPF()
 	private String cpf;
 	
-	@NotBlank(message = "O sexo não pode ficar em branco")
-	@Column(length = 20, nullable = false)
+	//@NotBlank(message = "O sexo não pode ficar em branco")
+	//@Column(length = 20, nullable = false)
 	private String sexo;		
 }

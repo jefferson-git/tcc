@@ -61,7 +61,7 @@
                   <div class="row mx-n2">
                     <div th:each="produto, cont : ${produtos}" th:if="${cont.index <= 5 and produto.nome == 'Moletom'}"  class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
                       <div class="card product-card card-static">
-                       <a th:href="@{/mamute/desejos/adicionar/{id}(id=${produto.id})}"> <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Lista de desejos"><img src="../img/icon/heart.svg"></button></a>
+                       <a th:href="@{/usuario/desejos/adicionar/{id}(id=${produto.id})}"> <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Lista de desejos"><img src="../img/icon/heart.svg"></button></a>
                        <a class="card-img-top d-block overflow-hidden" href="#"><img th:src="@{/mamute/produto/visualizar/{imagem}(imagem=${produto.imagem})}" alt="Produto"></a>
                         <div class="card-body py-2"><a th:text="${produto.nome}" class="product-meta d-block fs-xs pb-1" href="descricao"></a>
                           <h3 class="product-title fs-sm"><a th:text="${produto.descricao}" href="#"></a></h3>
@@ -80,7 +80,7 @@
                   <div class="row mx-n2">
                     <div th:each="produto, cont : ${produtos}" th:if="${cont.index >= 5 and cont.index <= 10 and produto.nome == 'Moletom'}"  class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
                       <div class="card product-card card-static">
-                       <a th:href="@{/mamute/desejos/adicionar/{id}(id=${produto.id})}"> <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="lista de desejos"><img src="../img/icon/heart.svg"></button></a>
+                       <a th:href="@{/usuario/desejos/adicionar/{id}(id=${produto.id})}"> <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="lista de desejos"><img src="../img/icon/heart.svg"></button></a>
                        <a class="card-img-top d-block overflow-hidden" href="#"><img th:src="@{/mamute/produto/visualizar/{imagem}(imagem=${produto.imagem})}" alt="Produto"></a>
                         <div class="card-body py-2"><a th:text="${produto.nome}" class="product-meta d-block fs-xs pb-1" href="#"></a>
                           <h3 class="product-title fs-sm"><a th:text="${produto.descricao}" href="shop-single-v1.html"></a></h3>
@@ -99,7 +99,7 @@
                   <div class="row mx-n2">
                     <div th:each="produto, cont : ${produtos}" th:if="${cont.index >= 10 and cont.index <= 16 and produto.nome == 'Moletom'}"  class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
                       <div class="card product-card card-static">
-                       <a th:href="@{/mamute/desejos/adicionar/{id}(id=${produto.id})}"> <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="lista de desejos"><img src="../img/icon/heart.svg"></i></button></a>
+                       <a th:href="@{/usuario/desejos/adicionar/{id}(id=${produto.id})}"> <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="lista de desejos"><img src="../img/icon/heart.svg"></i></button></a>
                        <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img th:src="@{/mamute/produto/visualizar/{imagem}(imagem=${produto.imagem})}" alt="Produto"></a>
                         <div class="card-body py-2"><a th:text="${produto.nome}" class="product-meta d-block fs-xs pb-1" href="#"></a>
                           <h3 class="product-title fs-sm"><a th:text="${produto.descricao}" href="shop-single-v1.html"></a></h3>

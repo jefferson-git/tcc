@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.mamute.cotacaoapi.model.Usuario;
 import br.com.mamute.cotacaoapi.repository.PessoaRepository;
 import br.com.mamute.cotacaoapi.repository.UsuarioRepository;
+import br.com.mamute.cotacaoapi.service.UsuarioService;
 
 @Controller
 @RequestMapping("/")
@@ -18,14 +19,15 @@ public class PrincipalController {
 	
 	@Autowired UsuarioRepository usuarioRepository;
 	@Autowired PessoaRepository pessoaRepository;
+	@Autowired private UsuarioService usuarioService;
+
 	
 	@GetMapping()
 	public ModelAndView principal(RedirectAttributes attributes) {
 		ModelAndView mvPrincipal = new ModelAndView("dashboard-admin/analise/resultados");
 		Usuario usuario = usuarioRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-		attributes.addFlashAttribute("menssagem", "Ola! Seja bem vindo, "+usuario.getUsername());	
-		
-		mvPrincipal.addObject("usuario", pessoaRepository.findById(usuario.getId()).get());		
+		attributes.addFlashAttribute("menssagem", "Ola! Seja bem vindo, "+ usuario.getUsername());			
+		mvPrincipal.addObject("colaboradorLogado",usuarioService.usuarioLogado());
 		return new ModelAndView("redirect:/dashboard-admin");
 	}
 	

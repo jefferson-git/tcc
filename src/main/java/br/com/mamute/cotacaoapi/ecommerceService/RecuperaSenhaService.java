@@ -1,7 +1,4 @@
 package br.com.mamute.cotacaoapi.ecommerceService;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,16 +10,9 @@ import br.com.mamute.cotacaoapi.repository.DepartamentoRepository;
 @Service
 public class RecuperaSenhaService {
 
-	private static String caminhoDaImagemProduto = "/cotacao_api/produto/";
-		
-	@Autowired
-	private DepartamentoRepository departamentoRepository;
-	
-	@Autowired
-	private CategoriaRepository categoriaRepository;
-	
-	@Autowired
-	private CarrinhoService carrinhoService;
+	@Autowired private DepartamentoRepository departamentoRepository;	
+	@Autowired private CategoriaRepository categoriaRepository;	
+	@Autowired private CarrinhoService carrinhoService;
 		
 	public ModelAndView recupera() {
 		ModelAndView mvCarrinho = new ModelAndView("ecommerce/recupera-senha");
@@ -31,10 +21,4 @@ public class RecuperaSenhaService {
 		mvCarrinho.addObject("categorias", categoriaRepository.findAll());
 		return mvCarrinho.addObject("compras", carrinhoService.listaCompras);
     }	
-		
-	public byte[] imagemProduto(String imagem) throws IOException {		
-		File imagemProduto = new File(caminhoDaImagemProduto+imagem);
-		return Files.readAllBytes(imagemProduto.toPath());
-	}
-
 }

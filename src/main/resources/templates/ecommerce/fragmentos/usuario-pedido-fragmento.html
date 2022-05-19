@@ -72,14 +72,18 @@
                   <option>Atrasada</option>
                   <option>Cancelados</option>
                 </select>
-              </div><a class="btn btn-primary btn-sm d-none d-lg-inline-block" href="#"><img src="../img/icon/box-arrow-in-right.svg">&nbsp;  Sair</a>
+              </div>
+                <form name="formulario" action="/usuario/logout" method="post">                     
+	              <a class="btn btn-primary btn-sm d-none d-lg-inline-block" href="javascript: submitform()"><img src="../img/icon/box-arrow-in-right.svg">&nbsp;  Sair</a>
+	              <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"  />              
+	            </form>
             </div>
             <!-- Orders list-->
             <div class="table-responsive fs-md mb-4">
-              <table class="table table-hover mb-0">
+              <table class="table table-hover mb-0" th:each="comprasRealizada: ${comprasRealizadas}">
                 <thead>
                   <tr>
-                    <th>Pedidos #</th>
+                    <th>Código do pedido #</th>
                     <th>Data da Compra</th>
                     <th>Status</th>
                     <th>Total</th>
@@ -87,10 +91,10 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="py-3"><a class="nav-link-style fw-medium fs-sm" href="#order-details" data-bs-toggle="modal">34VB5540K83</a></td>
-                    <td class="py-3">21 maio, 2021</td>
+                    <td class="py-3"><a th:text="${comprasRealizada.codigoCompra}" class="nav-link-style fw-medium fs-sm" href="#order-details" data-bs-toggle="modal">34VB5540K83</a></td>
+                    <td class="py-3" th:text="${#dates.format(comprasRealizada.dataCompra, 'dd/MM/yyyy')}">21 maio, 2021</td>
                     <td class="py-3"><span class="badge bg-info m-0">Em progresso</span></td>
-                    <td class="py-3">R$ 358.75</td>
+                    <td class="py-3" th:text="${#numbers.formatDecimal(comprasRealizada.valorTotal, 0, 'COMMA', 2, 'POINT')}">R$ 358.75</td>
                   </tr>
                   <tr>
                     <td class="py-3"><a class="nav-link-style fw-medium fs-sm" href="#order-details" data-bs-toggle="modal">78A643CD409</a></td>
@@ -114,7 +118,7 @@
               </table>
             </div>
             <!-- Pagination-->
-            <nav class="d-flex justify-content-between pt-2" aria-label="Page navigation">
+           <!--  <nav class="d-flex justify-content-between pt-2" aria-label="Page navigation">
               <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#"><img src="../img/icon/chevron-left.svg"> Anterior </a></li>
               </ul>
@@ -129,7 +133,20 @@
               <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#" aria-label="Next"> Proxímo <img src="../img/icon/chevron-right.svg"></a></li>
               </ul>
-            </nav>
+            </nav> -->
+             <div th:if="${comprasRealizadas.isEmpty()}" class="d-sm-flex justify-content-between mt-4">
+              <div class="d-block d-sm-flex align-items-start text-center text-sm-start"><a class="d-block flex-shrink-0 mx-auto me-sm-4" href="#" style="width: 10rem;"><img src="../img/voto-negativo.png" width="50%" alt="icone"></a>
+                <div class="pt-2">
+                  <h3 class="product-title fs-base mb-2"><a href="/mamute">Retornar as Compras</a></h3>
+                  <div class="fs-sm"><span class="text-muted me-2"><strong>Lista de Compras está vazia!</strong> </span></div>
+                </div>
+              </div>
+            </div>
+            <script type="text/javascript">
+    		function submitform() {
+        	  document.formulario.submit();
+    	    }
+	      </script>
           </section>
         </div>
       </div> 

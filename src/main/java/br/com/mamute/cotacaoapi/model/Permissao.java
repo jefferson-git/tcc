@@ -15,16 +15,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
-
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 
-@Entity
-@Getter
-@Setter
-@Table(name = "permissao")
-@SuppressWarnings("serial")
+@Entity @Table(name = "permissao")
+@Data @SuppressWarnings("serial")
 public class Permissao implements Serializable{
 		
 	@Id

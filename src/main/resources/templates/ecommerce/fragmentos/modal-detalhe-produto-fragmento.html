@@ -58,7 +58,7 @@
                         	<img src="../img/icon/star.svg"><img src="../img/icon/star.svg"><img src="../img/icon/star.svg"><img src="../img/icon/star.svg"><img src="../img/icon/star.svg">
                         </div>
                         <span class="d-inline-block fs-sm text-body align-middle mt-1 ms-1"> </span>
-                        <button class="btn-wishlist" type="button" data-bs-toggle="tooltip" title="Lista de desejos"><a th:href="@{/mamute/desejos/adicionar/{id}(id=${produto.id})}"><img src="../img/icon/heart.svg"></a></button>
+                        <button class="btn-wishlist" type="button" data-bs-toggle="tooltip" title="Lista de desejos"><a th:href="@{/usuario/desejos/adicionar/{id}(id=${produto.id})}"><img src="../img/icon/heart.svg"></a></button>
                     </div>
                     <div class="mb-3"><span class="h3 fw-normal text-accent me-1" >R$ <small th:text="${#numbers.formatDecimal(produto.precoVenda, 0, 'COMMA', 2, 'POINT')}"></small></span>
                       <!-- <del class="text-muted fs-lg me-3">$25.<small>00</small></del> --><span class="badge bg-danger badge-shadow align-middle mt-n2">Oferta</span>

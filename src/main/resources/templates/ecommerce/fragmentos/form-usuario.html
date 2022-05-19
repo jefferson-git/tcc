@@ -48,16 +48,16 @@
             <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body tab-content py-4">
-            <form class="needs-validation tab-pane fade show active" autocomplete="off" novalidate id="signin-tab">
+            <form class="needs-validation tab-pane fade show active" th:action="@{~/usuario/login}" th:method="post" autocomplete="off" novalidate id="signin-tab">
               <div class="mb-3">
-                <label class="form-label" for="si-email">Endereço de e-mail</label>
-                <input class="form-control" type="email" id="si-email" placeholder="jefferson@exemplo.com" required>
-                <div class="invalid-feedback">Por favor, forneça um endereço de e-mail válido.</div>
+                <label class="form-label" for="si-email">Email</label>
+                 <input class="form-control rounded-start" name="username" type="text" placeholder="Nome de usuário" required>
               </div>
               <div class="mb-3">
                 <label class="form-label" for="si-password">Senha</label>
                 <div class="password-toggle">
-                  <input class="form-control" type="password" id="si-password" required>
+                  <input class="form-control" type="password" id="si-password" name="password" required>
+                  <div class="invalid-feedback">Por favor, nome de usuário.</div>
                   <label class="password-toggle-btn" aria-label="Show/hide password" ><img src="../img/icon/tropical-storm.svg">
                     <input class="password-toggle-check" type="checkbox">
                   </label>
@@ -71,21 +71,39 @@
               </div>
               <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Entrar</button>
             </form>
-            <form class="needs-validation tab-pane fade" autocomplete="off" novalidate id="signup-tab">
+            <form class="needs-validation tab-pane fade" th:action="@{~/mamute/registrar}" th:method="post" th:object="${cliente}" autocomplete="off" novalidate id="signup-tab">
               <div class="mb-3">
-                <label class="form-label" for="su-name">Nome completo</label>
-                <input class="form-control" type="text" id="su-name" placeholder="John Doe" required>
+                <label class="form-label" for="su-name">Nome</label>
+                <input class="form-control" type="text" th:field="${cliente.nome}" name="nome" id="su-name" placeholder="Jefferson" required>
                 <div class="invalid-feedback">Por favor, preencha seu nome.</div>
               </div>
               <div class="mb-3">
-                <label for="su-email">Endereço de Email</label>
-                <input class="form-control" type="email" id="su-email" placeholder="jefferson@gmail.com" required>
+                <label class="form-label" for="su-name">Sobrenome</label>
+                <input class="form-control" type="text" th:field="${cliente.sobrenome}" name="sobrenome" id="su-name" placeholder="Moreira" required>
+                <div class="invalid-feedback">Por favor, preencha seu sobrenome.</div>
+              </div>
+              <div class="mb-3">
+                <label for="su-email">Email</label>
+                <input class="form-control" type="email" th:field="${cliente.email.enderecoEmail}" id="su-email" name="username" placeholder="jefferson@gmail.com" required>
                 <div class="invalid-feedback">Por favor, forneça um endereço de e-mail válido.</div>
               </div>
+               <div class="mb-3" th:object="${descricoes}">
+                <br>
+	                <select class="form-select" th:field="${cliente.telefone.descricao.id}" required="required" aria-label="Default select example">
+					   <option value="">Tipo do Contato Fone</option>
+                      <option th:each="descricao: ${descricoes}" th:value="${descricao.id}" th:text="${descricao.nome}"></option>                    
+					</select>
+				</div>				
+				<div class="mb-3">
+                  <label class="form-label" for="reg-phone">Telefone</label>
+                  <input th:field="${cliente.telefone.numero}" class="form-control" type="text" id="reg-phone" maxlength="14"
+                   name="tel" onkeydown="javascript: fMasc( this, mTel );" required>
+                  <div class="invalid-feedback">Por favor, digite seu número de telefone!</div>
+                </div>
               <div class="mb-3">
                 <label class="form-label" for="su-password">Senha</label>
                 <div class="password-toggle">
-                  <input class="form-control" type="password" id="su-password" required>
+                  <input class="form-control" type="password" th:field="${cliente.usuario.password}" name="password" id="su-password" required>
                   <label class="password-toggle-btn" aria-label="Show/hide password">
                     <input class="password-toggle-check" type="checkbox"><img src="../img/icon/tropical-storm.svg">
                   </label>
@@ -100,6 +118,7 @@
                   </label>
                 </div>
               </div>
+              <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">              
               <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Inscrever-se</button>
             </form>
           </div>

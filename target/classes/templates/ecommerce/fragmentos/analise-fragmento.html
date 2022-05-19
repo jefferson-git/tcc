@@ -32,13 +32,13 @@
             <!-- Steps-->
         	<div th:fragment="menu-pagina" class="steps steps-light pt-2 pb-3 mb-5"><a class="step-item active" href="/mamute/carrinho">
                 <div class="step-progress"><span class="step-count">1</span></div>
-                <div class="step-label"><img src="../img/icon/cart3.svg"> Carrinho</div></a><a class="step-item active" href="/mamute/detalhes">
+                <div class="step-label"><img src="../img/icon/cart3.svg"> Carrinho</div></a><a class="step-item active" href="/usuario/detalhes">
                 <div class="step-progress"><span class="step-count">2</span></div>
-                <div class="step-label"><img src="../img/icon/person.svg"> Detalhes</div></a><a class="step-item active" href="/mamute/envio">
+                <div class="step-label"><img src="../img/icon/person.svg"> Detalhes</div></a><a class="step-item active" href="/usuario/envio">
                 <div class="step-progress"><span class="step-count">3</span></div>
-                <div class="step-label"><img src="../img/icon/basket3.svg">&nbsp;&nbsp;&nbsp; Entrega</div></a><a class="step-item active" href="/mamute/pagamento">
+                <div class="step-label"><img src="../img/icon/basket3.svg">&nbsp;&nbsp;&nbsp; Entrega</div></a><a class="step-item active" href="/usuario/pagamento">
                 <div class="step-progress"><span class="step-count">4</span></div>
-                <div class="step-label"><img src="../img/icon/currency-dollar.svg"> Pagamento </div></a><a class="step-item active current" href="/mamute/analise">
+                <div class="step-label"><img src="../img/icon/currency-dollar.svg"> Pagamento </div></a><a class="step-item active current" href="/usuario/analise">
                 <div class="step-progress"><span class="step-count">5</span></div>
                 <div class="step-label"><img src="../img/icon/bootstrap-reboot.svg">&nbsp;&nbsp;&nbsp;Análises</div></a>
             </div>       	
@@ -65,56 +65,38 @@
                 <div class="col-sm-6">
                   <h4 class="h6">Enviando para:</h4>
                   <ul class="list-unstyled fs-sm">
-                    <li><span class="text-muted">Cliente :&nbsp;</span>Susan Gardner</li>
-                    <li><span class="text-muted">Endereço :&nbsp;</span>44 Shirley Ave. West Chicago, IL 60185, BRA</li>
-                    <li><span class="text-muted">Telefone :&nbsp;</span>+1 (808) 764 554 330</li>
+                    <li><span class="text-muted">Cliente :&nbsp;</span><span th:text="${usuarioLogado.nome} +' '+ ${usuarioLogado.sobrenome}" ></span></li>
+                    <li><span class="text-muted">Endereço :&nbsp;</span><span th:text="${usuarioLogado.endereco.logradouro}"></span>
+						<span th:text="${usuarioLogado.endereco.complemento}"></span><span> ,</span>
+					    <span th:text="${usuarioLogado.endereco.bairro}"></span><span> -</span>
+					    <span th:text="${usuarioLogado.endereco.cidade}"></span><span> -</span>	
+					    <span th:text="${usuarioLogado.endereco.cep}"></span>		    </li>
+                    <li><span class="text-muted">Telefone :&nbsp;</span><span class="text-muted" th:text="${usuarioLogado.telefone.numero}"></span></li>
                   </ul>
                 </div>
                 <div class="col-sm-6">
                   <h4 class="h6">Forma de pagamento:</h4>
                   <ul class="list-unstyled fs-sm">
-                    <li><span class="text-muted">Credit Card:&nbsp;</span>**** **** **** 5300</li>
+                    <li><span class="text-muted">Cartão de Credito:&nbsp; **** **** **** </span><span th:text="${#strings.substring(usuarioLogado.cartao.numero, 14)}"></span></li>
                   </ul>
                 </div>
               </div>
             </div>
             <!-- Navigation (desktop)-->
             <div class="d-none d-lg-flex pt-4">
-              <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="/mamute/pagamento"><i class="mt-sm-0 me-1"></i><img src="../img/icon/chevron-left.svg"><img src="../img/icon/chevron-left.svg"><span class="d-none d-sm-inline">Voltar para o pagamento</span><span class="d-inline d-sm-none">Voltar</span></a></div>
-              <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" href="/mamute/pedido"><span class="d-none d-sm-inline">Finalizar pedido</span><span class="d-inline d-sm-none">Finalizar</span><img src="../img/icon/chevron-right.svg"><img src="../img/icon/chevron-right.svg"><i class="mt-sm-0 ms-1"></i></a></div>
+              <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="/usuario/pagamento"><i class="mt-sm-0 me-1"></i><img src="../img/icon/chevron-left.svg"><img src="../img/icon/chevron-left.svg"><span class="d-none d-sm-inline">Voltar para o pagamento</span><span class="d-inline d-sm-none">Voltar</span></a></div>
+              <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" href="/usuario/pagamento/cartao/2"><span class="d-none d-sm-inline">Finalizar pedido</span><span class="d-inline d-sm-none">Finalizar</span><img src="../img/icon/chevron-right.svg"><img src="../img/icon/chevron-right.svg"><i class="mt-sm-0 ms-1"></i></a></div>
             </div>
           </section>
           <!-- Sidebar-->
-          <aside class="col-lg-4 pt-4 pt-lg-0 ps-xl-5">
-            <div class="bg-white rounded-3 shadow-lg p-4 ms-lg-auto">
-              <div class="py-2 px-xl-2">
-                <div class="widget mb-3">
-                  <h2 class="widget-title text-center">Resumo do pedido</h2> 
-                </div>
-                <ul class="list-unstyled fs-sm pb-2 border-bottom">
-                  <li class="d-flex justify-content-between align-items-center"><span class="me-2">Subtotal:</span><span class="text-end">R$<small th:text="${#numbers.formatDecimal(pedido.ValorTotal, 0, 'COMMA', 2, 'POINT')}"></small></span></li>
-                  <li class="d-flex justify-content-between align-items-center"><span class="me-2">Envio:</span><span class="text-end">—</span></li>
-                  <li class="d-flex justify-content-between align-items-center"><span class="me-2">Impostos:</span><span class="text-end">R$<small>0</small></span></li>
-                  <li class="d-flex justify-content-between align-items-center"><span class="me-2">Desconto:</span><span class="text-end">—</span></li>
-                </ul>
-                <h3 class="fw-normal text-center my-4">R$<small th:text="${#numbers.formatDecimal(pedido.ValorTotal, 0, 'COMMA', 2, 'POINT')}"></small></h3>
-                <form class="needs-validation" method="post" novalidate>
-                  <div class="mb-3">
-                    <input class="form-control" type="text" placeholder="Promo code" required>
-                    <div class="invalid-feedback">Forneça o código promocional.</div>
-                  </div>
-                  <button class="btn btn-outline-primary d-block w-100" type="submit">Aplicar código promocional</button>
-                </form>
-              </div>
-            </div>
-          </aside>
+         <div th:replace="~{ecommerce/fragmentos/resumo-do-pedido-fragmento :: resumo-pedido}"></div>
         </div>
         <!-- Navigation (mobile)-->
         <div class="row d-lg-none">
           <div class="col-lg-8">
             <div class="d-flex pt-4 mt-3">
               <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="/mamute/carrinho"><img src="../img/icon/chevron-left.svg"><i class="mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Voltar ao carrinho</span><span class="d-inline d-sm-none">Voltar</span></a></div>
-              <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" href="/mamute/pedido"><span class="d-none d-sm-inline">Prossiga para o envio</span><span class="d-inline d-sm-none">Próximo</span><img src="../img/icon/chevron-right.svg"><i class="mt-sm-0 ms-1"></i></a></div>
+              <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" href="/usuario/pedido"><span class="d-none d-sm-inline">Prossiga para o envio</span><span class="d-inline d-sm-none">Próximo</span><img src="../img/icon/chevron-right.svg"><i class="mt-sm-0 ms-1"></i></a></div>
             </div>
           </div>
         </div>

@@ -33,13 +33,13 @@
         	<div class="steps steps-light pt-2 pb-3 mb-5">
         		<a class="step-item active" href="/mamute/carrinho">
         		 <div class="step-progress"><span class="step-count">1</span></div>
-                <div class="step-label"><img src="../img/icon/cart3.svg"> Carrinho</div></a><a class="step-item active" href="/mamute/detalhes">
+                <div class="step-label"><img src="../img/icon/cart3.svg"> Carrinho</div></a><a class="step-item active" href="/usuario/detalhes">
                 <div class="step-progress"><span class="step-count">2</span></div>
-                <div class="step-label"><img src="../img/icon/person.svg"> Detalhes</div></a><a class="step-item active current" href="/mamute/envio">
+                <div class="step-label"><img src="../img/icon/person.svg"> Detalhes</div></a><a class="step-item active current" href="/usuario/envio">
                 <div class="step-progress"><span class="step-count">3</span></div>
-                <div class="step-label"><img src="../img/icon/basket3.svg">&nbsp;&nbsp;&nbsp; Entrega</div></a><a class="step-item" href="/mamute/pagamento">
+                <div class="step-label"><img src="../img/icon/basket3.svg">&nbsp;&nbsp;&nbsp; Entrega</div></a><a class="step-item" href="/usuario/pagamento">
                 <div class="step-progress"><span class="step-count">4</span></div>
-                <div class="step-label"><img src="../img/icon/currency-dollar.svg"> Pagamento</div></a><a class="step-item" href="/mamute/analise">
+                <div class="step-label"><img src="../img/icon/currency-dollar.svg"> Pagamento</div></a><a class="step-item" href="/usuario/analise">
                 <div class="step-progress"><span class="step-count">5</span></div>
                 <div class="step-label"><img src="../img/icon/bootstrap-reboot.svg">&nbsp;&nbsp;&nbsp; Análise</div></a>
             </div>           
@@ -52,103 +52,38 @@
                     <th class="align-middle"></th>
                     <th class="align-middle">Método de envio</th>
                     <th class="align-middle">Tempo de entrega</th>
-                    <th class="align-middle">Taxa de manuseio</th>
+                    <th class="align-middle">Valor da taxa de envio</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody th:each="taxa : ${taxas}">
                   <tr>
-                    <td>
-                      <div class="form-check mb-4">
-                        <input class="form-check-input" type="radio" id="courier" name="shipping-method" checked>
-                        <label class="form-check-label" for="courier"></label>
-                      </div>
+                    <td>                    
+					  <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+					    <a class="btn btn-outline-primary"  th:href="@{/mamute/carrinho/taxa/{id}(id=${taxa.id})}">adicione</a>
+  					  </div>
                     </td>
-                    <td class="align-middle"><span class="text-dark fw-medium">Correio</span><br><span class="text-muted">Todos os endereços (zona padrão), Brasil</span></td>
-                    <td class="align-middle">2 - 7 dias</td>
-                    <td class="align-middle">R$26.50</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check mb-4">
-                        <input class="form-check-input" type="radio" id="local" name="shipping-method">
-                        <label class="form-check-label" for="local"></label>
-                      </div>
-                    </td>
-                    <td class="align-middle"><span class="text-dark fw-medium">Remessa Local</span><br><span class="text-muted">Todos os endereços (zona padrão), Brasil</span></td>
-                    <td class="align-middle">até uma semana</td>
-                    <td class="align-middle">R$15.00</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check mb-4">
-                        <input class="form-check-input" type="radio" id="flat" name="shipping-method">
-                        <label class="form-check-label" for="flat"></label>
-                      </div>
-                    </td>
-                    <td class="align-middle"><span class="text-dark fw-medium">Taxa fixa</span><br><span class="text-muted">Todos os endereços (zona padrão), Brasil</span></td>
-                    <td class="align-middle">5 - 7 dias</td>
-                    <td class="align-middle">R$33.85</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check mb-4">
-                        <input class="form-check-input" type="radio" id="pickup" name="shipping-method">
-                        <label class="form-check-label" for="pickup"></label>
-                      </div>
-                    </td>
-                    <td class="align-middle"><span class="text-dark fw-medium">Retirada local na loja</span><br><span class="text-muted">Todos os endereços</span></td>
-                    <td class="align-middle">&mdash;</td>
-                    <td class="align-middle">R$0.00</td>
-                  </tr>
+                    <td class="align-middle"><span class="text-dark fw-medium" th:text="${taxa.nome}"></span><br><span class="text-muted">Todos os endereços (zona padrão), Brasil</span></td>
+                    <td class="align-middle" th:text="${taxa.tempoMinimo} +' - '+ ${taxa.tempoMaximo} + '  dias'"><span></span></td>
+                    <td class="align-middle" th:text="${#numbers.formatDecimal(taxa.valor, 0, 'COMMA', 2, 'POINT')}"></td>
+                  </tr> 
                 </tbody>
               </table>
             </div>            
             <!-- Navigation (desktop)-->
             <div class="d-none d-lg-flex pt-4 mt-3">
               <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="/mamute/carrinho"><img src="../img/icon/chevron-left.svg"><img src="../img/icon/chevron-left.svg"><span class="d-none d-sm-inline"> Voltar ao carrinho</span><span class="d-inline d-sm-none">Back</span></a></div>
-              <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" href="/mamute/pagamento"><span class="d-none d-sm-inline">Prossiga para o pagamento <img src="../img/icon/chevron-right.svg"></span><span class="d-inline d-sm-none">Próximo</span><img src="../img/icon/chevron-right.svg"></a></div>
+             <!-- <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" href="/mamute/carrinho/"><span class="d-none d-sm-inline">Prossiga para o pagamento <img src="../img/icon/chevron-right.svg"></span><span class="d-inline d-sm-none">Próximo</span><img src="../img/icon/chevron-right.svg"></a></div> -->
             </div>
           </section>
           <!-- Sidebar-->
-          <aside class="col-lg-4 pt-4 pt-lg-0 ps-xl-5">
-            <div class="bg-white rounded-3 shadow-lg p-4 ms-lg-auto">
-              <div class="py-2 px-xl-2">
-                <div class="widget mb-3">
-                  <h2 class="widget-title text-center">Resumo do pedido</h2>
-                   <div th:each="compra : ${compras}" class="widget-cart-item pb-2 border-bottom">
-                     <div  class="d-flex align-items-center"><a class="flex-shrink-0" href="#"><img th:src="@{/mamute/carrinho/produto/visualizar/{imagem}(imagem=${compra.produto.imagem})}" width="64" alt="Produto"></a>
-                       <div class="ps-2">
-                         <h6 th:text="${compra.produto.nome}" class="widget-product-title"><a href="shop-single-v1.html"></a></h6>
-                         <div class="widget-product-meta"><span class="text-accent me-2">R$<small th:text="${#numbers.formatDecimal(compra.produto.precoVenda, 0, 'COMMA', 2, 'POINT')}"></small></span>
-                         <span>x</span><span th:text="${compra.quantidade}"class="text-muted"></span></div>
-                       </div>
-                     </div>
-                  </div> 
-                </div>
-                <ul class="list-unstyled fs-sm pb-2 border-bottom">
-                  <li class="d-flex justify-content-between align-items-center"><span class="me-2">Subtotal:</span><span class="text-end">R$<small th:text="${#numbers.formatDecimal(pedido.ValorTotal, 0, 'COMMA', 2, 'POINT')}"></small></span></li>
-                  <li class="d-flex justify-content-between align-items-center"><span class="me-2">Envio:</span><span class="text-end">—</span></li>
-                  <li class="d-flex justify-content-between align-items-center"><span class="me-2">Impostos:</span><span class="text-end">R$<small>0</small></span></li>
-                  <li class="d-flex justify-content-between align-items-center"><span class="me-2">Desconto:</span><span class="text-end">—</span></li>
-                </ul>
-                <h3 class="fw-normal text-center my-4">R$<small th:text="${#numbers.formatDecimal(pedido.ValorTotal, 0, 'COMMA', 2, 'POINT')}"></small></h3>
-                <form class="needs-validation" method="post" novalidate>
-                  <div class="mb-3">
-                    <input class="form-control" type="text" placeholder="Promo code" required>
-                    <div class="invalid-feedback">Forneça o código promocional.</div>
-                  </div>
-                  <button class="btn btn-outline-primary d-block w-100" type="submit">Aplicar código promocional</button>
-                </form>
-              </div>
-            </div>
-          </aside>
+         <div th:replace="~{ecommerce/fragmentos/resumo-do-pedido-fragmento :: resumo-pedido}"></div> 
         </div>
         <!-- Navigation (mobile)-->
         <div class="row d-lg-none">
           <div class="col-lg-8">
             <div class="d-flex pt-4 mt-3">
               <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="/mamute/carrinho"><img src="../img/icon/chevron-left.svg"><i class="mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Voltar ao carrinho</span><span class="d-inline d-sm-none">Voltar</span></a></div>
-              <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" href="/mamute/pagamento"><span class="d-none d-sm-inline">Prossiga para o pagamento</span><span class="d-inline d-sm-none">Próximo</span><i class="mt-sm-0 ms-1"></i><img src="../img/icon/chevron-right.svg"></a></div>
+              <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" href="/usuario/pagamento"><span class="d-none d-sm-inline">Prossiga para o pagamento</span><span class="d-inline d-sm-none">Próximo</span><i class="mt-sm-0 ms-1"></i><img src="../img/icon/chevron-right.svg"></a></div>
             </div>
           </div>
         </div>

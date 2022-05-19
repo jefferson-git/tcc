@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.mamute.cotacaoapi.ecommerceService.UsuarioListaDesejosService;
 
 @Controller
-@RequestMapping("/mamute/desejos")
+@RequestMapping("/usuario/desejos")
 public class UsuarioListaDesejosController {
 	
 	@Autowired

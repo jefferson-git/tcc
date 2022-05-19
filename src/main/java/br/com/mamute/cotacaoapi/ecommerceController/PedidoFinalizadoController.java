@@ -7,18 +7,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.mamute.cotacaoapi.ecommerceService.PedidoFinalizadoService;
-import br.com.mamute.cotacaoapi.model.Departamento;
 
 @Controller
-@RequestMapping("/mamute")
+@RequestMapping("/usuario")
 public class PedidoFinalizadoController {
 	
 	@Autowired
 	private PedidoFinalizadoService pedidoFinalizadoService;
 	
     @GetMapping("/pedido")
-	ModelAndView Rastreamento(Departamento departamento) {
-		return pedidoFinalizadoService.page(departamento);
-	}		
+	ModelAndView pedido() {
+		return pedidoFinalizadoService.page();
+	}	
+    
+    @GetMapping("/pedido-finalizado")
+   	ModelAndView pedidoFinalizado() {
+   		return pedidoFinalizadoService.pedido();
+   	}	
 	
 }

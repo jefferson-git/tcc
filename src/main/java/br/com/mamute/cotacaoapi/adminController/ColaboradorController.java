@@ -46,15 +46,13 @@ public class ColaboradorController {
 	@Autowired private TelefoneRepository telefoneRepositoty;	
 	@Autowired private EnderecoRepository enderecoRepository;		
 	@Autowired private EmailRepository emailRepository;
-	@Autowired private UsuarioService usuarioService;
-	
+	@Autowired private UsuarioService usuarioService;	
 	private ModelAndView mvForm = new ModelAndView("dashboard-admin/colaborador/form-registrar-colaborador");
 	private ModelAndView mvLista = new ModelAndView("dashboard-admin/colaborador/lista-colaborador");
 	
 	@GetMapping("/registrar")
 	ModelAndView form(Colaborador colaborador, DescricaoTelefone descricao, MultipartFile arquivo) {
 		mvForm.addObject("colaboradorLogado", usuarioService.usuarioLogado());
-		mvForm.addObject("colaborador", colaborador);
 		mvForm.addObject("colaborador", colaborador);
 		mvForm.addObject("descricoes", descricaoTelefoneRepository.findAll());		
 		mvForm.addObject("arquivo", arquivo);
@@ -131,7 +129,7 @@ public class ColaboradorController {
 	ModelAndView visualizar(@PathVariable(name = "id") Long id) {
 		ModelAndView mv = new ModelAndView("dashboard-admin/colaborador/visao-colaborador");
 		Optional<Colaborador> colab = colaboradorRepository.findById(id);
-		Colaborador colaborador = colab.get();
+		Colaborador colaborador = colab.get(); 
 		mv.addObject("colaboradorLogado", usuarioService.usuarioLogado());
         mv.addObject("colaborador", colaborador); 
 		return mv;

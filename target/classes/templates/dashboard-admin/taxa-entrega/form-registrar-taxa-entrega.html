@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html class="loading" lang="pt-br" data-textdirection="ltr"
+ xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+  <!-- INÍCIO: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
+    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
+    <meta name="author" content="ThemeSelect">
+    <title>Form Desconto  | Mamute - Admin</title>
+    <link rel="apple-touch-icon" href="../../../../app-assets/images/favicon/apple-touch-icon-152x152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../app-assets/images/favicon/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- BEGIN: VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/vendors/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/vendors/flag-icon/css/flag-icon.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/vendors/materialize-stepper/materialize-stepper.min.css">
+    <!-- END: VENDOR CSS-->
+    <!-- BEGIN: Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/css/themes/vertical-modern-menu-template/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../../app-assets/css/themes/vertical-modern-menu-template/style.min.css">
+    <!-- BEGIN: Custom CSS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>    
+  	<link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/dropify/css/dropify.min.css">
+    <!-- END: Custom CSS-->
+  </head>
+ <!-- FIM: Head-->
+  <div th:replace="~{dashboard-admin/fragmentos/topo-pagina :: topo}"></div>
+   <div th:replace="~{dashboard-admin/fragmentos/menu-principal :: menu-painel}"></div>
+    <!-- FIM: SideNav Fim menu lateral-->
+
+    <!-- BEGIN: Page Main-->
+    <div id="main">
+      <div class="row">
+        <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+        <div class="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
+          <!-- Search for small screen-->
+          <div class="container">
+            <div class="row">
+              <div class="col s10 m6 l6">
+                <h5 class="breadcrumbs-title mt-0 mb-0" th:text="${id == null ? 'Formulário de Cadastro' : 'Formulário de Edição'}"><span>Formulário de Cadastro</span></h5>
+                <ol class="breadcrumbs mb-0">
+                  <li class="breadcrumb-item"><a href="#">Home</a> </li>
+                  <li class="breadcrumb-item"><a href="#">Desconto</a></li>
+                  <li class="breadcrumb-item active" th:text="${id == null ? 'Cadastro' : 'Edição'}">Cadastro</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col s12">
+          <div class="container">
+            <div class="section section-form-wizard">
+  			 <div class="card gradient-45deg-light-blue-cyan gradient-shadow">
+			    <div class="card-content white-text">
+			     <p class="caption mb-0">
+			     	<span class="card-title">
+			     	<i class="material-icons">content_paste</i>
+			     	<span th:text="${id == null ? 'Cadastre Aqui o Desconto Aplicados Para Produto.' : 'Editando o Porcentagem das Desconto.'}">
+			     	Cadastre Aqui a porecentagem de Descontos para Produto.</span></span>
+			        <p></p>
+			      </div>            
+			   </div>
+  <!-- Horizontal Stepper -->
+  <div class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content pb-0">
+          <div class="card-header mb-2">
+            <h4 class="card-title">Etapas</h4>            
+          </div>      
+          <form action="/dashboard-admin/taxa-entrega/salvar" th:object="${taxa}" method="post">       
+          <ul class="stepper horizontal" id="horizStepper">       
+            <li class="step active">
+              <div class="step-title waves-effect">Passo Único</div>
+              <div class="step-content">
+                <div class="row"> 
+                <br>	                      	
+                  <div class="input-field col m3 s12">
+                    <label>Informe Método de envio: <span class="red-text">*</span></label>
+                    <input type="text" min="0" th:field="*{nome}" required >
+                  	<p th:if="${#fields.hasErrors('nome')}" th:errorclass="error" th:errors="*{nome}" />
+                  	<p>campo obrigatório</p>
+                  </div>
+                 <div class="input-field col m3 s12">
+                  <label>Valor da cobrança:<span class="red-text">*</span> </label>                  
+                    <input type="text" th:field="*{valor}" name="valor" required>
+					<p th:if="${#fields.hasErrors('valor')}" th:errorclass="error" th:errors="*{valor}" />					
+					<p>campo obrigatório</p>				
+                </div>
+                <div class="input-field col m3 s12">
+                  <label>Tempo mínimo de recebimento:<span class="red-text">*</span> </label>                  
+                    <input type="text" th:field="*{tempoMinimo}" name="tempoEntrega" id="field" maxlength="1" required>
+					<p th:if="${#fields.hasErrors('tempoMinimo')}" th:errorclass="error" th:errors="*{tempoMinimo}" />					
+					<p>campo obrigatório</p>				
+                </div>
+                <div class="input-field col m3 s12">
+                  <label>Tempo maximo de recebimento:<span class="red-text">*</span> </label>                  
+                    <input type="text" th:field="*{tempoMaximo}" name="tempoMaximo" id="field" maxlength="2" required>
+					<p th:if="${#fields.hasErrors('tempoMinimo')}" th:errorclass="error" th:errors="*{tempoMinimo}" />					
+					<p>campo obrigatório</p>				
+                </div>
+                </div> 
+                <div>                   
+                    <input type="hidden" id="id" th:field="*{id}" name="id">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                  </div>                   
+                <div class="row">  
+                	<button class="red btn mr-1 btn-reset" type="reset">
+                        <i class="material-icons right">clear</i>Limpar</button>              
+                      <button class="waves-effect waves-dark btn btn-primary" type="submit"><i class="material-icons right">cloud</i>Enviar</button>  
+                </div>          
+              </div>         
+             </li>            
+            </ul> 
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+ <div class="content-overlay"></div>
+  </div>
+   </div>
+    </div>
+     </div>
+	  <div class="alert alert-success" th:if="${not #strings.isEmpty(menssagem)}">
+		<script>					    
+			M.toast({html: '<i class="material-icons">[(${icone})]</i> &emsp; [(${menssagem})]', classes: 'rounded'});
+		</script>	
+	  </div>
+	<script type="text/javascript">	
+	$(document).ready(function() {
+	  $("#field").keyup(function() {
+	      $("#field").val(this.value.match(/[0-9]*/));
+	  });
+	});
+	</script>
+	<!-- END: Página principal-->
+	<div th:replace="~{dashboard-admin/fragmentos/personaliza-tema :: temas}"></div>
+	<div th:replace="~{dashboard-admin/fragmentos/rodape :: footer}"></div>
+    <!-- END: Footer-->
+    <!-- BEGIN VENDOR JS-->
+    <script src="../../../../../app-assets/js/vendors.min.js"></script>
+    <script src="../../../../../app-assets/js/mask.js"></script> 
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="../../../../../../app-assets/vendors/materialize-stepper/materialize-stepper.min.js"></script>
+    <!-- END PAGE VENDOR JS-->
+ 
+    <!-- END THEME  JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+     <script src="../../../../app-assets/vendors/dropify/js/dropify.min.js"></script> 
+    <script src="../../../../app-assets/js/scripts/form-file-uploads.min.js"></script>
+    <!-- END PAGE LEVEL JS-->
+  </body>
+</html>

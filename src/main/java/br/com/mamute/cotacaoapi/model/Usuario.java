@@ -30,26 +30,20 @@ import lombok.NoArgsConstructor;
 @SuppressWarnings("serial") @Table(name = "usuario")
 public class Usuario implements Serializable{	
 
-	@Id
-	@SequenceGenerator(name = "seq_usuario", sequenceName = "seq_id_usuario", allocationSize = 1)
+	@Id	@SequenceGenerator(name = "seq_usuario", sequenceName = "seq_id_usuario", allocationSize = 1)
 	@GeneratedValue(generator = "seq_usuario", strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
 	@Column(name = "data_de_cadastro", nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date dataCadastro = new Date();
-		
-	@Column()
-	private String password;
-		
-	@Column()
-	private String username;
-	
+	private Date dataCadastro = new Date();		
+	private String password;		
+	private String username;	
 	@Column(nullable = false, length = 20)
 	private Integer status;	
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "usuarios_papeis", 
+	@JoinTable(name = "permissao", 
 			   joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"), 
 	           inverseJoinColumns = @JoinColumn(name = "papel_id", referencedColumnName = "id")) 
 	private Set<Papel> papeis = new HashSet<>();

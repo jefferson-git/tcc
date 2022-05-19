@@ -9,20 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Entity
-@Getter
-@Setter
-@SuppressWarnings("serial")
-@Table(name = "carrinho")
+@Entity @SuppressWarnings("serial")
+@Data @Table(name = "carrinho")
 public class Carrinho implements Serializable{
 	
-	@Id
-	@SequenceGenerator(name = "seq_carrinho", sequenceName = "seq_id_carrinho", allocationSize = 1)
+	@Id @SequenceGenerator(name = "seq_carrinho", sequenceName = "seq_id_carrinho", allocationSize = 1)
 	@GeneratedValue(generator = "seq_carrinho", strategy = GenerationType.SEQUENCE)
-	private Long id;
-	
+	private Long id;	
 	private Produto produto;
 }

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html class="loading" lang="pt-br" data-textdirection="ltr" xmlns:th="http://www.thymeleaf.org">
+    <!-- BEGIN: Head-->
+  <head>
+    <meta charset="utf-8">
+    <title>Mamute | Fashion Store v.1</title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="Mamute - Bootstrap E-commerce Template">
+    <meta name="keywords" content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap, html5, css3, js, gallery, slider, touch, creative, clean">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+    
+    <link rel="stylesheet" media="screen" href="../../vendor/simplebar/dist/simplebar.min.css"/>
+    <link rel="stylesheet" media="screen" href="../../vendor/tiny-slider/dist/tiny-slider.css"/>
+    <link rel="stylesheet" media="screen" href="../../vendor/drift-zoom/dist/drift-basic.min.css"/>
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="../../css/theme.min.css">
+    <!-- Google Tag Manager-->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WKV3GT5');
+    </script>
+  </head>
+	<body>
+     <div th:fragment="suporte">
+      <!-- suporte-->
+      	 <form class="needs-validation modal fade" method="post" id="open-ticket" tabindex="-1" novalidate>
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Enviar novo mensagem</h5>
+              <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p class="text-muted fs-sm">Normalmente respondemos os tickets dentro de 2 dias úteis.</p>
+              <div class="row gx-4 gy-3">
+                <div class="col-12">
+                  <label class="form-label" for="ticket-subject">Assunto</label>
+                  <input class="form-control" type="text" id="ticket-subject" required>
+                  <div class="invalid-feedback">Por favor, preencha a linha de assunto!</div>
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="ticket-type">Type</label>
+                  <select class="form-select" id="ticket-type" required>
+                    <option value>Escolha o tipo</option>
+                    <option value="Website problem">Problema no site</option>
+                    <option value="Partner request">Atraso na entrega</option>
+                    <option value="Complaint">Reclamação</option>
+                    <option value="Info inquiry">Consulta de informações</option>
+                  </select>
+                  <div class="invalid-feedback">Por favor, escolha o tipo de bilhete!</div>
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="ticket-priority">Prioridade</label>
+                  <select class="form-select" id="ticket-priority" required>
+                    <option value>Quão urgente é o seu problema?</option>
+                    <option value="Urgent">Urgente</option>
+                    <option value="High">Alto</option>
+                    <option value="Medium">Médio</option>
+                    <option value="Low">Baixo</option>
+                  </select>
+                  <div class="invalid-feedback">Por favor, escolha a urgência do seu bilhete!</div>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="ticket-description">descreva seu problema</label>
+                  <textarea class="form-control" id="ticket-description" rows="8" required></textarea>
+                  <div class="invalid-feedback">Por favor, forneça a descrição do problema!</div>
+                </div>
+                <div class="col-12">
+                  <input class="form-control" type="file" id="file-input">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Fechar</button>
+              <button class="btn btn-primary" type="submit">Enviar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      </div>
+    </body>
+</html>

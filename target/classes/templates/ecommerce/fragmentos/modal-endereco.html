@@ -37,48 +37,48 @@
 	<body>
      <div th:fragment="endereco">
       <!-- Add New Address-->
-      <form class="needs-validation modal fade" method="post" id="add-address" tabindex="-1" novalidate>
+      <form class="needs-validation modal fade" action="/usuario/endereco/salvar" th:object="${usuario}" method="post" id="add-address" tabindex="-1" novalidate>
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Adicione um novo endereço</h5>
+              <h5 class="modal-title"  th:text="${usuarioLogado.endereco.logradouro == '' ? 'Adicione endereço' : 'Deseja alterar endereço cadastrado'}"></h5>
               <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="row gx-4 gy-3">                
                 <div class="col-sm-6">
                   <label class="form-label" for="address-zip">CEP</label>
-                  <input class="form-control" type="text" id="address-zip" required>
+                  <input class="form-control" type="text" id="address-zip" th:field="${usuarioLogado.endereco.cep}" required>
                   <div class="invalid-feedback">Adicione o seu código postal!</div>
                 </div>
                 <div class="col-sm-6">
                   <label class="form-label" for="address-fn">logradouro</label>
-                  <input class="form-control" type="text" id="address-fn" required>
+                  <input class="form-control" type="text" id="address-fn" th:field="${usuarioLogado.endereco.logradouro}" required>
                   <div class="invalid-feedback">Por favor, preencha o logradouro!</div>
                 </div>
                 <div class="col-sm-6">
                   <label class="form-label" for="address-ln">complemento</label>
-                  <input class="form-control" type="text" id="address-ln">
+                  <input class="form-control" type="text" id="address-ln" th:field="${usuarioLogado.endereco.complemento}">
                 </div>
                 
                 <div class="col-sm-6">
                   <label class="form-label" for="address-line2">número</label>
-                  <input class="form-control" type="text" id="address-line2">
+                  <input class="form-control" type="text" id="address-line2" th:field="${usuarioLogado.endereco.numero}">
                   
                 </div>
                 <div class="col-sm-6">
                   <label class="form-label" for="address-company">bairro</label>
-                  <input class="form-control" type="text" id="address-company" required>
+                  <input class="form-control" type="text" id="address-company"  th:field="${usuarioLogado.endereco.bairro}" required>
                   <div class="invalid-feedback">Por favor, preencha seu bairro!</div>
                 </div>
                 <div class="col-sm-6">
                   <label class="form-label" for="address-city">cidade</label>
-                  <input class="form-control" type="text" id="address-city" required>
+                  <input class="form-control" type="text" id="address-city" th:field="${usuarioLogado.endereco.cidade}" required>
                   <div class="invalid-feedback">Por favor, preencha sua cidade!</div>
                 </div>
                 <div class="col-sm-6">
                   <label class="form-label" for="address-line1">uf</label>
-                  <input class="form-control" type="text" id="address-line1" required>
+                  <input class="form-control" type="text" id="address-line1" th:field="${usuarioLogado.endereco.estado}" required>
                   <div class="invalid-feedback">Por favor, preencha seu estado!</div>
                 </div>
                 <div class="col-sm-6">
@@ -90,9 +90,11 @@
                 </div>
               </div>
             </div>
+             <input type="hidden" id="id" th:field="${usuarioLogado.id}" name="id">    
+          	 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
             <div class="modal-footer">
               <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Fechar</button>
-              <button class="btn btn-primary btn-shadow" type="submit">Adicionar endereço</button>
+              <button class="btn btn-primary btn-shadow" type="submit"  th:text="${usuarioLogado.endereco.logradouro == '' ? 'Adicionar endereço' : 'Alterar endereço'}"></button>
             </div>
           </div>
         </div>

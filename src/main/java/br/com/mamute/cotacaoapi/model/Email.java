@@ -15,17 +15,12 @@ import javax.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Entity
-@Table(name = "email")
-@Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Entity @Data @Table(name = "email")
 public class Email implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@Column(name = "id")
-	@EqualsAndHashCode.Include
+	@Id	@Column(name = "id") @EqualsAndHashCode.Include
 	@SequenceGenerator(name = "seq_email", sequenceName = "seq_id_email", allocationSize = 1)
 	@GeneratedValue(generator = "seq_email", strategy = GenerationType.SEQUENCE)
 	private Long id;
